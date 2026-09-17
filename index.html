@@ -6,54 +6,460 @@
 <meta name="theme-color" content="#090c12">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Portfolio Command Centre V1.3</title>
+<title>Portfolio Command Centre V1.4.1</title>
+
 <style>
-:root{--bg:#090c12;--panel:#121822;--panel2:#171f2c;--line:#263244;--text:#f4f7fb;--muted:#94a3b8;--green:#36d49b;--red:#ff7a7a;--amber:#ffd166;--blue:#8bb7ff;--shadow:0 10px 30px rgba(0,0,0,.22)}
+:root{
+  --bg:#0a0c0f;
+  --bg2:#0e1115;
+  --panel:#14181d;
+  --panel-2:#191e24;
+  --panel-3:#101419;
+  --line:#252c34;
+  --line-soft:#1d232a;
+  --text:#f4f1e9;
+  --muted:#8f979f;
+  --muted2:#67717b;
+  --green:#9bd5bd;
+  --green-strong:#6fd6aa;
+  --red:#ee9a9a;
+  --amber:#d9bf79;
+  --blue:#9eb9df;
+  --ivory:#f2eee4;
+  --shadow:0 18px 45px rgba(0,0,0,.26);
+}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{background:var(--bg)}
-body{margin:0;background:linear-gradient(180deg,#07090e 0,#0a0e15 45%,#090c12 100%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;min-height:100vh}
-button,input,select,textarea{font:inherit}button{cursor:pointer}
-.app{width:100%;max-width:900px;margin:0 auto;padding:18px 14px calc(104px + env(safe-area-inset-bottom))}
-.header{padding:2px 2px 4px}h1{font-size:25px;line-height:1.08;margin:0;font-weight:850;letter-spacing:-.45px}
-.sub{color:var(--muted);font-size:12px;line-height:1.4;margin-top:6px}
-.grid{display:grid;gap:10px}.metrics{grid-template-columns:1fr 1fr;margin-top:16px}.metric:last-child{grid-column:1/-1}
-.card{background:rgba(18,24,34,.94);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
-.metric{padding:14px 15px;min-height:82px}.lab{font-size:11px;color:var(--muted);font-weight:650}.val{font-size:20px;font-weight:850;margin-top:7px;letter-spacing:-.2px}
-.sec{margin-top:18px}.sech{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 2px 9px}.secht{font-size:16px;font-weight:820}
-.btn{min-height:44px;border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:10px 13px;border-radius:13px;font-weight:750}
-.btn.primary{background:#f3f6fa;color:#080b10;border-color:#f3f6fa}.btn.danger{color:#ffb0b0}
-.notice{padding:13px 14px;color:#cbd5e1;font-size:12px;line-height:1.55}
-.green{color:var(--green)}.red{color:var(--red)}.amber{color:var(--amber)}.page{display:none}.page.on{display:block}
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 85% -10%,rgba(155,213,189,.08),transparent 30%),
+    linear-gradient(180deg,#090b0e 0%,#0d1014 46%,#090b0e 100%);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+  font-feature-settings:"tnum" 1;
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.app{
+  width:100%;
+  max-width:920px;
+  margin:0 auto;
+  padding:20px 15px calc(112px + env(safe-area-inset-bottom));
+}
+.header{
+  position:relative;
+  padding:6px 2px 12px;
+}
+.header:before{
+  content:"PRIVATE PORTFOLIO";
+  display:block;
+  color:var(--green);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1.35px;
+  margin-bottom:8px;
+}
+.header:after{
+  content:"";
+  position:absolute;
+  top:9px;
+  right:4px;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--green-strong);
+  box-shadow:0 0 0 5px rgba(111,214,170,.08);
+}
+h1{
+  margin:0;
+  font-size:27px;
+  line-height:1.06;
+  font-weight:760;
+  letter-spacing:-.7px;
+}
+.sub{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.45;
+  margin-top:7px;
+  max-width:620px;
+}
+.grid{display:grid;gap:10px}
+.metrics{grid-template-columns:1fr 1fr;margin-top:15px}
+.metric:last-child{grid-column:1/-1}
+.card{
+  background:linear-gradient(180deg,rgba(21,26,31,.98),rgba(16,20,25,.98));
+  border:1px solid var(--line);
+  border-radius:20px;
+  box-shadow:var(--shadow);
+}
+.metric{
+  position:relative;
+  overflow:hidden;
+  padding:15px 15px 16px;
+  min-height:88px;
+}
+.metric:before{
+  content:"";
+  position:absolute;
+  inset:0 auto 0 0;
+  width:2px;
+  background:linear-gradient(180deg,transparent,var(--green),transparent);
+  opacity:.75;
+}
+.lab{
+  color:var(--muted);
+  font-size:10px;
+  font-weight:720;
+  letter-spacing:.7px;
+  text-transform:uppercase;
+}
+.val{
+  margin-top:8px;
+  font-size:21px;
+  font-weight:760;
+  letter-spacing:-.35px;
+}
+.sec{margin-top:19px}
+.sech{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin:0 2px 10px;
+}
+.secht{
+  font-size:15px;
+  font-weight:760;
+  letter-spacing:-.1px;
+}
+.btn{
+  min-height:42px;
+  border:1px solid var(--line);
+  background:#171c22;
+  color:var(--text);
+  padding:9px 12px;
+  border-radius:12px;
+  font-size:12px;
+  font-weight:720;
+  transition:transform .12s ease,background .12s ease,border-color .12s ease;
+}
+.btn:active{transform:scale(.97)}
+.btn.primary{
+  background:var(--ivory);
+  color:#111418;
+  border-color:var(--ivory);
+}
+.btn.danger{color:#f2aaaa}
+.notice{
+  padding:13px 14px;
+  color:#c9ced3;
+  font-size:12px;
+  line-height:1.55;
+  box-shadow:none;
+  background:#11161b;
+}
+.green{color:var(--green-strong)}
+.red{color:var(--red)}
+.amber{color:var(--amber)}
+.page{display:none}
+.page.on{display:block}
 .list{display:grid;gap:10px}
-.item{background:rgba(18,24,34,.96);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:var(--shadow)}
-.item:active{transform:scale(.995)}.itemtop{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-.ticker{font-size:17px;font-weight:900;letter-spacing:.2px}.name{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.25}
-.pill{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;padding:7px 9px;border-radius:999px;font-size:10px;font-weight:900;letter-spacing:.15px}
-.wait{background:#1d2735;color:#d0d8e4}.buy{background:rgba(54,212,155,.14);color:#84efc5}.trim{background:rgba(255,209,102,.14);color:#ffe7a3}.no{background:rgba(255,122,122,.14);color:#ffb8b8}
-.detailgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}
-.detail{background:#0d121a;border:1px solid #202a39;border-radius:13px;padding:10px 11px;min-width:0}
-.detail .k{font-size:10px;color:var(--muted);font-weight:650;margin-bottom:4px}.detail .v{font-size:14px;font-weight:780;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.source{font-size:10px;color:var(--blue);font-weight:800;margin-top:4px}
-.reason{font-size:12px;color:#cbd5e1;line-height:1.5;margin-top:11px;padding-top:10px;border-top:1px solid #202a39}
-.empty{padding:18px;text-align:center;color:var(--muted);font-size:13px}
-.field{margin:12px 0}.field label{display:block;font-size:11px;color:var(--muted);font-weight:700;margin-bottom:6px}
-.field input,.field textarea,.field select{width:100%;min-height:46px;padding:11px 12px;border-radius:13px;background:#0c1118;color:#fff;border:1px solid var(--line);font-size:16px;outline:none}
-.field textarea{min-height:190px;resize:vertical;line-height:1.45}.field input:focus,.field textarea:focus,.field select:focus{border-color:#526780}
-.two{display:grid;grid-template-columns:1fr;gap:0}.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.aihero{padding:15px}.aihero .reg{font-size:11px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.6px}.aihero .sum{font-size:14px;line-height:1.55;margin-top:7px}
-.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.chip{background:#0d131c;border:1px solid #253144;color:#cbd5e1;padding:7px 9px;border-radius:999px;font-size:10px;line-height:1.2}
-.aiitem{padding:14px}.mini{font-size:10px;color:var(--muted)}
-.tabs{position:fixed;z-index:20;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(10,14,21,.94);border-top:1px solid var(--line);padding:6px 7px calc(7px + env(safe-area-inset-bottom));backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
-.tab{border:0;background:transparent;color:var(--muted);min-height:48px;border-radius:12px;padding:7px 3px;font-size:11px;font-weight:750}.tab.on{background:#1b2533;color:#fff}
-.modal{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.7);display:none;align-items:flex-end;justify-content:center}.modal.on{display:flex}
-.sheet{width:100%;max-width:700px;max-height:92dvh;overflow:auto;background:#101721;border:1px solid var(--line);border-bottom:0;border-radius:24px 24px 0 0;padding:18px 14px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -20px 50px rgba(0,0,0,.4)}
-.sheet h3{margin:0 0 10px;font-size:20px}.sheetactions{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:8px;margin-top:14px}
-@media(min-width:700px){.app{padding:24px 18px 100px}.metrics{grid-template-columns:repeat(3,1fr)}.metric:last-child{grid-column:auto}.two{grid-template-columns:1fr 1fr;gap:10px}.list{grid-template-columns:1fr 1fr}.tabs{left:50%;right:auto;transform:translateX(-50%);width:620px;bottom:12px;border:1px solid var(--line);border-radius:18px;padding:6px}.sheet{border-radius:24px;margin-bottom:20px;border-bottom:1px solid var(--line)}}
+.item{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(180deg,#151a20 0%,#11161b 100%);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:15px;
+  box-shadow:0 12px 28px rgba(0,0,0,.19);
+  transition:transform .12s ease,border-color .12s ease;
+}
+.item:active{transform:scale(.992);border-color:#35404b}
+.item:before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:18px;
+  bottom:18px;
+  width:2px;
+  border-radius:2px;
+  background:#3b4651;
+}
+.itemtop{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  padding-left:2px;
+}
+.ticker{
+  font-size:18px;
+  font-weight:820;
+  letter-spacing:.15px;
+}
+.name{
+  max-width:210px;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.3;
+  margin-top:4px;
+}
+.pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  white-space:nowrap;
+  padding:7px 9px;
+  border:1px solid transparent;
+  border-radius:999px;
+  font-size:9.5px;
+  font-weight:850;
+  letter-spacing:.45px;
+}
+.wait{background:#1b2229;color:#c1c8cf;border-color:#29323b}
+.buy{background:rgba(111,214,170,.09);color:#96e7c6;border-color:rgba(111,214,170,.19)}
+.trim{background:rgba(217,191,121,.10);color:#ead292;border-color:rgba(217,191,121,.20)}
+.no{background:rgba(238,154,154,.08);color:#efb1b1;border-color:rgba(238,154,154,.18)}
+.detailgrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:14px;
+}
+.detail{
+  min-width:0;
+  padding:10px 11px;
+  background:rgba(8,11,14,.38);
+  border:1px solid var(--line-soft);
+  border-radius:13px;
+}
+.detail .k{
+  color:var(--muted2);
+  font-size:9.5px;
+  font-weight:730;
+  text-transform:uppercase;
+  letter-spacing:.45px;
+  margin-bottom:5px;
+}
+.detail .v{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:14px;
+  font-weight:700;
+}
+.source{
+  color:var(--blue);
+  font-size:9.5px;
+  font-weight:800;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+  margin-top:5px;
+}
+.reason{
+  margin-top:12px;
+  padding-top:11px;
+  border-top:1px solid var(--line-soft);
+  color:#bcc4cb;
+  font-size:12px;
+  line-height:1.55;
+}
+.empty{
+  padding:20px;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+}
+.field{margin:13px 0}
+.field label{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:720;
+  letter-spacing:.4px;
+  text-transform:uppercase;
+  margin:0 0 7px 1px;
+}
+.field input,.field textarea,.field select{
+  width:100%;
+  min-height:48px;
+  padding:12px 13px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  outline:none;
+  background:#0e1318;
+  color:var(--text);
+  font-size:16px;
+}
+.field input:focus,.field textarea:focus,.field select:focus{
+  border-color:#4b5d69;
+  box-shadow:0 0 0 3px rgba(155,213,189,.06);
+}
+.field textarea{min-height:190px;resize:vertical;line-height:1.5}
+.two{display:grid;grid-template-columns:1fr;gap:0}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.aihero{padding:16px}
+.aihero .reg{
+  color:var(--green);
+  font-size:10px;
+  font-weight:850;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+.aihero .sum{
+  margin-top:9px;
+  color:#d8dcdf;
+  font-size:14px;
+  line-height:1.6;
+}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:13px}
+.chip{
+  padding:7px 9px;
+  background:#0f1419;
+  border:1px solid #222a31;
+  border-radius:999px;
+  color:#b8c0c7;
+  font-size:10px;
+  line-height:1.2;
+}
+.aiitem{padding:15px}
+.mini{font-size:10px;color:var(--muted)}
+.tabs{
+  position:fixed;
+  z-index:20;
+  left:0;
+  right:0;
+  bottom:0;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:2px;
+  padding:7px 8px calc(8px + env(safe-area-inset-bottom));
+  background:rgba(12,15,19,.92);
+  border-top:1px solid #232a31;
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
+}
+.tab{
+  position:relative;
+  border:0;
+  min-height:50px;
+  padding:25px 3px 6px;
+  border-radius:13px;
+  background:transparent;
+  color:#737d87;
+  font-size:10px;
+  font-weight:720;
+}
+.tab:before{
+  position:absolute;
+  left:50%;
+  top:7px;
+  transform:translateX(-50%);
+  font-size:15px;
+  line-height:1;
+  color:#73808a;
+}
+.tab[data-p="portfolio"]:before{content:"▦"}
+.tab[data-p="tactical"]:before{content:"◎"}
+.tab[data-p="ai"]:before{content:"✦"}
+.tab[data-p="settings"]:before{content:"⚙"}
+.tab.on{
+  background:#171d23;
+  color:var(--ivory);
+}
+.tab.on:before{color:var(--green)}
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:40;
+  display:none;
+  align-items:flex-end;
+  justify-content:center;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(3px);
+  -webkit-backdrop-filter:blur(3px);
+}
+.modal.on{display:flex}
+.sheet{
+  width:100%;
+  max-width:700px;
+  max-height:92dvh;
+  overflow:auto;
+  padding:19px 15px calc(19px + env(safe-area-inset-bottom));
+  background:#11161b;
+  border:1px solid #2a323a;
+  border-bottom:0;
+  border-radius:24px 24px 0 0;
+  box-shadow:0 -24px 60px rgba(0,0,0,.46);
+}
+.sheet:before{
+  content:"";
+  display:block;
+  width:38px;
+  height:4px;
+  margin:0 auto 14px;
+  border-radius:4px;
+  background:#37404a;
+}
+.sheet h3{margin:0 0 11px;font-size:20px;font-weight:770;letter-spacing:-.35px}
+.sheetactions{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:8px;margin-top:14px}
+@media(min-width:700px){
+  .app{padding:26px 20px 104px}
+  .metrics{grid-template-columns:repeat(3,1fr)}
+  .metric:last-child{grid-column:auto}
+  .two{grid-template-columns:1fr 1fr;gap:10px}
+  .list{grid-template-columns:1fr 1fr}
+  .tabs{
+    left:50%;
+    right:auto;
+    bottom:14px;
+    width:620px;
+    transform:translateX(-50%);
+    border:1px solid var(--line);
+    border-radius:19px;
+    padding:6px;
+  }
+  .sheet{
+    margin-bottom:20px;
+    border-bottom:1px solid #2a323a;
+    border-radius:24px;
+  }
+}
 </style>
+
+<style id="v14-allocation-css">
+.alloccard{padding:15px}
+.allochead{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:12px}
+.alloctitle{font-size:15px;font-weight:780}
+.alloctotal{font-size:10px;color:var(--muted);font-weight:750;letter-spacing:.45px;text-transform:uppercase}
+.allocrow{display:grid;grid-template-columns:116px 1fr 42px;gap:9px;align-items:center;margin:10px 0}
+.allocname{font-size:11px;color:#cbd1d6;font-weight:700}
+.allocbar{height:7px;border-radius:999px;background:#0b1014;border:1px solid #1d252c;overflow:hidden}
+.allocfill{height:100%;border-radius:999px;background:linear-gradient(90deg,#5c927d,#9bd5bd)}
+.allocpct{text-align:right;font-size:11px;font-weight:780;color:var(--ivory)}
+.allocnote{margin-top:11px;padding-top:10px;border-top:1px solid var(--line-soft);font-size:10.5px;color:var(--muted);line-height:1.5}
+.zonegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:13px}
+.zonebox{min-width:0;background:rgba(8,11,14,.42);border:1px solid var(--line-soft);border-radius:13px;padding:9px 8px}
+.zonebox .zk{font-size:9px;color:var(--muted2);font-weight:800;letter-spacing:.48px;text-transform:uppercase}
+.zonebox .zp{font-size:13px;font-weight:760;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.zonebox .za{font-size:11px;color:var(--green);font-weight:760;margin-top:4px;white-space:nowrap}
+.nowamt{margin-top:5px;font-size:10px;color:var(--green);font-weight:760}
+.bucketbadge{display:inline-flex;margin-top:5px;padding:4px 6px;border-radius:999px;background:#10161c;border:1px solid #202932;color:#91a1ad;font-size:8.5px;font-weight:800;letter-spacing:.45px;text-transform:uppercase}
+.targetgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.targetbox{padding:11px;border-radius:14px;background:#0e1318;border:1px solid var(--line-soft)}
+.targetbox label{display:block;color:var(--muted);font-size:9px;font-weight:750;letter-spacing:.4px;text-transform:uppercase;margin-bottom:6px}
+.targetbox input{width:100%;background:transparent;color:var(--text);border:0;outline:0;font-size:18px;font-weight:760;padding:0}
+.targetsum{margin-top:10px;font-size:11px;color:var(--muted)}
+@media(max-width:380px){.allocrow{grid-template-columns:102px 1fr 38px}.zonebox{padding:8px 6px}.zonebox .zp{font-size:12px}.zonebox .za{font-size:10px}}
+</style>
+
 </head>
 <body>
 <div class="app">
-<div class="header"><h1>Portfolio Command Centre</h1><div class="sub">V1.3 · mobile-first · stocks & ETFs · book cost · tactical plan · AI overlay</div></div>
+<div class="header"><h1>Portfolio Command Centre</h1><div class="sub">V1.4.1 · premium mobile UI · strategic allocation · currency-aware buy amounts · AI tactical overlay</div></div>
 
 <section id="portfolio" class="page on">
 <div class="grid metrics">
@@ -62,6 +468,15 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}
 <div class="card metric"><div class="lab">Dry powder</div><div id="dry" class="val green">—</div></div>
 </div>
 <div class="sec card notice"><b>Private by design:</b> your shares, book costs, API key and AI brief stay in this browser's local storage.</div>
+<div class="sec card alloccard">
+  <div class="allochead">
+    <div><div class="alloctitle">Strategic allocation</div><div class="mini" style="margin-top:3px">Your long-term target mix</div></div>
+    <div class="alloctotal">Core first</div>
+  </div>
+  <div id="allocView"></div>
+  <div class="allocnote">Target: 40% S&amp;P 500 · 20% Nasdaq-100/QQC · 10% direct U.S./growth · 15% Canada · 10% XEF · 5% XEC. Direct stocks count inside the 10% bucket rather than on top of the U.S. core.</div>
+</div>
+
 <div class="sec"><div class="sech"><div class="secht">Holdings & watchlist</div><div style="display:flex;gap:8px"><button class="btn" onclick="openBulk()">Bulk prices</button><button class="btn" onclick="addHolding()">+ Add</button></div></div><div id="holdRows" class="list"></div></div>
 </section>
 
@@ -71,7 +486,7 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}
 <div class="card metric"><div class="lab">10Y yield</div><div id="yieldView" class="val">—</div></div>
 <div class="card metric"><div class="lab">VIX</div><div id="vixView" class="val">—</div></div>
 </div>
-<div class="sec"><div class="sech"><div><div class="secht">Tactical plan</div><div class="mini">AI brief overrides baseline when fresh</div></div><button class="btn primary" onclick="refreshQuotes()">Refresh</button></div><div id="tacRows" class="list"></div></div>
+<div class="sec"><div class="sech"><div><div class="secht">Tactical plan</div><div class="mini">Price zone + suggested amount in the holding’s trading currency. AI can temporarily override either.</div></div><button class="btn primary" onclick="refreshQuotes()">Refresh</button></div><div class="card notice" style="margin-bottom:10px"><b>Suggested $ is a per-trigger maximum.</b> Canadian holdings show CAD; U.S. holdings show USD using the CAD/USD rate in Settings. If several holdings trigger together, keep total deployment within your dry powder and favor the most underweight strategic bucket.</div><div id="tacRows" class="list"></div></div>
 </section>
 
 <section id="ai" class="page">
@@ -86,9 +501,23 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}
 <div class="field"><label>Twelve Data API key</label><input id="apiKey" type="password" placeholder="Stored only on this device"></div>
 <div class="two">
 <div class="field"><label>Dry powder (CAD)</label><input id="dryInput" inputmode="decimal" type="number" step="1"></div>
+<div class="field"><label>CAD per 1 USD</label><input id="fxCadUsd" inputmode="decimal" type="number" step="0.0001" placeholder="e.g. 1.38"></div>
 <div class="field"><label>10Y Treasury yield %</label><input id="y10" inputmode="decimal" type="number" step="0.01"></div>
 <div class="field"><label>VIX</label><input id="vix" inputmode="decimal" type="number" step="0.1"></div>
 <div class="field"><label>Rates bias</label><select id="fed"><option value="neutral">Neutral</option><option value="hawkish">Hawkish</option><option value="dovish">Dovish</option></select></div>
+</div>
+
+<div class="sec" style="margin-top:16px">
+  <div class="secht" style="margin-bottom:9px">Strategic target weights</div>
+  <div class="targetgrid">
+    <div class="targetbox"><label>S&amp;P 500 %</label><input id="tSP500" inputmode="decimal" type="number" step="1"></div>
+    <div class="targetbox"><label>QQC / Nasdaq %</label><input id="tQQC" inputmode="decimal" type="number" step="1"></div>
+    <div class="targetbox"><label>Direct growth %</label><input id="tDIRECT" inputmode="decimal" type="number" step="1"></div>
+    <div class="targetbox"><label>Canada %</label><input id="tCANADA" inputmode="decimal" type="number" step="1"></div>
+    <div class="targetbox"><label>XEF %</label><input id="tXEF" inputmode="decimal" type="number" step="1"></div>
+    <div class="targetbox"><label>XEC %</label><input id="tXEC" inputmode="decimal" type="number" step="1"></div>
+  </div>
+  <div id="targetSum" class="targetsum">Total: 100%</div>
 </div>
 <div class="actions"><button class="btn primary" onclick="saveSettings()">Save</button><button class="btn danger" onclick="resetLocal()">Reset data</button></div>
 <div class="mini" style="margin-top:12px;line-height:1.45">Free Twelve Data plans may not return every TSX symbol. Manual prices always work.</div>
@@ -130,20 +559,121 @@ Paste one ticker and price per line. These formats all work:
 <div class="field"><label>Trim 2</label><input id="etr2" inputmode="decimal" type="number" step="0.01"></div>
 <div class="field"><label>Feed symbol</label><input id="efs"></div><div class="field"><label>Exchange</label><input id="eex" placeholder="TSX / NASDAQ / NYSE"></div>
 </div>
+
+<div class="field"><label>Strategic bucket</label>
+<select id="ebucket">
+<option value="SP500">S&amp;P 500 core</option>
+<option value="QQC">QQC / Nasdaq core</option>
+<option value="DIRECT">Direct U.S. / growth</option>
+<option value="CANADA">Canada</option>
+<option value="XEF">XEF developed ex-North America</option>
+<option value="XEC">XEC emerging markets</option>
+<option value="OTHER">Satellite / other</option>
+</select></div>
+<div class="two">
+<div class="field"><label>Buy 1 amount % of dry powder</label><input id="ep1" inputmode="decimal" type="number" step="0.5"></div>
+<div class="field"><label>Buy 2 amount % of dry powder</label><input id="ep2" inputmode="decimal" type="number" step="0.5"></div>
+<div class="field"><label>Strong Buy amount % of dry powder</label><input id="ep3" inputmode="decimal" type="number" step="0.5"></div>
+</div>
 <div class="field"><label>Notes</label><textarea id="enotes" style="min-height:90px"></textarea></div>
 <div class="sheetactions"><button class="btn primary" onclick="saveHolding()">Save</button><button class="btn" onclick="closeModal()">Cancel</button><button class="btn danger" onclick="deleteHolding()">Delete</button></div>
 </div></div>
 
 <script>
 const K='pcc_v13_private_1';
-const seed={settings:{apiKey:'',dry:0,y10:5.0,vix:20,fed:'neutral'},ai:null,holdings:[
+const TARGET_DEFAULTS={SP500:40,QQC:20,DIRECT:10,CANADA:15,XEF:10,XEC:5};
+const BUCKET_LABELS={SP500:'S&P 500',QQC:'QQC / Nasdaq',DIRECT:'Direct growth',CANADA:'Canada',XEF:'XEF',XEC:'XEC',OTHER:'Satellite'};
+const META={
+  'VFV':{bucket:'SP500',p1:10,p2:15,p3:20},
+  'HXS':{bucket:'SP500',p1:6,p2:10,p3:15},
+  'QQC':{bucket:'QQC',p1:8,p2:12,p3:18},
+  'XEF':{bucket:'XEF',p1:5,p2:8,p3:12},
+  'XEC':{bucket:'XEC',p1:4,p2:6,p3:9},
+  'XEI':{bucket:'CANADA',p1:4,p2:6,p3:8},
+  'VDY':{bucket:'CANADA',p1:0,p2:0,p3:0},
+  'ATD':{bucket:'CANADA',p1:4,p2:6,p3:9},
+  'ENB':{bucket:'CANADA',p1:4,p2:6,p3:8},
+  'CNQ':{bucket:'CANADA',p1:4,p2:6,p3:8},
+  'T':{bucket:'CANADA',p1:0,p2:0,p3:0},
+  'BCE':{bucket:'CANADA',p1:0,p2:0,p3:0},
+  'TSM':{bucket:'DIRECT',p1:5,p2:8,p3:12},
+  'AVGO':{bucket:'DIRECT',p1:5,p2:8,p3:12},
+  'MSFT':{bucket:'DIRECT',p1:5,p2:8,p3:12},
+  'GOOGL':{bucket:'DIRECT',p1:5,p2:8,p3:12},
+  'AMZN':{bucket:'DIRECT',p1:5,p2:8,p3:12},
+  'NVDA':{bucket:'DIRECT',p1:5,p2:8,p3:12},
+  'ASML':{bucket:'DIRECT',p1:5,p2:8,p3:12},
+  'META':{bucket:'DIRECT',p1:0,p2:0,p3:0},
+  'MCD':{bucket:'DIRECT',p1:0,p2:0,p3:0},
+  'PEP':{bucket:'DIRECT',p1:0,p2:0,p3:0},
+  'BTCX.B':{bucket:'OTHER',p1:3,p2:5,p3:7},
+  'XEQT':{bucket:'OTHER',p1:0,p2:0,p3:0}
+};
+const seed={settings:{apiKey:'',dry:0,y10:5.0,vix:20,fed:'neutral',cadPerUsd:1.38,targets:{...TARGET_DEFAULTS}},ai:null,holdings:[
 ['VFV','Vanguard S&P 500 ETF','CAD',184,178,170,null,null,'VFV','TSX'],['HXS','Global X S&P 500 Index ETF','CAD',107,103,98,null,null,'HXS','TSX'],['XEC','iShares Core MSCI Emerging Markets IMI','CAD',42.5,41,39.25,null,null,'XEC','TSX'],['XEF','iShares Core MSCI EAFE IMI','CAD',50.5,49,47,null,null,'XEF','TSX'],['XEI','iShares S&P/TSX Composite High Dividend','CAD',38.5,37,35.5,null,null,'XEI','TSX'],['QQC','Invesco NASDAQ 100 Index ETF','CAD',46,44,42,49.75,51,'QQC','TSX'],['ATD','Alimentation Couche-Tard','CAD',77.5,74.25,70,null,null,'ATD','TSX'],['ENB','Enbridge','CAD',65,62.5,59.5,null,null,'ENB','TSX'],['TSM','Taiwan Semiconductor ADR','USD',410,385,355,null,null,'TSM','NYSE'],['AVGO','Broadcom','USD',345,320,295,null,null,'AVGO','NASDAQ'],['MSFT','Microsoft','USD',475,450,420,null,null,'MSFT','NASDAQ'],['GOOGL','Alphabet','USD',320,300,280,null,null,'GOOGL','NASDAQ'],['AMZN','Amazon','USD',245,230,210,null,null,'AMZN','NASDAQ'],['NVDA','NVIDIA','USD',205,190,170,null,null,'NVDA','NASDAQ'],['META','Meta Platforms','USD',610,575,530,null,null,'META','NASDAQ'],['BTCX.B','CI Galaxy Bitcoin ETF','CAD',14.5,13.25,11.75,null,null,'BTCX.B','TSX'],['T','TELUS','CAD',null,null,null,null,null,'T','TSX']
 ].map((x,i)=>({id:'h'+i,ticker:x[0],name:x[1],currency:x[2],shares:null,avg:null,price:null,b1:x[3],b2:x[4],strong:x[5],tr1:x[6],tr2:x[7],feed:x[8],exchange:x[9],notes:x[0]==='T'?'Tax/ACB placeholder; no tactical buy by default.':''}))};
-let d=load();
+let d=migrate(load());
 function load(){try{return JSON.parse(localStorage.getItem(K))||structuredClone(seed)}catch(e){return structuredClone(seed)}}
+function migrate(x){
+  x=x||structuredClone(seed);
+  x.settings=x.settings||{};
+  x.settings.targets={...TARGET_DEFAULTS,...(x.settings.targets||{})};
+  if(num(x.settings.cadPerUsd)==null||num(x.settings.cadPerUsd)<=0)x.settings.cadPerUsd=1.38;
+  x.holdings=(x.holdings||[]).map(h=>{
+    const m=META[String(h.ticker||'').toUpperCase()]||{bucket:'OTHER',p1:3,p2:5,p3:7};
+    if(!h.bucket)h.bucket=m.bucket;
+    if(h.p1==null)h.p1=m.p1;
+    if(h.p2==null)h.p2=m.p2;
+    if(h.p3==null)h.p3=m.p3;
+    return h;
+  });
+  return x;
+}
 function save(){localStorage.setItem(K,JSON.stringify(d));render()}
 const num=x=>{let v=parseFloat(x);return Number.isFinite(v)?v:null};
 const money=(v,c='CAD')=>v==null?'—':new Intl.NumberFormat('en-CA',{style:'currency',currency:c,maximumFractionDigits:2}).format(v);
+const cad0=v=>v==null||v<=0?'—':new Intl.NumberFormat('en-CA',{style:'currency',currency:'CAD',maximumFractionDigits:0}).format(v);
+const usd0=v=>v==null||v<=0?'—':new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(v);
+const round25=v=>Math.round(v/25)*25;
+function recMoney(cadAmount,h){
+  if(cadAmount==null||cadAmount<=0)return '—';
+  if(h.currency==='USD'){
+    const fx=num(d.settings.cadPerUsd)||1.38;
+    return usd0(cadAmount/fx);
+  }
+  return cad0(cadAmount);
+}
+function amountOverrides(a){
+  if(!a)return {};
+  return {
+    b1:num(a.amountBuy1??a.buy1Amount??a.recommendedBuy1),
+    b2:num(a.amountBuy2??a.buy2Amount??a.recommendedBuy2),
+    strong:num(a.amountStrong??a.strongAmount??a.recommendedStrong)
+  };
+}
+function recAmounts(h){
+  const dry=num(d.settings.dry)||0,a=aiRec(h.ticker),ov=amountOverrides(a);
+  const calc=p=>dry>0&&num(p)>0?round25(dry*num(p)/100):null;
+  return {
+    b1:ov.b1??calc(h.p1),
+    b2:ov.b2??calc(h.p2),
+    strong:ov.strong??calc(h.p3),
+    src:(ov.b1!=null||ov.b2!=null||ov.strong!=null)?'AI':'BASE'
+  };
+}
+function currentSuggested(h){
+  const [a]=action(h),r=recAmounts(h);
+  if(a==='BUY 1')return r.b1;
+  if(a==='BUY 2')return r.b2;
+  if(a==='STRONG BUY')return r.strong;
+  return null;
+}
+function renderAllocation(){
+  const t=d.settings.targets||TARGET_DEFAULTS;
+  const rows=[['SP500','S&P 500'],['QQC','QQC / Nasdaq'],['DIRECT','Direct growth'],['CANADA','Canada'],['XEF','XEF'],['XEC','XEC']];
+  allocView.innerHTML=rows.map(([k,label])=>`<div class="allocrow"><div class="allocname">${label}</div><div class="allocbar"><div class="allocfill" style="width:${Math.max(0,Math.min(100,num(t[k])||0))}%"></div></div><div class="allocpct">${num(t[k])||0}%</div></div>`).join('');
+}
+
 function freshAI(){if(!d.ai||!d.ai.asOf)return false;return Date.now()-new Date(d.ai.asOf).getTime()<=36*3600e3}
 function aiRec(t){if(!freshAI())return null;return (d.ai.recommendations||[]).find(r=>String(r.ticker).toUpperCase()===String(t).toUpperCase())||null}
 function levels(h){let a=aiRec(h.ticker);return {b1:a?.buy1??h.b1,b2:a?.buy2??h.b2,strong:a?.strong??h.strong,tr1:a?.trim1??h.tr1,tr2:a?.trim2??h.tr2,src:a?'AI':'BASE'}}
@@ -156,18 +686,68 @@ function render(){
  let cb=0,ub=0,hasC=0,hasU=0;
  d.holdings.forEach(h=>{let b=book(h);if(b!=null){if(h.currency==='CAD'){cb+=b;hasC=1}else{ub+=b;hasU=1}}});
  cadBook.textContent=hasC?money(cb,'CAD'):'—';usdBook.textContent=hasU?money(ub,'USD'):'—';dry.textContent=money(num(d.settings.dry)||0,'CAD');
- regime.textContent=freshAI()?(d.ai.marketRegime||localRegime()):localRegime();yieldView.textContent=num(d.settings.y10)!=null?num(d.settings.y10).toFixed(2)+'%':'—';vixView.textContent=num(d.settings.vix)!=null?num(d.settings.vix).toFixed(1):'—';
- holdRows.innerHTML=d.holdings.map(h=>{let p=num(h.price),b=book(h),m=mv(h),pl=b!=null&&m!=null?m-b:null,[a,cl]=action(h);return `<div class="item" onclick="editHolding('${h.id}')"><div class="itemtop"><div><div class="ticker">${h.ticker}</div><div class="name">${h.name}</div></div><span class="pill ${cl}">${a}</span></div><div class="detailgrid">${detail('Price',money(p,h.currency))}${detail('Avg cost',money(num(h.avg),h.currency))}${detail('Book cost',money(b,h.currency))}${detail('P/L',money(pl,h.currency),pl>0?'green':pl<0?'red':'')}</div></div>`}).join('')||'<div class="card empty">No holdings yet.</div>';
- tacRows.innerHTML=d.holdings.map(h=>{let l=levels(h),[a,cl]=action(h),r=aiRec(h.ticker);return `<div class="item" onclick="editHolding('${h.id}')"><div class="itemtop"><div><div class="ticker">${h.ticker}</div><div class="source">${l.src}${r?.confidence?' · '+r.confidence:''}</div></div><span class="pill ${cl}">${a}</span></div><div class="detailgrid">${detail('Price',money(num(h.price),h.currency))}${detail('Buy 1',money(l.b1,h.currency))}${detail('Buy 2',money(l.b2,h.currency))}${detail('Strong',money(l.strong,h.currency))}</div>${r?.reason?`<div class="reason">${r.reason}</div>`:''}</div>`}).join('');
- apiKey.value=d.settings.apiKey||'';dryInput.value=d.settings.dry??'';y10.value=d.settings.y10??'';vix.value=d.settings.vix??'';fed.value=d.settings.fed||'neutral';renderAI();
+ regime.textContent=freshAI()?(d.ai.marketRegime||localRegime()):localRegime();
+ yieldView.textContent=num(d.settings.y10)!=null?num(d.settings.y10).toFixed(2)+'%':'—';
+ vixView.textContent=num(d.settings.vix)!=null?num(d.settings.vix).toFixed(1):'—';
+ renderAllocation();
+
+ holdRows.innerHTML=d.holdings.map(h=>{
+   let p=num(h.price),b=book(h),m=mv(h),pl=b!=null&&m!=null?m-b:null,[a,cl]=action(h);
+   return `<div class="item" onclick="editHolding('${h.id}')">
+     <div class="itemtop"><div><div class="ticker">${h.ticker}</div><div class="name">${h.name}</div><div class="bucketbadge">${BUCKET_LABELS[h.bucket]||'Satellite'}</div></div><span class="pill ${cl}">${a}</span></div>
+     <div class="detailgrid">${detail('Price',money(p,h.currency))}${detail('Avg cost',money(num(h.avg),h.currency))}${detail('Book cost',money(b,h.currency))}${detail('P/L',money(pl,h.currency),pl>0?'green':pl<0?'red':'')}</div>
+   </div>`}).join('')||'<div class="card empty">No holdings yet.</div>';
+
+ tacRows.innerHTML=d.holdings.map(h=>{
+   let l=levels(h),[a,cl]=action(h),r=aiRec(h.ticker),am=recAmounts(h),now=currentSuggested(h);
+   return `<div class="item" onclick="editHolding('${h.id}')">
+     <div class="itemtop">
+       <div><div class="ticker">${h.ticker}</div><div class="source">${l.src}${r?.confidence?' · '+r.confidence:''} · ${BUCKET_LABELS[h.bucket]||'Satellite'}</div>${now!=null?`<div class="nowamt">Suggested now: ${recMoney(now,h)} ${h.currency}</div>`:''}</div>
+       <span class="pill ${cl}">${a}</span>
+     </div>
+     <div class="detailgrid">${detail('Current price',money(num(h.price),h.currency))}${detail('Trim 1',money(l.tr1,h.currency))}</div>
+     <div class="zonegrid">
+       <div class="zonebox"><div class="zk">Buy 1</div><div class="zp">${money(l.b1,h.currency)}</div><div class="za">${recMoney(am.b1,h)} ${h.currency}</div></div>
+       <div class="zonebox"><div class="zk">Buy 2</div><div class="zp">${money(l.b2,h.currency)}</div><div class="za">${recMoney(am.b2,h)} ${h.currency}</div></div>
+       <div class="zonebox"><div class="zk">Strong</div><div class="zp">${money(l.strong,h.currency)}</div><div class="za">${recMoney(am.strong,h)} ${h.currency}</div></div>
+     </div>
+     ${r?.reason?`<div class="reason">${r.reason}</div>`:''}
+   </div>`}).join('');
+
+ apiKey.value=d.settings.apiKey||'';dryInput.value=d.settings.dry??'';fxCadUsd.value=d.settings.cadPerUsd??1.38;y10.value=d.settings.y10??'';vix.value=d.settings.vix??'';fed.value=d.settings.fed||'neutral';
+ const t=d.settings.targets||TARGET_DEFAULTS;
+ tSP500.value=t.SP500??40;tQQC.value=t.QQC??20;tDIRECT.value=t.DIRECT??10;tCANADA.value=t.CANADA??15;tXEF.value=t.XEF??10;tXEC.value=t.XEC??5;
+ const total=['SP500','QQC','DIRECT','CANADA','XEF','XEC'].reduce((s,k)=>s+(num(t[k])||0),0);
+ targetSum.textContent=`Total: ${total}%${total===100?'':' · adjust to 100%'}`;
+ targetSum.className='targetsum '+(total===100?'green':'amber');
+ renderAI();
 }
 function localRegime(){let s=0,y=num(d.settings.y10),v=num(d.settings.vix);if(y>=5.1)s+=2;else if(y>=4.8)s++;if(v>=30)s+=2;else if(v>=22)s++;if(d.settings.fed==='hawkish')s++;if(d.settings.fed==='dovish')s--;return s>=4?'STRESSED':s>=2?'CAUTIOUS':s<=-1?'RISK-ON':'NEUTRAL'}
-function editHolding(id){let h=d.holdings.find(x=>x.id===id);if(!h)return;eid.value=h.id;et.value=h.ticker;en.value=h.name;ec.value=h.currency;es.value=h.shares??'';eavg.value=h.avg??'';ep.value=h.price??'';eb1.value=h.b1??'';eb2.value=h.b2??'';estr.value=h.strong??'';etr1.value=h.tr1??'';etr2.value=h.tr2??'';efs.value=h.feed??'';eex.value=h.exchange??'';enotes.value=h.notes||'';modal.classList.add('on')}
-function addHolding(){let h={id:'h'+Date.now(),ticker:'NEW',name:'New holding',currency:'CAD',shares:null,avg:null,price:null,b1:null,b2:null,strong:null,tr1:null,tr2:null,feed:'',exchange:'',notes:''};d.holdings.push(h);editHolding(h.id)}
+function editHolding(id){
+ let h=d.holdings.find(x=>x.id===id);if(!h)return;
+ eid.value=h.id;et.value=h.ticker;en.value=h.name;ec.value=h.currency;es.value=h.shares??'';eavg.value=h.avg??'';ep.value=h.price??'';
+ eb1.value=h.b1??'';eb2.value=h.b2??'';estr.value=h.strong??'';etr1.value=h.tr1??'';etr2.value=h.tr2??'';
+ efs.value=h.feed??'';eex.value=h.exchange??'';ebucket.value=h.bucket||'OTHER';ep1.value=h.p1??'';ep2.value=h.p2??'';ep3.value=h.p3??'';enotes.value=h.notes||'';
+ modal.classList.add('on')
+}
+function addHolding(){
+ let h={id:'h'+Date.now(),ticker:'NEW',name:'New holding',currency:'CAD',shares:null,avg:null,price:null,b1:null,b2:null,strong:null,tr1:null,tr2:null,feed:'',exchange:'',bucket:'OTHER',p1:3,p2:5,p3:7,notes:''};
+ d.holdings.push(h);editHolding(h.id)
+}
 function closeModal(){modal.classList.remove('on')}
-function saveHolding(){let h=d.holdings.find(x=>x.id===eid.value);if(!h)return;Object.assign(h,{ticker:et.value.trim().toUpperCase(),name:en.value.trim(),currency:ec.value,shares:num(es.value),avg:num(eavg.value),price:num(ep.value),b1:num(eb1.value),b2:num(eb2.value),strong:num(estr.value),tr1:num(etr1.value),tr2:num(etr2.value),feed:efs.value.trim(),exchange:eex.value.trim(),notes:enotes.value.trim()});closeModal();save()}
+function saveHolding(){
+ let h=d.holdings.find(x=>x.id===eid.value);if(!h)return;
+ Object.assign(h,{ticker:et.value.trim().toUpperCase(),name:en.value.trim(),currency:ec.value,shares:num(es.value),avg:num(eavg.value),price:num(ep.value),b1:num(eb1.value),b2:num(eb2.value),strong:num(estr.value),tr1:num(etr1.value),tr2:num(etr2.value),feed:efs.value.trim(),exchange:eex.value.trim(),bucket:ebucket.value,p1:num(ep1.value)||0,p2:num(ep2.value)||0,p3:num(ep3.value)||0,notes:enotes.value.trim()});
+ closeModal();save()
+}
 function deleteHolding(){let id=eid.value;d.holdings=d.holdings.filter(x=>x.id!==id);closeModal();save()}
-function saveSettings(){d.settings.apiKey=apiKey.value.trim();d.settings.dry=num(dryInput.value)||0;d.settings.y10=num(y10.value);d.settings.vix=num(vix.value);d.settings.fed=fed.value;save()}
+function saveSettings(){
+ d.settings.apiKey=apiKey.value.trim();d.settings.dry=num(dryInput.value)||0;d.settings.cadPerUsd=num(fxCadUsd.value)||1.38;d.settings.y10=num(y10.value);d.settings.vix=num(vix.value);d.settings.fed=fed.value;
+ d.settings.targets={SP500:num(tSP500.value)||0,QQC:num(tQQC.value)||0,DIRECT:num(tDIRECT.value)||0,CANADA:num(tCANADA.value)||0,XEF:num(tXEF.value)||0,XEC:num(tXEC.value)||0};
+ const total=Object.values(d.settings.targets).reduce((a,b)=>a+(num(b)||0),0);
+ if(total!==100&&!confirm(`Target weights total ${total}%, not 100%. Save anyway?`))return;
+ save()
+}
 async function refreshQuotes(){let key=d.settings.apiKey;if(!key){alert('Add your Twelve Data API key in Settings first.');return}let ok=0;for(let h of d.holdings){if(!h.feed)continue;let sym=h.feed+(h.exchange?':'+h.exchange:'');try{let r=await fetch(`https://api.twelvedata.com/price?symbol=${encodeURIComponent(sym)}&apikey=${encodeURIComponent(key)}`);let j=await r.json();let p=num(j.price);if(p!=null){h.price=p;ok++}}catch(e){}}save();alert(`Updated ${ok} quotes. Symbols unavailable on your plan can still be entered manually.`)}
 function openBulk(){bulkBox.value='';bulkResult.textContent='';bulkModal.classList.add('on');setTimeout(()=>bulkBox.focus(),100)}
 function closeBulk(){bulkModal.classList.remove('on')}
@@ -193,7 +773,7 @@ function applyBulk(){
 function applyAI(){try{let x=JSON.parse(aiBox.value.trim());if(!x.asOf||!Array.isArray(x.recommendations))throw 0;d.ai=x;save();aiBox.value='';go('tactical')}catch(e){alert('Invalid AI brief JSON. Paste the complete JSON block from ChatGPT.')}}
 function clearAI(){d.ai=null;save()}
 function renderAI(){if(!d.ai){aiView.innerHTML='<div class="card empty">No AI brief loaded.</div>';return}let age=(Date.now()-new Date(d.ai.asOf).getTime())/3600e3,active=age<36;let chips=(d.ai.catalysts||[]).map(x=>`<span class="chip">${x}</span>`).join('');let recs=(d.ai.recommendations||[]).map(r=>`<div class="card aiitem"><div class="itemtop"><div><div class="ticker">${r.ticker}</div><div class="mini">${r.confidence||''}</div></div><span class="pill ${actionClass(r.action)}">${r.action||''}</span></div>${r.reason?`<div class="reason">${r.reason}</div>`:''}</div>`).join('');aiView.innerHTML=`<div class="card aihero"><div class="reg">${d.ai.marketRegime||'AI Brief'} · ${active?'Fresh':'Expired'}</div><div class="sum">${d.ai.summary||''}</div>${chips?`<div class="chips">${chips}</div>`:''}</div><div class="list" style="margin-top:10px">${recs}</div>`}
-function resetLocal(){if(confirm('Delete all locally entered portfolio data and restore defaults?')){localStorage.removeItem(K);d=structuredClone(seed);render()}}
+function resetLocal(){if(confirm('Delete all locally entered portfolio data and restore defaults?')){localStorage.removeItem(K);d=migrate(structuredClone(seed));render()}}
 function go(id){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x.dataset.p===id));document.querySelectorAll('.page').forEach(x=>x.classList.toggle('on',x.id===id));window.scrollTo({top:0,behavior:'smooth'})}
 document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>go(b.dataset.p));modal.onclick=e=>{if(e.target===modal)closeModal()};bulkModal.onclick=e=>{if(e.target===bulkModal)closeBulk()};render();
 </script>
