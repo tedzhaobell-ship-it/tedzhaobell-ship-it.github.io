@@ -1,40 +1,201 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b0d12"><title>Portfolio Command Centre V1.3</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090c12">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Portfolio Command Centre V1.3</title>
 <style>
-:root{--bg:#0b0d12;--p:#121722;--p2:#171e2a;--l:#283244;--t:#f3f6fb;--m:#94a3b8;--g:#2bd49b;--r:#ff7474;--a:#ffd166;--b:#77aaff}*{box-sizing:border-box}body{margin:0;background:linear-gradient(#080a0f,#0b0d12);color:var(--t);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.app{max-width:980px;margin:auto;padding:18px 12px 90px}h1{font-size:26px;margin:0}.sub{color:var(--m);font-size:12px;margin-top:5px}.grid{display:grid;gap:10px}.metrics{grid-template-columns:repeat(3,1fr);margin-top:16px}.card{background:var(--p);border:1px solid var(--l);border-radius:17px}.metric{padding:14px}.lab{font-size:10px;color:var(--m)}.val{font-size:21px;font-weight:800;margin-top:5px}.sec{margin-top:16px}.sech{display:flex;justify-content:space-between;align-items:center;margin:0 2px 8px}.secht{font-weight:800}.btn{border:1px solid var(--l);background:var(--p2);color:var(--t);padding:9px 11px;border-radius:11px;font-weight:700}.btn.primary{background:#eef2f7;color:#0b0d12}.btn.danger{color:#ffaaaa}.notice{padding:12px;font-size:12px;line-height:1.5;color:#cbd5e1}.tbl{overflow:hidden}.row{display:grid;grid-template-columns:1fr .75fr .8fr .8fr .8fr .9fr;gap:8px;padding:11px;border-bottom:1px solid var(--l);align-items:center;font-size:12px}.head{color:var(--m);font-size:10px;background:#0f141d}.ticker{font-weight:850}.name{font-size:10px;color:var(--m);margin-top:2px}.pill{display:inline-flex;padding:6px 8px;border-radius:999px;font-size:10px;font-weight:800}.wait{background:#1a2230;color:#c4cfdd}.buy{background:rgba(43,212,155,.12);color:#7deac0}.trim{background:rgba(255,209,102,.12);color:#ffe39a}.no{background:rgba(255,116,116,.12);color:#ffb1b1}.mini{font-size:10px;color:var(--m)}.tabs{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);width:min(620px,calc(100% - 20px));display:grid;grid-template-columns:repeat(4,1fr);gap:4px;background:rgba(14,18,25,.96);border:1px solid var(--l);border-radius:17px;padding:6px;backdrop-filter:blur(15px)}.tab{border:0;background:transparent;color:var(--m);padding:10px 4px;border-radius:11px}.tab.on{background:#20293a;color:#fff;font-weight:800}.page{display:none}.page.on{display:block}.field{margin:10px 0}.field label{display:block;font-size:10px;color:var(--m);margin-bottom:5px}.field input,.field textarea,.field select{width:100%;padding:10px;border-radius:10px;background:#0d1118;color:#fff;border:1px solid var(--l)}.field textarea{min-height:170px}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.aiitem{padding:12px;margin-top:8px}.green{color:var(--g)}.red{color:var(--r)}.amber{color:var(--a)}.modal{position:fixed;inset:0;background:#000b;display:none;align-items:flex-end;justify-content:center;padding:12px;z-index:9}.modal.on{display:flex}.sheet{width:min(660px,100%);max-height:90vh;overflow:auto;background:#111722;border:1px solid var(--l);border-radius:20px;padding:15px}.sheet h3{margin-top:0}@media(max-width:700px){.metrics{grid-template-columns:1fr 1fr}.row{grid-template-columns:1.1fr .8fr .8fr;grid-template-areas:"t p a" "c b pnl"}.row .c1{grid-area:t}.row .c2{grid-area:p}.row .c3{grid-area:c}.row .c4{grid-area:b}.row .c5{grid-area:pnl}.row .c6{grid-area:a}.head{display:none}.two{grid-template-columns:1fr}}@media(max-width:420px){.metrics{grid-template-columns:1fr 1fr}.val{font-size:18px}}
-</style></head><body><div class="app">
-<h1>Portfolio Command Centre</h1><div class="sub">V1.3 · stocks & ETFs · book cost · daily tactical plan · AI research overlay</div>
-<section id="portfolio" class="page on"><div class="grid metrics"><div class="card metric"><div class="lab">CAD book cost</div><div id="cadBook" class="val">—</div></div><div class="card metric"><div class="lab">USD book cost</div><div id="usdBook" class="val">—</div></div><div class="card metric"><div class="lab">Dry powder</div><div id="dry" class="val green">—</div></div></div>
-<div class="sec card notice"><b>Private by design:</b> this public site contains no personal share counts, book costs or API keys. Anything you enter is saved only in this browser's local storage.</div>
-<div class="sec"><div class="sech"><div class="secht">Holdings & watchlist</div><button class="btn" onclick="addHolding()">+ Add</button></div><div class="card tbl"><div class="row head"><div>Ticker</div><div>Price</div><div>Avg cost</div><div>Book cost</div><div>P/L</div><div>Action</div></div><div id="holdRows"></div></div></div></section>
-<section id="tactical" class="page"><div class="grid metrics"><div class="card metric"><div class="lab">Market regime</div><div id="regime" class="val">NEUTRAL</div></div><div class="card metric"><div class="lab">10Y yield</div><div id="yieldView" class="val">—</div></div><div class="card metric"><div class="lab">VIX</div><div id="vixView" class="val">—</div></div></div><div class="sec"><div class="sech"><div class="secht">Live tactical plan</div><button class="btn primary" onclick="refreshQuotes()">Refresh quotes</button></div><div class="card tbl"><div class="row head"><div>Ticker</div><div>Price</div><div>Buy 1</div><div>Buy 2</div><div>Strong</div><div>Action</div></div><div id="tacRows"></div></div></div></section>
-<section id="ai" class="page"><div class="card notice"><b>Daily AI Research Brief</b><br>Paste the JSON from your daily ChatGPT brief. Fresh AI levels override local tactical levels for 36 hours, while baseline levels remain preserved underneath.</div><div class="field"><label>Paste JSON</label><textarea id="aiBox" placeholder='{"asOf":"...","marketRegime":"CAUTIOUS",...}'></textarea></div><button class="btn primary" onclick="applyAI()">Apply AI brief</button> <button class="btn danger" onclick="clearAI()">Clear brief</button><div id="aiView" class="sec"></div></section>
-<section id="settings" class="page"><div class="card" style="padding:14px"><div class="secht">Settings</div><div class="field"><label>Twelve Data API key</label><input id="apiKey" type="password" placeholder="Stored only on this device"></div><div class="two"><div class="field"><label>Dry powder (CAD)</label><input id="dryInput" type="number" step="1"></div><div class="field"><label>10Y Treasury yield %</label><input id="y10" type="number" step="0.01"></div><div class="field"><label>VIX</label><input id="vix" type="number" step="0.1"></div><div class="field"><label>Rates bias</label><select id="fed"><option value="neutral">Neutral</option><option value="hawkish">Hawkish</option><option value="dovish">Dovish</option></select></div></div><button class="btn primary" onclick="saveSettings()">Save</button> <button class="btn danger" onclick="resetLocal()">Reset local data</button><div class="mini" style="margin-top:10px">Free Twelve Data plans may not return all TSX symbols. You can always enter a manual price in the holding editor.</div></div></section>
-</div><nav class="tabs"><button class="tab on" data-p="portfolio">Portfolio</button><button class="tab" data-p="tactical">Tactical</button><button class="tab" data-p="ai">AI Brief</button><button class="tab" data-p="settings">Settings</button></nav>
-<div id="modal" class="modal"><div class="sheet"><h3>Edit holding</h3><input id="eid" type="hidden"><div class="two"><div class="field"><label>Ticker</label><input id="et"></div><div class="field"><label>Name</label><input id="en"></div><div class="field"><label>Currency</label><select id="ec"><option>CAD</option><option>USD</option></select></div><div class="field"><label>Shares</label><input id="es" type="number" step="0.000001"></div><div class="field"><label>Average cost / share</label><input id="eavg" type="number" step="0.0001"></div><div class="field"><label>Manual price</label><input id="ep" type="number" step="0.0001"></div><div class="field"><label>Buy 1</label><input id="eb1" type="number" step="0.01"></div><div class="field"><label>Buy 2</label><input id="eb2" type="number" step="0.01"></div><div class="field"><label>Strong buy</label><input id="estr" type="number" step="0.01"></div><div class="field"><label>Trim 1</label><input id="etr1" type="number" step="0.01"></div><div class="field"><label>Trim 2</label><input id="etr2" type="number" step="0.01"></div><div class="field"><label>Feed symbol</label><input id="efs"></div><div class="field"><label>Exchange</label><input id="eex" placeholder="TSX / NASDAQ / NYSE"></div></div><div class="field"><label>Notes</label><textarea id="enotes" style="min-height:70px"></textarea></div><button class="btn primary" onclick="saveHolding()">Save</button> <button class="btn" onclick="closeModal()">Cancel</button> <button class="btn danger" onclick="deleteHolding()">Delete</button></div></div>
+:root{--bg:#090c12;--panel:#121822;--panel2:#171f2c;--line:#263244;--text:#f4f7fb;--muted:#94a3b8;--green:#36d49b;--red:#ff7a7a;--amber:#ffd166;--blue:#8bb7ff;--shadow:0 10px 30px rgba(0,0,0,.22)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:var(--bg)}
+body{margin:0;background:linear-gradient(180deg,#07090e 0,#0a0e15 45%,#090c12 100%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;min-height:100vh}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+.app{width:100%;max-width:900px;margin:0 auto;padding:18px 14px calc(104px + env(safe-area-inset-bottom))}
+.header{padding:2px 2px 4px}h1{font-size:25px;line-height:1.08;margin:0;font-weight:850;letter-spacing:-.45px}
+.sub{color:var(--muted);font-size:12px;line-height:1.4;margin-top:6px}
+.grid{display:grid;gap:10px}.metrics{grid-template-columns:1fr 1fr;margin-top:16px}.metric:last-child{grid-column:1/-1}
+.card{background:rgba(18,24,34,.94);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+.metric{padding:14px 15px;min-height:82px}.lab{font-size:11px;color:var(--muted);font-weight:650}.val{font-size:20px;font-weight:850;margin-top:7px;letter-spacing:-.2px}
+.sec{margin-top:18px}.sech{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 2px 9px}.secht{font-size:16px;font-weight:820}
+.btn{min-height:44px;border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:10px 13px;border-radius:13px;font-weight:750}
+.btn.primary{background:#f3f6fa;color:#080b10;border-color:#f3f6fa}.btn.danger{color:#ffb0b0}
+.notice{padding:13px 14px;color:#cbd5e1;font-size:12px;line-height:1.55}
+.green{color:var(--green)}.red{color:var(--red)}.amber{color:var(--amber)}.page{display:none}.page.on{display:block}
+.list{display:grid;gap:10px}
+.item{background:rgba(18,24,34,.96);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:var(--shadow)}
+.item:active{transform:scale(.995)}.itemtop{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.ticker{font-size:17px;font-weight:900;letter-spacing:.2px}.name{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.25}
+.pill{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;padding:7px 9px;border-radius:999px;font-size:10px;font-weight:900;letter-spacing:.15px}
+.wait{background:#1d2735;color:#d0d8e4}.buy{background:rgba(54,212,155,.14);color:#84efc5}.trim{background:rgba(255,209,102,.14);color:#ffe7a3}.no{background:rgba(255,122,122,.14);color:#ffb8b8}
+.detailgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}
+.detail{background:#0d121a;border:1px solid #202a39;border-radius:13px;padding:10px 11px;min-width:0}
+.detail .k{font-size:10px;color:var(--muted);font-weight:650;margin-bottom:4px}.detail .v{font-size:14px;font-weight:780;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.source{font-size:10px;color:var(--blue);font-weight:800;margin-top:4px}
+.reason{font-size:12px;color:#cbd5e1;line-height:1.5;margin-top:11px;padding-top:10px;border-top:1px solid #202a39}
+.empty{padding:18px;text-align:center;color:var(--muted);font-size:13px}
+.field{margin:12px 0}.field label{display:block;font-size:11px;color:var(--muted);font-weight:700;margin-bottom:6px}
+.field input,.field textarea,.field select{width:100%;min-height:46px;padding:11px 12px;border-radius:13px;background:#0c1118;color:#fff;border:1px solid var(--line);font-size:16px;outline:none}
+.field textarea{min-height:190px;resize:vertical;line-height:1.45}.field input:focus,.field textarea:focus,.field select:focus{border-color:#526780}
+.two{display:grid;grid-template-columns:1fr;gap:0}.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.aihero{padding:15px}.aihero .reg{font-size:11px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.6px}.aihero .sum{font-size:14px;line-height:1.55;margin-top:7px}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.chip{background:#0d131c;border:1px solid #253144;color:#cbd5e1;padding:7px 9px;border-radius:999px;font-size:10px;line-height:1.2}
+.aiitem{padding:14px}.mini{font-size:10px;color:var(--muted)}
+.tabs{position:fixed;z-index:20;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(10,14,21,.94);border-top:1px solid var(--line);padding:6px 7px calc(7px + env(safe-area-inset-bottom));backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.tab{border:0;background:transparent;color:var(--muted);min-height:48px;border-radius:12px;padding:7px 3px;font-size:11px;font-weight:750}.tab.on{background:#1b2533;color:#fff}
+.modal{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.7);display:none;align-items:flex-end;justify-content:center}.modal.on{display:flex}
+.sheet{width:100%;max-width:700px;max-height:92dvh;overflow:auto;background:#101721;border:1px solid var(--line);border-bottom:0;border-radius:24px 24px 0 0;padding:18px 14px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -20px 50px rgba(0,0,0,.4)}
+.sheet h3{margin:0 0 10px;font-size:20px}.sheetactions{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:8px;margin-top:14px}
+@media(min-width:700px){.app{padding:24px 18px 100px}.metrics{grid-template-columns:repeat(3,1fr)}.metric:last-child{grid-column:auto}.two{grid-template-columns:1fr 1fr;gap:10px}.list{grid-template-columns:1fr 1fr}.tabs{left:50%;right:auto;transform:translateX(-50%);width:620px;bottom:12px;border:1px solid var(--line);border-radius:18px;padding:6px}.sheet{border-radius:24px;margin-bottom:20px;border-bottom:1px solid var(--line)}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="header"><h1>Portfolio Command Centre</h1><div class="sub">V1.3 · mobile-first · stocks & ETFs · book cost · tactical plan · AI overlay</div></div>
+
+<section id="portfolio" class="page on">
+<div class="grid metrics">
+<div class="card metric"><div class="lab">CAD book cost</div><div id="cadBook" class="val">—</div></div>
+<div class="card metric"><div class="lab">USD book cost</div><div id="usdBook" class="val">—</div></div>
+<div class="card metric"><div class="lab">Dry powder</div><div id="dry" class="val green">—</div></div>
+</div>
+<div class="sec card notice"><b>Private by design:</b> your shares, book costs, API key and AI brief stay in this browser's local storage.</div>
+<div class="sec"><div class="sech"><div class="secht">Holdings & watchlist</div><div style="display:flex;gap:8px"><button class="btn" onclick="openBulk()">Bulk prices</button><button class="btn" onclick="addHolding()">+ Add</button></div></div><div id="holdRows" class="list"></div></div>
+</section>
+
+<section id="tactical" class="page">
+<div class="grid metrics">
+<div class="card metric"><div class="lab">Market regime</div><div id="regime" class="val">NEUTRAL</div></div>
+<div class="card metric"><div class="lab">10Y yield</div><div id="yieldView" class="val">—</div></div>
+<div class="card metric"><div class="lab">VIX</div><div id="vixView" class="val">—</div></div>
+</div>
+<div class="sec"><div class="sech"><div><div class="secht">Tactical plan</div><div class="mini">AI brief overrides baseline when fresh</div></div><button class="btn primary" onclick="refreshQuotes()">Refresh</button></div><div id="tacRows" class="list"></div></div>
+</section>
+
+<section id="ai" class="page">
+<div class="card notice"><b>Daily AI Research Brief</b><br>Paste the JSON from ChatGPT. Recommendations remain active for 36 hours.</div>
+<div class="field"><label>Paste AI brief JSON</label><textarea id="aiBox" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder='{"asOf":"2026-09-17","marketRegime":"CAUTIOUS",...}'></textarea></div>
+<div class="actions"><button class="btn primary" onclick="applyAI()">Apply brief</button><button class="btn danger" onclick="clearAI()">Clear brief</button></div>
+<div id="aiView" class="sec"></div>
+</section>
+
+<section id="settings" class="page">
+<div class="card" style="padding:15px"><div class="secht">Settings</div>
+<div class="field"><label>Twelve Data API key</label><input id="apiKey" type="password" placeholder="Stored only on this device"></div>
+<div class="two">
+<div class="field"><label>Dry powder (CAD)</label><input id="dryInput" inputmode="decimal" type="number" step="1"></div>
+<div class="field"><label>10Y Treasury yield %</label><input id="y10" inputmode="decimal" type="number" step="0.01"></div>
+<div class="field"><label>VIX</label><input id="vix" inputmode="decimal" type="number" step="0.1"></div>
+<div class="field"><label>Rates bias</label><select id="fed"><option value="neutral">Neutral</option><option value="hawkish">Hawkish</option><option value="dovish">Dovish</option></select></div>
+</div>
+<div class="actions"><button class="btn primary" onclick="saveSettings()">Save</button><button class="btn danger" onclick="resetLocal()">Reset data</button></div>
+<div class="mini" style="margin-top:12px;line-height:1.45">Free Twelve Data plans may not return every TSX symbol. Manual prices always work.</div>
+</div>
+</section>
+</div>
+
+<nav class="tabs">
+<button class="tab on" data-p="portfolio">Portfolio</button>
+<button class="tab" data-p="tactical">Tactical</button>
+<button class="tab" data-p="ai">AI Brief</button>
+<button class="tab" data-p="settings">Settings</button>
+</nav>
+
+
+<div id="bulkModal" class="modal"><div class="sheet">
+<h3>Mass Price Update</h3>
+<div class="notice" style="padding:0 0 10px;color:#94a3b8">
+Paste one ticker and price per line. These formats all work:
+<br><b style="color:#f4f7fb">VFV 187.77</b> &nbsp; <b style="color:#f4f7fb">QQC,48.15</b> &nbsp; <b style="color:#f4f7fb">AVGO = 342.10</b>
+</div>
+<div class="field"><label>Prices</label><textarea id="bulkBox" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="VFV 187.77&#10;QQC 48.15&#10;ATD 80.05&#10;AVGO 342.10&#10;TSM 417.70"></textarea></div>
+<div id="bulkResult" class="mini" style="min-height:18px;margin:2px 0 10px"></div>
+<div class="actions"><button class="btn primary" onclick="applyBulk()">Update All Prices</button><button class="btn" onclick="closeBulk()">Cancel</button></div>
+</div></div>
+
+<div id="modal" class="modal"><div class="sheet">
+<h3>Edit holding</h3><input id="eid" type="hidden">
+<div class="two">
+<div class="field"><label>Ticker</label><input id="et"></div><div class="field"><label>Name</label><input id="en"></div>
+<div class="field"><label>Currency</label><select id="ec"><option>CAD</option><option>USD</option></select></div>
+<div class="field"><label>Shares</label><input id="es" inputmode="decimal" type="number" step="0.000001"></div>
+<div class="field"><label>Average cost / share</label><input id="eavg" inputmode="decimal" type="number" step="0.0001"></div>
+<div class="field"><label>Manual price</label><input id="ep" inputmode="decimal" type="number" step="0.0001"></div>
+<div class="field"><label>Buy 1</label><input id="eb1" inputmode="decimal" type="number" step="0.01"></div>
+<div class="field"><label>Buy 2</label><input id="eb2" inputmode="decimal" type="number" step="0.01"></div>
+<div class="field"><label>Strong buy</label><input id="estr" inputmode="decimal" type="number" step="0.01"></div>
+<div class="field"><label>Trim 1</label><input id="etr1" inputmode="decimal" type="number" step="0.01"></div>
+<div class="field"><label>Trim 2</label><input id="etr2" inputmode="decimal" type="number" step="0.01"></div>
+<div class="field"><label>Feed symbol</label><input id="efs"></div><div class="field"><label>Exchange</label><input id="eex" placeholder="TSX / NASDAQ / NYSE"></div>
+</div>
+<div class="field"><label>Notes</label><textarea id="enotes" style="min-height:90px"></textarea></div>
+<div class="sheetactions"><button class="btn primary" onclick="saveHolding()">Save</button><button class="btn" onclick="closeModal()">Cancel</button><button class="btn danger" onclick="deleteHolding()">Delete</button></div>
+</div></div>
+
 <script>
 const K='pcc_v13_private_1';
 const seed={settings:{apiKey:'',dry:0,y10:5.0,vix:20,fed:'neutral'},ai:null,holdings:[
 ['VFV','Vanguard S&P 500 ETF','CAD',184,178,170,null,null,'VFV','TSX'],['HXS','Global X S&P 500 Index ETF','CAD',107,103,98,null,null,'HXS','TSX'],['XEC','iShares Core MSCI Emerging Markets IMI','CAD',42.5,41,39.25,null,null,'XEC','TSX'],['XEF','iShares Core MSCI EAFE IMI','CAD',50.5,49,47,null,null,'XEF','TSX'],['XEI','iShares S&P/TSX Composite High Dividend','CAD',38.5,37,35.5,null,null,'XEI','TSX'],['QQC','Invesco NASDAQ 100 Index ETF','CAD',46,44,42,49.75,51,'QQC','TSX'],['ATD','Alimentation Couche-Tard','CAD',77.5,74.25,70,null,null,'ATD','TSX'],['ENB','Enbridge','CAD',65,62.5,59.5,null,null,'ENB','TSX'],['TSM','Taiwan Semiconductor ADR','USD',410,385,355,null,null,'TSM','NYSE'],['AVGO','Broadcom','USD',345,320,295,null,null,'AVGO','NASDAQ'],['MSFT','Microsoft','USD',475,450,420,null,null,'MSFT','NASDAQ'],['GOOGL','Alphabet','USD',320,300,280,null,null,'GOOGL','NASDAQ'],['AMZN','Amazon','USD',245,230,210,null,null,'AMZN','NASDAQ'],['NVDA','NVIDIA','USD',205,190,170,null,null,'NVDA','NASDAQ'],['META','Meta Platforms','USD',610,575,530,null,null,'META','NASDAQ'],['BTCX.B','CI Galaxy Bitcoin ETF','CAD',14.5,13.25,11.75,null,null,'BTCX.B','TSX'],['T','TELUS','CAD',null,null,null,null,null,'T','TSX']
 ].map((x,i)=>({id:'h'+i,ticker:x[0],name:x[1],currency:x[2],shares:null,avg:null,price:null,b1:x[3],b2:x[4],strong:x[5],tr1:x[6],tr2:x[7],feed:x[8],exchange:x[9],notes:x[0]==='T'?'Tax/ACB placeholder; no tactical buy by default.':''}))};
-let d=load();function load(){try{return JSON.parse(localStorage.getItem(K))||structuredClone(seed)}catch(e){return structuredClone(seed)}}function save(){localStorage.setItem(K,JSON.stringify(d));render()}
-const num=x=>{let v=parseFloat(x);return Number.isFinite(v)?v:null};const money=(v,c='CAD')=>v==null?'—':new Intl.NumberFormat('en-CA',{style:'currency',currency:c,maximumFractionDigits:2}).format(v);
-function aiRec(t){if(!d.ai||!d.ai.asOf)return null;let age=Date.now()-new Date(d.ai.asOf).getTime();if(age>36*3600e3)return null;return (d.ai.recommendations||[]).find(r=>r.ticker===t)||null}
+let d=load();
+function load(){try{return JSON.parse(localStorage.getItem(K))||structuredClone(seed)}catch(e){return structuredClone(seed)}}
+function save(){localStorage.setItem(K,JSON.stringify(d));render()}
+const num=x=>{let v=parseFloat(x);return Number.isFinite(v)?v:null};
+const money=(v,c='CAD')=>v==null?'—':new Intl.NumberFormat('en-CA',{style:'currency',currency:c,maximumFractionDigits:2}).format(v);
+function freshAI(){if(!d.ai||!d.ai.asOf)return false;return Date.now()-new Date(d.ai.asOf).getTime()<=36*3600e3}
+function aiRec(t){if(!freshAI())return null;return (d.ai.recommendations||[]).find(r=>String(r.ticker).toUpperCase()===String(t).toUpperCase())||null}
 function levels(h){let a=aiRec(h.ticker);return {b1:a?.buy1??h.b1,b2:a?.buy2??h.b2,strong:a?.strong??h.strong,tr1:a?.trim1??h.tr1,tr2:a?.trim2??h.tr2,src:a?'AI':'BASE'}}
-function action(h){if(h.ticker==='T')return ['NO BUY','no'];let p=num(h.price),l=levels(h);if(p==null)return ['WAIT','wait'];if(l.tr2!=null&&p>=l.tr2)return ['TRIM 2','trim'];if(l.tr1!=null&&p>=l.tr1)return ['TRIM 1','trim'];if(l.strong!=null&&p<=l.strong)return ['STRONG BUY','buy'];if(l.b2!=null&&p<=l.b2)return ['BUY 2','buy'];if(l.b1!=null&&p<=l.b1)return ['BUY 1','buy'];return ['WAIT','wait']}
-function book(h){return num(h.shares)!=null&&num(h.avg)!=null?num(h.shares)*num(h.avg):null}function mv(h){return num(h.shares)!=null&&num(h.price)!=null?num(h.shares)*num(h.price):null}
-function render(){let cb=0,ub=0,hasC=0,hasU=0;d.holdings.forEach(h=>{let b=book(h);if(b!=null){if(h.currency==='CAD'){cb+=b;hasC=1}else{ub+=b;hasU=1}}});cadBook.textContent=hasC?money(cb,'CAD'):'—';usdBook.textContent=hasU?money(ub,'USD'):'—';dry.textContent=money(num(d.settings.dry)||0,'CAD');regime.textContent=d.ai?.marketRegime||localRegime();yieldView.textContent=num(d.settings.y10)!=null?d.settings.y10.toFixed(2)+'%':'—';vixView.textContent=num(d.settings.vix)!=null?d.settings.vix.toFixed(1):'—';holdRows.innerHTML=d.holdings.map(h=>{let p=num(h.price),b=book(h),m=mv(h),pl=b!=null&&m!=null?m-b:null,[a,cl]=action(h);return `<div class="row" onclick="editHolding('${h.id}')"><div class="c1"><div class="ticker">${h.ticker}</div><div class="name">${h.name}</div></div><div class="c2">${money(p,h.currency)}</div><div class="c3">${money(num(h.avg),h.currency)}</div><div class="c4">${money(b,h.currency)}</div><div class="c5 ${pl>0?'green':pl<0?'red':''}">${money(pl,h.currency)}</div><div class="c6"><span class="pill ${cl}">${a}</span></div></div>`}).join('');tacRows.innerHTML=d.holdings.map(h=>{let l=levels(h),[a,cl]=action(h);return `<div class="row" onclick="editHolding('${h.id}')"><div class="c1"><div class="ticker">${h.ticker}</div><div class="name">${l.src}</div></div><div class="c2">${money(num(h.price),h.currency)}</div><div class="c3">${money(l.b1,h.currency)}</div><div class="c4">${money(l.b2,h.currency)}</div><div class="c5">${money(l.strong,h.currency)}</div><div class="c6"><span class="pill ${cl}">${a}</span></div></div>`}).join('');apiKey.value=d.settings.apiKey||'';dryInput.value=d.settings.dry??'';y10.value=d.settings.y10??'';vix.value=d.settings.vix??'';fed.value=d.settings.fed||'neutral';renderAI()}
+function actionClass(a){a=(a||'').toUpperCase();if(a.includes('BUY')&&!a.includes('NO BUY'))return'buy';if(a.includes('TRIM'))return'trim';if(a.includes('NO BUY'))return'no';return'wait'}
+function action(h){if(h.ticker==='T')return ['NO BUY','no'];let a=aiRec(h.ticker);if(a?.action)return [String(a.action).toUpperCase(),actionClass(a.action)];let p=num(h.price),l=levels(h);if(p==null)return['WAIT','wait'];if(l.tr2!=null&&p>=l.tr2)return['TRIM 2','trim'];if(l.tr1!=null&&p>=l.tr1)return['TRIM 1','trim'];if(l.strong!=null&&p<=l.strong)return['STRONG BUY','buy'];if(l.b2!=null&&p<=l.b2)return['BUY 2','buy'];if(l.b1!=null&&p<=l.b1)return['BUY 1','buy'];return['WAIT','wait']}
+function book(h){return num(h.shares)!=null&&num(h.avg)!=null?num(h.shares)*num(h.avg):null}
+function mv(h){return num(h.shares)!=null&&num(h.price)!=null?num(h.shares)*num(h.price):null}
+function detail(k,v,cl=''){return `<div class="detail"><div class="k">${k}</div><div class="v ${cl}">${v}</div></div>`}
+function render(){
+ let cb=0,ub=0,hasC=0,hasU=0;
+ d.holdings.forEach(h=>{let b=book(h);if(b!=null){if(h.currency==='CAD'){cb+=b;hasC=1}else{ub+=b;hasU=1}}});
+ cadBook.textContent=hasC?money(cb,'CAD'):'—';usdBook.textContent=hasU?money(ub,'USD'):'—';dry.textContent=money(num(d.settings.dry)||0,'CAD');
+ regime.textContent=freshAI()?(d.ai.marketRegime||localRegime()):localRegime();yieldView.textContent=num(d.settings.y10)!=null?num(d.settings.y10).toFixed(2)+'%':'—';vixView.textContent=num(d.settings.vix)!=null?num(d.settings.vix).toFixed(1):'—';
+ holdRows.innerHTML=d.holdings.map(h=>{let p=num(h.price),b=book(h),m=mv(h),pl=b!=null&&m!=null?m-b:null,[a,cl]=action(h);return `<div class="item" onclick="editHolding('${h.id}')"><div class="itemtop"><div><div class="ticker">${h.ticker}</div><div class="name">${h.name}</div></div><span class="pill ${cl}">${a}</span></div><div class="detailgrid">${detail('Price',money(p,h.currency))}${detail('Avg cost',money(num(h.avg),h.currency))}${detail('Book cost',money(b,h.currency))}${detail('P/L',money(pl,h.currency),pl>0?'green':pl<0?'red':'')}</div></div>`}).join('')||'<div class="card empty">No holdings yet.</div>';
+ tacRows.innerHTML=d.holdings.map(h=>{let l=levels(h),[a,cl]=action(h),r=aiRec(h.ticker);return `<div class="item" onclick="editHolding('${h.id}')"><div class="itemtop"><div><div class="ticker">${h.ticker}</div><div class="source">${l.src}${r?.confidence?' · '+r.confidence:''}</div></div><span class="pill ${cl}">${a}</span></div><div class="detailgrid">${detail('Price',money(num(h.price),h.currency))}${detail('Buy 1',money(l.b1,h.currency))}${detail('Buy 2',money(l.b2,h.currency))}${detail('Strong',money(l.strong,h.currency))}</div>${r?.reason?`<div class="reason">${r.reason}</div>`:''}</div>`}).join('');
+ apiKey.value=d.settings.apiKey||'';dryInput.value=d.settings.dry??'';y10.value=d.settings.y10??'';vix.value=d.settings.vix??'';fed.value=d.settings.fed||'neutral';renderAI();
+}
 function localRegime(){let s=0,y=num(d.settings.y10),v=num(d.settings.vix);if(y>=5.1)s+=2;else if(y>=4.8)s++;if(v>=30)s+=2;else if(v>=22)s++;if(d.settings.fed==='hawkish')s++;if(d.settings.fed==='dovish')s--;return s>=4?'STRESSED':s>=2?'CAUTIOUS':s<=-1?'RISK-ON':'NEUTRAL'}
 function editHolding(id){let h=d.holdings.find(x=>x.id===id);if(!h)return;eid.value=h.id;et.value=h.ticker;en.value=h.name;ec.value=h.currency;es.value=h.shares??'';eavg.value=h.avg??'';ep.value=h.price??'';eb1.value=h.b1??'';eb2.value=h.b2??'';estr.value=h.strong??'';etr1.value=h.tr1??'';etr2.value=h.tr2??'';efs.value=h.feed??'';eex.value=h.exchange??'';enotes.value=h.notes||'';modal.classList.add('on')}
-function addHolding(){let h={id:'h'+Date.now(),ticker:'NEW',name:'New holding',currency:'CAD',shares:null,avg:null,price:null,b1:null,b2:null,strong:null,tr1:null,tr2:null,feed:'',exchange:'',notes:''};d.holdings.push(h);editHolding(h.id)}function closeModal(){modal.classList.remove('on')}
+function addHolding(){let h={id:'h'+Date.now(),ticker:'NEW',name:'New holding',currency:'CAD',shares:null,avg:null,price:null,b1:null,b2:null,strong:null,tr1:null,tr2:null,feed:'',exchange:'',notes:''};d.holdings.push(h);editHolding(h.id)}
+function closeModal(){modal.classList.remove('on')}
 function saveHolding(){let h=d.holdings.find(x=>x.id===eid.value);if(!h)return;Object.assign(h,{ticker:et.value.trim().toUpperCase(),name:en.value.trim(),currency:ec.value,shares:num(es.value),avg:num(eavg.value),price:num(ep.value),b1:num(eb1.value),b2:num(eb2.value),strong:num(estr.value),tr1:num(etr1.value),tr2:num(etr2.value),feed:efs.value.trim(),exchange:eex.value.trim(),notes:enotes.value.trim()});closeModal();save()}
 function deleteHolding(){let id=eid.value;d.holdings=d.holdings.filter(x=>x.id!==id);closeModal();save()}
 function saveSettings(){d.settings.apiKey=apiKey.value.trim();d.settings.dry=num(dryInput.value)||0;d.settings.y10=num(y10.value);d.settings.vix=num(vix.value);d.settings.fed=fed.value;save()}
 async function refreshQuotes(){let key=d.settings.apiKey;if(!key){alert('Add your Twelve Data API key in Settings first.');return}let ok=0;for(let h of d.holdings){if(!h.feed)continue;let sym=h.feed+(h.exchange?':'+h.exchange:'');try{let r=await fetch(`https://api.twelvedata.com/price?symbol=${encodeURIComponent(sym)}&apikey=${encodeURIComponent(key)}`);let j=await r.json();let p=num(j.price);if(p!=null){h.price=p;ok++}}catch(e){}}save();alert(`Updated ${ok} quotes. Symbols unavailable on your plan can still be entered manually.`)}
-function applyAI(){try{let x=JSON.parse(aiBox.value.trim());if(!x.asOf||!Array.isArray(x.recommendations))throw 0;d.ai=x;save();aiBox.value=''}catch(e){alert('Invalid AI brief JSON. Paste the complete JSON block from ChatGPT.') }}function clearAI(){d.ai=null;save()}function renderAI(){if(!d.ai){aiView.innerHTML='<div class="card notice">No AI brief loaded.</div>';return}let age=(Date.now()-new Date(d.ai.asOf).getTime())/3600e3;aiView.innerHTML=`<div class="card notice"><b>${d.ai.marketRegime||'AI BRIEF'}</b> · ${age<36?'Fresh':'Expired'}<br>${d.ai.summary||''}</div>`+(d.ai.recommendations||[]).map(r=>`<div class="card aiitem"><b>${r.ticker}</b> · ${r.action||''} · <span class="mini">${r.confidence||''}</span><div class="mini" style="margin-top:5px">${r.reason||''}</div></div>`).join('')}
-function resetLocal(){if(confirm('Delete all locally entered portfolio data and restore the privacy-safe defaults?')){localStorage.removeItem(K);d=structuredClone(seed);render()}}
-document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));b.classList.add('on');document.getElementById(b.dataset.p).classList.add('on')});modal.onclick=e=>{if(e.target===modal)closeModal()};render();
-</script></body></html>
+function openBulk(){bulkBox.value='';bulkResult.textContent='';bulkModal.classList.add('on');setTimeout(()=>bulkBox.focus(),100)}
+function closeBulk(){bulkModal.classList.remove('on')}
+function applyBulk(){
+ let lines=bulkBox.value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+ let updated=[],skipped=[],invalid=[];
+ for(let line of lines){
+   if(/^ticker[\s,=:]+price$/i.test(line))continue;
+   let m=line.match(/^([A-Za-z0-9.\-]+)\s*(?:[,=:]|\s+)\s*\$?([0-9]+(?:\.[0-9]+)?)\s*$/);
+   if(!m){invalid.push(line);continue}
+   let ticker=m[1].toUpperCase(),price=parseFloat(m[2]);
+   let h=d.holdings.find(x=>String(x.ticker).toUpperCase()===ticker);
+   if(!h){skipped.push(ticker);continue}
+   h.price=price;updated.push(ticker);
+ }
+ if(updated.length){localStorage.setItem(K,JSON.stringify(d));render()}
+ let msg=`Updated ${updated.length} price${updated.length===1?'':'s'}`;
+ if(skipped.length)msg+=` · Not in watchlist: ${[...new Set(skipped)].join(', ')}`;
+ if(invalid.length)msg+=` · Could not read ${invalid.length} line${invalid.length===1?'':'s'}`;
+ bulkResult.textContent=msg;
+ if(updated.length && !skipped.length && !invalid.length){setTimeout(()=>{closeBulk();go('tactical')},550)}
+}
+function applyAI(){try{let x=JSON.parse(aiBox.value.trim());if(!x.asOf||!Array.isArray(x.recommendations))throw 0;d.ai=x;save();aiBox.value='';go('tactical')}catch(e){alert('Invalid AI brief JSON. Paste the complete JSON block from ChatGPT.')}}
+function clearAI(){d.ai=null;save()}
+function renderAI(){if(!d.ai){aiView.innerHTML='<div class="card empty">No AI brief loaded.</div>';return}let age=(Date.now()-new Date(d.ai.asOf).getTime())/3600e3,active=age<36;let chips=(d.ai.catalysts||[]).map(x=>`<span class="chip">${x}</span>`).join('');let recs=(d.ai.recommendations||[]).map(r=>`<div class="card aiitem"><div class="itemtop"><div><div class="ticker">${r.ticker}</div><div class="mini">${r.confidence||''}</div></div><span class="pill ${actionClass(r.action)}">${r.action||''}</span></div>${r.reason?`<div class="reason">${r.reason}</div>`:''}</div>`).join('');aiView.innerHTML=`<div class="card aihero"><div class="reg">${d.ai.marketRegime||'AI Brief'} · ${active?'Fresh':'Expired'}</div><div class="sum">${d.ai.summary||''}</div>${chips?`<div class="chips">${chips}</div>`:''}</div><div class="list" style="margin-top:10px">${recs}</div>`}
+function resetLocal(){if(confirm('Delete all locally entered portfolio data and restore defaults?')){localStorage.removeItem(K);d=structuredClone(seed);render()}}
+function go(id){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x.dataset.p===id));document.querySelectorAll('.page').forEach(x=>x.classList.toggle('on',x.id===id));window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>go(b.dataset.p));modal.onclick=e=>{if(e.target===modal)closeModal()};bulkModal.onclick=e=>{if(e.target===bulkModal)closeBulk()};render();
+</script>
+</body>
+</html>
