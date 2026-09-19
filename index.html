@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#090c12">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Portfolio Command Centre V1.6</title>
+<title>Portfolio Command Centre V1.6.1</title>
 <style>
 :root{--bg:#090c12;--p:#121823;--p2:#171f2c;--p3:#0e141d;--line:#263244;--text:#f4f7fb;--muted:#91a0b3;--muted2:#68778c;--green:#39d49d;--red:#ff7b84;--amber:#f0c268;--blue:#78adff;--purple:#b89cff}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -46,7 +46,7 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}.app{max-width:9
 <body>
 <div class="app">
   <div class="header">
-    <div><h1>Portfolio Command Centre</h1><div class="sub">V1.6 · Wealthsimple CSV sync · grouped allocation · AI tactical engine · K-line</div></div>
+    <div><h1>Portfolio Command Centre</h1><div class="sub">V1.6.1 · Wealthsimple CSV sync · grouped allocation · AI tactical engine · K-line</div></div>
     <div class="badgeTop">PRIVATE · LOCAL</div>
   </div>
 
@@ -172,6 +172,62 @@ const seed={"version":"1.6","settings":{"apiKey":"","dry":0,"fxUSDCAD":1.4,"char
 const $=id=>document.getElementById(id);
 const num=x=>{let v=parseFloat(x);return Number.isFinite(v)?v:null};
 const clone=x=>JSON.parse(JSON.stringify(x));
+
+const WS_SNAPSHOT_SEED={"ETH_CAD":{"qty":0.0110466,"bookMarket":28.82,"bookCAD":28.82,"marketLocal":40.90814559754565,"price":3701.2158745,"currency":"CAD","accounts":[{"name":"Crypto","type":"Crypto","qty":0.0110466,"bookMarket":28.82,"bookCAD":28.82,"marketValue":40.90814559754565,"currency":"CAD"}]},"ASML_CAD":{"qty":55.262100000000004,"bookMarket":1114.81,"bookCAD":1114.81,"marketLocal":2625.502371,"price":47.51,"currency":"CAD","accounts":[{"name":"Non-registered","type":"Non-registered","qty":20.1283,"bookMarket":398.72,"bookCAD":398.72,"marketValue":956.295533,"currency":"CAD"},{"name":"TFSA","type":"TFSA","qty":35.1338,"bookMarket":716.09,"bookCAD":716.09,"marketValue":1669.206838,"currency":"CAD"}]},"ATD_CAD":{"qty":6.2996,"bookMarket":500.0,"bookCAD":500.0,"marketLocal":497.794392,"price":79.02,"currency":"CAD","accounts":[{"name":"Non-registered","type":"Non-registered","qty":6.2996,"bookMarket":500.0,"bookCAD":500.0,"marketValue":497.794392,"currency":"CAD"}]},"BRKB_USD":{"qty":1.9734,"bookMarket":999.98,"bookCAD":1401.2519744,"marketLocal":1008.387666,"price":510.99,"currency":"USD","accounts":[{"name":"Non-registered","type":"Non-registered","qty":1.9734,"bookMarket":999.98,"bookCAD":1401.2519744,"marketValue":1008.387666,"currency":"USD"}]},"WS_CAD_CASH":{"qty":2429.0299999999997,"bookMarket":2429.0299999999997,"bookCAD":2429.0299999999997,"marketLocal":2429.0299999999997,"price":1.0,"currency":"CAD","accounts":[{"name":"Non-registered","type":"Non-registered","qty":285.14,"bookMarket":285.14,"bookCAD":285.14,"marketValue":285.14,"currency":"CAD"},{"name":"RRSP","type":"RRSP","qty":55.61,"bookMarket":55.61,"bookCAD":55.61,"marketValue":55.61,"currency":"CAD"},{"name":"RRSP savings account","type":"RRSP","qty":14.9,"bookMarket":14.9,"bookCAD":14.9,"marketValue":14.9,"currency":"CAD"},{"name":"TFSA","type":"TFSA","qty":2048.39,"bookMarket":2048.39,"bookCAD":2048.39,"marketValue":2048.39,"currency":"CAD"},{"name":"TFSA savings account","type":"TFSA","qty":24.99,"bookMarket":24.99,"bookCAD":24.99,"marketValue":24.99,"currency":"CAD"}]},"CASH_CAD":{"qty":303.1421,"bookMarket":15162.806801154406,"bookCAD":15162.806801154406,"marketLocal":15175.293526,"price":50.06,"currency":"CAD","accounts":[{"name":"Non-registered","type":"Non-registered","qty":210.9969,"bookMarket":10554.268740855097,"bookCAD":10554.268740855097,"marketValue":10562.504814,"currency":"CAD"},{"name":"TFSA","type":"TFSA","qty":92.1452,"bookMarket":4608.538060299309,"bookCAD":4608.538060299309,"marketValue":4612.788712,"currency":"CAD"}]},"CNQ_CAD":{"qty":71.2332,"bookMarket":3565.69,"bookCAD":3565.69,"marketLocal":4941.447084,"price":69.37,"currency":"CAD","accounts":[{"name":"Non-registered","type":"Non-registered","qty":53.3729,"bookMarket":2565.69,"bookCAD":2565.69,"marketValue":3702.478073,"currency":"CAD"},{"name":"TFSA","type":"TFSA","qty":17.8603,"bookMarket":1000.0,"bookCAD":1000.0,"marketValue":1238.969011,"currency":"CAD"}]},"DRAM_USD":{"qty":37.0142,"bookMarket":2199.75,"bookCAD":3113.215505,"marketLocal":2210.26964022,"price":59.7141,"currency":"USD","accounts":[{"name":"Non-registered","type":"Non-registered","qty":37.0142,"bookMarket":2199.75,"bookCAD":3113.215505,"marketValue":2210.26964022,"currency":"USD"}]},"GOOGL_USD":{"qty":14.8944,"bookMarket":4649.030000000001,"bookCAD":6355.4510831,"marketLocal":5225.402352,"price":350.83,"currency":"USD","accounts":[{"name":"Non-registered","type":"Non-registered","qty":2.6024,"bookMarket":857.27,"bookCAD":1183.7429075,"marketValue":912.999992,"currency":"USD"},{"name":"TFSA","type":"TFSA","qty":12.292,"bookMarket":3791.76,"bookCAD":5171.7081756,"marketValue":4312.40236,"currency":"USD"}]},"HXS_CAD":{"qty":67.3565,"bookMarket":6695.95,"bookCAD":6695.95,"marketLocal":7465.120895,"price":110.83,"currency":"CAD","accounts":[{"name":"Non-registered","type":"Non-registered","qty":67.3565,"bookMarket":6695.95,"bookCAD":6695.95,"marketValue":7465.120895,"currency":"CAD"}]},"INTC_CAD":{"qty":105.6959,"bookMarket":1239.7688670416667,"bookCAD":1239.7688670416667,"marketLocal":6434.766392,"price":60.88,"currency":"CAD","accounts":[{"name":"Non-registered","type":"Non-registered","qty":105.6959,"bookMarket":1239.7688670416667,"bookCAD":1239.7688670416667,"marketValue":6434.766392,"currency":"CAD"}]},"MSFT_USD":{"qty":20.6779,"bookMarket":8403.84,"bookCAD":11526.6776575,"marketLocal":10214.675821,"price":493.99,"currency":"USD","accounts":[{"name":"Non-registered","type":"Non-registered","qty":12.4136,"bookMarket":4951.52,"bookCAD":6832.3633424,"marketValue":6132.194264,"currency":"USD"},{"name":"TFSA","type":"TFSA","qty":8.2643,"bookMarket":3452.32,"bookCAD":4694.3143151,"marketValue":4082.481557,"currency":"USD"}]},"NVDA_USD":{"qty":5.0064,"bookMarket":664.2138531924529,"bookCAD":963.7957208,"marketLocal":1114.074192,"price":222.53,"currency":"USD","accounts":[{"name":"Non-registered","type":"Non-registered","qty":5.0064,"bookMarket":664.2138531924529,"bookCAD":963.7957208,"marketValue":1114.074192,"currency":"USD"}]},"NVDA_CAD":{"qty":64.0824,"bookMarket":1806.38,"bookCAD":1806.38,"marketLocal":3169.515504,"price":49.46,"currency":"CAD","accounts":[{"name":"Non-registered","type":"Non-registered","qty":51.0675,"bookMarket":1300.02,"bookCAD":1300.02,"marketValue":2525.79855,"currency":"CAD"},{"name":"TFSA","type":"TFSA","qty":13.0149,"bookMarket":506.36,"bookCAD":506.36,"marketValue":643.716954,"currency":"CAD"}]},"PSU_USD":{"qty":64.0479,"bookMarket":6420.670025262866,"bookCAD":8800.298766790436,"marketLocal":6420.161496,"price":100.24,"currency":"USD","accounts":[{"name":"Non-registered","type":"Non-registered","qty":64.0479,"bookMarket":6420.670025262866,"bookCAD":8800.298766790436,"marketValue":6420.161496,"currency":"USD"}]},"QQC_CAD":{"qty":831.1689,"bookMarket":36122.0580054666,"bookCAD":36122.0580054666,"marketLocal":40984.938459,"price":49.31,"currency":"CAD","accounts":[{"name":"Non-registered","type":"Non-registered","qty":155.025,"bookMarket":5397.0071,"bookCAD":5397.0071,"marketValue":7644.28275,"currency":"CAD"},{"name":"RRSP","type":"RRSP","qty":676.1439,"bookMarket":30725.050905466596,"bookCAD":30725.050905466596,"marketValue":33340.655709,"currency":"CAD"}]},"T_CAD":{"qty":1168.0,"bookMarket":15265.76,"bookCAD":15265.76,"marketLocal":14378.08,"price":12.31,"currency":"CAD","accounts":[{"name":"Non-registered","type":"Non-registered","qty":1168.0,"bookMarket":15265.76,"bookCAD":15265.76,"marketValue":14378.08,"currency":"CAD"}]},"TD_CAD":{"qty":10.55,"bookMarket":848.93,"bookCAD":848.93,"marketLocal":1809.114,"price":171.48,"currency":"CAD","accounts":[{"name":"Non-registered","type":"Non-registered","qty":10.55,"bookMarket":848.93,"bookCAD":848.93,"marketValue":1809.114,"currency":"CAD"}]},"TSM_USD":{"qty":1.8249,"bookMarket":749.96,"bookCAD":1037.5696983,"marketLocal":791.203644,"price":433.56,"currency":"USD","accounts":[{"name":"Non-registered","type":"Non-registered","qty":1.8249,"bookMarket":749.96,"bookCAD":1037.5696983,"marketValue":791.203644,"currency":"USD"}]},"WS_USD_CASH":{"qty":349.84,"bookMarket":349.84,"bookCAD":619.1237587751276,"marketLocal":349.84,"price":1.0,"currency":"USD","accounts":[{"name":"Non-registered","type":"Non-registered","qty":349.65,"bookMarket":349.65,"bookCAD":482.0238734847029,"marketValue":349.65,"currency":"USD"},{"name":"RRSP","type":"RRSP","qty":0.08,"bookMarket":0.08,"bookCAD":0.1052794478108,"marketValue":0.08,"currency":"USD"},{"name":"TFSA","type":"TFSA","qty":0.11,"bookMarket":0.11,"bookCAD":136.99460584261394,"marketValue":0.11,"currency":"USD"}]},"VFV_CAD":{"qty":215.7215,"bookMarket":35178.7471,"bookCAD":35178.7471,"marketLocal":41002.185505,"price":190.07,"currency":"CAD","accounts":[{"name":"Non-registered","type":"Non-registered","qty":54.0656,"bookMarket":8046.8371,"bookCAD":8046.8371,"marketValue":10276.248592,"currency":"CAD"},{"name":"TFSA","type":"TFSA","qty":161.6559,"bookMarket":27131.91,"bookCAD":27131.91,"marketValue":30725.936913,"currency":"CAD"}]},"XEF_CAD":{"qty":234.87060000000002,"bookMarket":11507.89,"bookCAD":11507.89,"marketLocal":12135.763901999999,"price":51.67,"currency":"CAD","accounts":[{"name":"Non-registered","type":"Non-registered","qty":73.8095,"bookMarket":3643.96,"bookCAD":3643.96,"marketValue":3813.736865,"currency":"CAD"},{"name":"TFSA","type":"TFSA","qty":161.0611,"bookMarket":7863.93,"bookCAD":7863.93,"marketValue":8322.027037,"currency":"CAD"}]},"XEI_CAD":{"qty":296.5123,"bookMarket":9959.19,"bookCAD":9959.19,"marketLocal":11786.363925,"price":39.75,"currency":"CAD","accounts":[{"name":"Non-registered","type":"Non-registered","qty":104.9651,"bookMarket":3461.51,"bookCAD":3461.51,"marketValue":4172.362725,"currency":"CAD"},{"name":"TFSA","type":"TFSA","qty":191.5472,"bookMarket":6497.68,"bookCAD":6497.68,"marketValue":7614.0012,"currency":"CAD"}]},"AMZN_CAD":{"qty":151.0,"bookMarket":3835.54,"bookCAD":3835.54,"marketLocal":4369.9400000000005,"price":28.94,"currency":"CAD","accounts":[{"name":"RRSP","type":"RRSP","qty":51.0,"bookMarket":1295.14,"bookCAD":1295.14,"marketValue":1475.94,"currency":"CAD"},{"name":"TFSA","type":"TFSA","qty":100.0,"bookMarket":2540.4,"bookCAD":2540.4,"marketValue":2894.0,"currency":"CAD"}]},"SCHD_USD":{"qty":104.9884,"bookMarket":3055.65,"bookCAD":4192.4130921,"marketLocal":3543.32700348,"price":33.7497,"currency":"USD","accounts":[{"name":"RRSP","type":"RRSP","qty":104.9884,"bookMarket":3055.65,"bookCAD":4192.4130921,"marketValue":3543.32700348,"currency":"USD"}]},"TCSH_CAD":{"qty":26.291,"bookMarket":1317.048879916649,"bookCAD":1317.048879916649,"marketLocal":1316.39037,"price":50.07,"currency":"CAD","accounts":[{"name":"RRSP","type":"RRSP","qty":26.291,"bookMarket":1317.048879916649,"bookCAD":1317.048879916649,"marketValue":1316.39037,"currency":"CAD"}]},"BTCXB_CAD":{"qty":194.3835,"bookMarket":3051.2911195665747,"bookCAD":3051.2911195665747,"marketLocal":3209.271585,"price":16.51,"currency":"CAD","accounts":[{"name":"TFSA","type":"TFSA","qty":194.3835,"bookMarket":3051.2911195665747,"bookCAD":3051.2911195665747,"marketValue":3209.271585,"currency":"CAD"}]},"ENB_CAD":{"qty":21.6637,"bookMarket":1506.75,"bookCAD":1506.75,"marketLocal":1476.164518,"price":68.14,"currency":"CAD","accounts":[{"name":"TFSA","type":"TFSA","qty":21.6637,"bookMarket":1506.75,"bookCAD":1506.75,"marketValue":1476.164518,"currency":"CAD"}]},"MCD_CAD":{"qty":84.2769,"bookMarket":2011.24,"bookCAD":2011.24,"marketLocal":1759.701672,"price":20.88,"currency":"CAD","accounts":[{"name":"TFSA","type":"TFSA","qty":84.2769,"bookMarket":2011.24,"bookCAD":2011.24,"marketValue":1759.701672,"currency":"CAD"}]},"META_CAD":{"qty":123.1902,"bookMarket":4385.18,"bookCAD":4385.18,"marketLocal":4346.150256,"price":35.28,"currency":"CAD","accounts":[{"name":"TFSA","type":"TFSA","qty":123.1902,"bookMarket":4385.18,"bookCAD":4385.18,"marketValue":4346.150256,"currency":"CAD"}]},"PEP_CAD":{"qty":67.7695,"bookMarket":1512.8,"bookCAD":1512.8,"marketLocal":1301.1744,"price":19.2,"currency":"CAD","accounts":[{"name":"TFSA","type":"TFSA","qty":67.7695,"bookMarket":1512.8,"bookCAD":1512.8,"marketValue":1301.1744,"currency":"CAD"}]},"VDY_CAD":{"qty":44.0982,"bookMarket":2570.65,"bookCAD":2570.65,"marketLocal":3403.058094,"price":77.17,"currency":"CAD","accounts":[{"name":"TFSA","type":"TFSA","qty":44.0982,"bookMarket":2570.65,"bookCAD":2570.65,"marketValue":3403.058094,"currency":"CAD"}]},"XEQT_CAD":{"qty":76.3899,"bookMarket":2957.71,"bookCAD":2957.71,"marketLocal":3468.865359,"price":45.41,"currency":"CAD","accounts":[{"name":"TFSA","type":"TFSA","qty":76.3899,"bookMarket":2957.71,"bookCAD":2957.71,"marketValue":3468.865359,"currency":"CAD"}]}};
+const WS_ASOF_SEED="2026-09-19 12:11 GMT-04:00";
+const WS_MAP={
+  "ETH|":"ETH_CAD","ASML|TSX":"ASML_CAD","ATD|TSX":"ATD_CAD","BRK.B|NYSE":"BRKB_USD",
+  "CASH|TSX":"CASH_CAD","CNQ.TO|TSX":"CNQ_CAD","DRAM|BATS":"DRAM_USD","ENB.TO|TSX":"ENB_CAD",
+  "GOOGL|NASDAQ":"GOOGL_USD","HXS|TSX":"HXS_CAD","INTC|TSX":"INTC_CAD","MCD|TSX":"MCD_CAD",
+  "META|TSX":"META_CAD","MSFT|NASDAQ":"MSFT_USD","NVDA|NASDAQ":"NVDA_USD","NVDA|TSX":"NVDA_CAD",
+  "PEP|TSX":"PEP_CAD","PSU.U|TSX":"PSU_USD","QQC|TSX":"QQC_CAD","SCHD|NYSE":"SCHD_USD",
+  "T|TSX":"T_CAD","TCSH|TSX":"TCSH_CAD","TD.TO|TSX":"TD_CAD","TSM|NYSE":"TSM_USD",
+  "VDY|TSX":"VDY_CAD","VFV|TSX":"VFV_CAD","XEF|TSX":"XEF_CAD","XEI|TSX":"XEI_CAD",
+  "XEQT|TSX":"XEQT_CAD","AMZN|TSX":"AMZN_CAD","BTCX.B|TSX":"BTCXB_CAD"
+};
+const WS_POS_META={
+  "WS_CAD_CASH":{ticker:"CAD Cash",name:"Wealthsimple CAD Cash",currency:"CAD",group:"cash",feed:null,exchange:null},
+  "WS_USD_CASH":{ticker:"USD Cash",name:"Wealthsimple USD Cash",currency:"USD",group:"cash",feed:null,exchange:null}
+};
+function wsIdFor(row){
+  let st=(row["Security Type"]||"").trim().toUpperCase(),sym=(row["Symbol"]||"").trim(),ex=(row["Exchange"]||"").trim().toUpperCase();
+  if(st==="CURRENCY")return sym==="CAD"?"WS_CAD_CASH":(sym==="USD"?"WS_USD_CASH":null);
+  return WS_MAP[sym+"|"+ex]||WS_MAP[sym+"|"]||null;
+}
+
+const YAHOO_SYMBOLS={
+  "AMZN_CAD":"AMZN.NE","ASML_CAD":"ASML.NE","ATD_CAD":"ATD.TO","BTCXB_CAD":"BTCX-B.TO",
+  "CASH_CAD":"CASH.TO","CNQ_CAD":"CNQ.TO","DRAM_USD":"DRAM","ENB_CAD":"ENB.TO",
+  "ETH_CAD":"ETH-CAD","GOOGL_USD":"GOOGL","HXS_CAD":"HXS.TO","INTC_CAD":"INTC.NE",
+  "MCD_CAD":"MCD.NE","META_CAD":"META.NE","MSFT_USD":"MSFT","NVDA_USD":"NVDA",
+  "NVDA_CAD":"NVDA.NE","PEP_CAD":"PEP.NE","PSU_USD":"PSU-U.TO","QQC_CAD":"QQC.TO",
+  "SCHD_USD":"SCHD","T_CAD":"T.TO","TCSH_CAD":"TCSH.TO","TD_CAD":"TD.TO","TSM_USD":"TSM",
+  "VDY_CAD":"VDY.TO","VFV_CAD":"VFV.TO","XEF_CAD":"XEF.TO","XEI_CAD":"XEI.TO",
+  "XEQT_CAD":"XEQT.TO","XEC_CAD":"XEC.TO","AVGO_USD":"AVGO","BRKB_USD":"BRK-B"
+};
+const YAHOO_FALLBACK={
+  "AMZN_CAD":"AMZN","ASML_CAD":"ASML","INTC_CAD":"INTC","MCD_CAD":"MCD",
+  "META_CAD":"META","NVDA_CAD":"NVDA","PEP_CAD":"PEP"
+};
+const TACTICAL_CATEGORY_MAP={
+  "uscore":["VFV_CAD","HXS_CAD"],
+  "nasdaq":["QQC_CAD"],
+  "mega":["AMZN_CAD","GOOGL_USD","META_CAD","MSFT_USD"],
+  "cash":["CASH_CAD","TCSH_CAD","PSU_USD","WS_CAD_CASH","WS_USD_CASH"],
+  "caddiv":["XEI_CAD","VDY_CAD","TD_CAD"],
+  "semi":["ASML_CAD","DRAM_USD","INTC_CAD","NVDA_USD","NVDA_CAD","TSM_USD","AVGO_USD"],
+  "intl":["XEF_CAD","XEC_CAD"],
+  "energy":["CNQ_CAD","ENB_CAD"],
+  "consumer":["ATD_CAD","MCD_CAD","PEP_CAD"],
+  "usdiv":["SCHD_USD"],
+  "crypto":["BTCXB_CAD","ETH_CAD"],
+  "global":["XEQT_CAD"],
+  "berk":["BRKB_USD"]
+};
+const TACTICAL_CATEGORY_META={
+  "berk":{name:"Berkshire / Diversifier",target:[3,3],note:"Preferred base target ~3%"}
+};
+
 function load(){
   try{let x=JSON.parse(localStorage.getItem(K));if(x)return x}catch(e){}
   let x=clone(seed);
