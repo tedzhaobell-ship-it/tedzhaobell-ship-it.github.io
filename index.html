@@ -6,765 +6,592 @@
 <meta name="theme-color" content="#090c12">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Portfolio Command Centre V1.4 Final</title>
-
+<title>Portfolio Command Centre V1.6</title>
 <style>
-:root{
-  --bg:#0a0c0f;
-  --bg2:#0e1115;
-  --panel:#14181d;
-  --panel-2:#191e24;
-  --panel-3:#101419;
-  --line:#252c34;
-  --line-soft:#1d232a;
-  --text:#f4f1e9;
-  --muted:#8f979f;
-  --muted2:#67717b;
-  --green:#9bd5bd;
-  --green-strong:#6fd6aa;
-  --red:#ee9a9a;
-  --amber:#d9bf79;
-  --blue:#9eb9df;
-  --ivory:#f2eee4;
-  --shadow:0 18px 45px rgba(0,0,0,.26);
-}
+:root{--bg:#090c12;--p:#121823;--p2:#171f2c;--p3:#0e141d;--line:#263244;--text:#f4f7fb;--muted:#91a0b3;--muted2:#68778c;--green:#39d49d;--red:#ff7b84;--amber:#f0c268;--blue:#78adff;--purple:#b89cff}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{background:var(--bg)}
-body{
-  margin:0;
-  min-height:100vh;
-  color:var(--text);
-  background:
-    radial-gradient(circle at 85% -10%,rgba(155,213,189,.08),transparent 30%),
-    linear-gradient(180deg,#090b0e 0%,#0d1014 46%,#090b0e 100%);
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
-  font-feature-settings:"tnum" 1;
-}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-.app{
-  width:100%;
-  max-width:920px;
-  margin:0 auto;
-  padding:20px 15px calc(112px + env(safe-area-inset-bottom));
-}
-.header{
-  position:relative;
-  padding:6px 2px 12px;
-}
-.header:before{
-  content:"PRIVATE PORTFOLIO";
-  display:block;
-  color:var(--green);
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:1.35px;
-  margin-bottom:8px;
-}
-.header:after{
-  content:"";
-  position:absolute;
-  top:9px;
-  right:4px;
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:var(--green-strong);
-  box-shadow:0 0 0 5px rgba(111,214,170,.08);
-}
-h1{
-  margin:0;
-  font-size:27px;
-  line-height:1.06;
-  font-weight:760;
-  letter-spacing:-.7px;
-}
-.sub{
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.45;
-  margin-top:7px;
-  max-width:620px;
-}
-.grid{display:grid;gap:10px}
-.metrics{grid-template-columns:1fr 1fr;margin-top:15px}
-.metric:last-child{grid-column:1/-1}
-.card{
-  background:linear-gradient(180deg,rgba(21,26,31,.98),rgba(16,20,25,.98));
-  border:1px solid var(--line);
-  border-radius:20px;
-  box-shadow:var(--shadow);
-}
-.metric{
-  position:relative;
-  overflow:hidden;
-  padding:15px 15px 16px;
-  min-height:88px;
-}
-.metric:before{
-  content:"";
-  position:absolute;
-  inset:0 auto 0 0;
-  width:2px;
-  background:linear-gradient(180deg,transparent,var(--green),transparent);
-  opacity:.75;
-}
-.lab{
-  color:var(--muted);
-  font-size:10px;
-  font-weight:720;
-  letter-spacing:.7px;
-  text-transform:uppercase;
-}
-.val{
-  margin-top:8px;
-  font-size:21px;
-  font-weight:760;
-  letter-spacing:-.35px;
-}
-.sec{margin-top:19px}
-.sech{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin:0 2px 10px;
-}
-.secht{
-  font-size:15px;
-  font-weight:760;
-  letter-spacing:-.1px;
-}
-.btn{
-  min-height:42px;
-  border:1px solid var(--line);
-  background:#171c22;
-  color:var(--text);
-  padding:9px 12px;
-  border-radius:12px;
-  font-size:12px;
-  font-weight:720;
-  transition:transform .12s ease,background .12s ease,border-color .12s ease;
-}
-.btn:active{transform:scale(.97)}
-.btn.primary{
-  background:var(--ivory);
-  color:#111418;
-  border-color:var(--ivory);
-}
-.btn.danger{color:#f2aaaa}
-.notice{
-  padding:13px 14px;
-  color:#c9ced3;
-  font-size:12px;
-  line-height:1.55;
-  box-shadow:none;
-  background:#11161b;
-}
-.green{color:var(--green-strong)}
-.red{color:var(--red)}
-.amber{color:var(--amber)}
-.page{display:none}
-.page.on{display:block}
-.list{display:grid;gap:10px}
-.item{
-  position:relative;
-  overflow:hidden;
-  background:linear-gradient(180deg,#151a20 0%,#11161b 100%);
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:15px;
-  box-shadow:0 12px 28px rgba(0,0,0,.19);
-  transition:transform .12s ease,border-color .12s ease;
-}
-.item:active{transform:scale(.992);border-color:#35404b}
-.item:before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:18px;
-  bottom:18px;
-  width:2px;
-  border-radius:2px;
-  background:#3b4651;
-}
-.itemtop{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:12px;
-  padding-left:2px;
-}
-.ticker{
-  font-size:18px;
-  font-weight:820;
-  letter-spacing:.15px;
-}
-.name{
-  max-width:210px;
-  color:var(--muted);
-  font-size:11px;
-  line-height:1.3;
-  margin-top:4px;
-}
-.pill{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  white-space:nowrap;
-  padding:7px 9px;
-  border:1px solid transparent;
-  border-radius:999px;
-  font-size:9.5px;
-  font-weight:850;
-  letter-spacing:.45px;
-}
-.wait{background:#1b2229;color:#c1c8cf;border-color:#29323b}
-.buy{background:rgba(111,214,170,.09);color:#96e7c6;border-color:rgba(111,214,170,.19)}
-.trim{background:rgba(217,191,121,.10);color:#ead292;border-color:rgba(217,191,121,.20)}
-.no{background:rgba(238,154,154,.08);color:#efb1b1;border-color:rgba(238,154,154,.18)}
-.detailgrid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-top:14px;
-}
-.detail{
-  min-width:0;
-  padding:10px 11px;
-  background:rgba(8,11,14,.38);
-  border:1px solid var(--line-soft);
-  border-radius:13px;
-}
-.detail .k{
-  color:var(--muted2);
-  font-size:9.5px;
-  font-weight:730;
-  text-transform:uppercase;
-  letter-spacing:.45px;
-  margin-bottom:5px;
-}
-.detail .v{
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  font-size:14px;
-  font-weight:700;
-}
-.source{
-  color:var(--blue);
-  font-size:9.5px;
-  font-weight:800;
-  letter-spacing:.5px;
-  text-transform:uppercase;
-  margin-top:5px;
-}
-.reason{
-  margin-top:12px;
-  padding-top:11px;
-  border-top:1px solid var(--line-soft);
-  color:#bcc4cb;
-  font-size:12px;
-  line-height:1.55;
-}
-.empty{
-  padding:20px;
-  text-align:center;
-  color:var(--muted);
-  font-size:13px;
-}
-.field{margin:13px 0}
-.field label{
-  display:block;
-  color:var(--muted);
-  font-size:10px;
-  font-weight:720;
-  letter-spacing:.4px;
-  text-transform:uppercase;
-  margin:0 0 7px 1px;
-}
-.field input,.field textarea,.field select{
-  width:100%;
-  min-height:48px;
-  padding:12px 13px;
-  border:1px solid var(--line);
-  border-radius:14px;
-  outline:none;
-  background:#0e1318;
-  color:var(--text);
-  font-size:16px;
-}
-.field input:focus,.field textarea:focus,.field select:focus{
-  border-color:#4b5d69;
-  box-shadow:0 0 0 3px rgba(155,213,189,.06);
-}
-.field textarea{min-height:190px;resize:vertical;line-height:1.5}
-.two{display:grid;grid-template-columns:1fr;gap:0}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.aihero{padding:16px}
-.aihero .reg{
-  color:var(--green);
-  font-size:10px;
-  font-weight:850;
-  letter-spacing:1px;
-  text-transform:uppercase;
-}
-.aihero .sum{
-  margin-top:9px;
-  color:#d8dcdf;
-  font-size:14px;
-  line-height:1.6;
-}
-.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:13px}
-.chip{
-  padding:7px 9px;
-  background:#0f1419;
-  border:1px solid #222a31;
-  border-radius:999px;
-  color:#b8c0c7;
-  font-size:10px;
-  line-height:1.2;
-}
-.aiitem{padding:15px}
-.mini{font-size:10px;color:var(--muted)}
-.tabs{
-  position:fixed;
-  z-index:20;
-  left:0;
-  right:0;
-  bottom:0;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:2px;
-  padding:7px 8px calc(8px + env(safe-area-inset-bottom));
-  background:rgba(12,15,19,.92);
-  border-top:1px solid #232a31;
-  backdrop-filter:blur(22px);
-  -webkit-backdrop-filter:blur(22px);
-}
-.tab{
-  position:relative;
-  border:0;
-  min-height:50px;
-  padding:25px 3px 6px;
-  border-radius:13px;
-  background:transparent;
-  color:#737d87;
-  font-size:10px;
-  font-weight:720;
-}
-.tab:before{
-  position:absolute;
-  left:50%;
-  top:7px;
-  transform:translateX(-50%);
-  font-size:15px;
-  line-height:1;
-  color:#73808a;
-}
-.tab[data-p="portfolio"]:before{content:"▦"}
-.tab[data-p="tactical"]:before{content:"◎"}
-.tab[data-p="ai"]:before{content:"✦"}
-.tab[data-p="settings"]:before{content:"⚙"}
-.tab.on{
-  background:#171d23;
-  color:var(--ivory);
-}
-.tab.on:before{color:var(--green)}
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:40;
-  display:none;
-  align-items:flex-end;
-  justify-content:center;
-  background:rgba(0,0,0,.72);
-  backdrop-filter:blur(3px);
-  -webkit-backdrop-filter:blur(3px);
-}
-.modal.on{display:flex}
-.sheet{
-  width:100%;
-  max-width:700px;
-  max-height:92dvh;
-  overflow:auto;
-  padding:19px 15px calc(19px + env(safe-area-inset-bottom));
-  background:#11161b;
-  border:1px solid #2a323a;
-  border-bottom:0;
-  border-radius:24px 24px 0 0;
-  box-shadow:0 -24px 60px rgba(0,0,0,.46);
-}
-.sheet:before{
-  content:"";
-  display:block;
-  width:38px;
-  height:4px;
-  margin:0 auto 14px;
-  border-radius:4px;
-  background:#37404a;
-}
-.sheet h3{margin:0 0 11px;font-size:20px;font-weight:770;letter-spacing:-.35px}
-.sheetactions{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:8px;margin-top:14px}
-@media(min-width:700px){
-  .app{padding:26px 20px 104px}
-  .metrics{grid-template-columns:repeat(3,1fr)}
-  .metric:last-child{grid-column:auto}
-  .two{grid-template-columns:1fr 1fr;gap:10px}
-  .list{grid-template-columns:1fr 1fr}
-  .tabs{
-    left:50%;
-    right:auto;
-    bottom:14px;
-    width:620px;
-    transform:translateX(-50%);
-    border:1px solid var(--line);
-    border-radius:19px;
-    padding:6px;
-  }
-  .sheet{
-    margin-bottom:20px;
-    border-bottom:1px solid #2a323a;
-    border-radius:24px;
-  }
-}
-</style>
+html{background:var(--bg)}body{margin:0;min-height:100vh;background:radial-gradient(circle at 50% -10%,rgba(82,116,180,.11),transparent 35%),linear-gradient(#080b10,#090c12 45%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.app{max-width:980px;margin:auto;padding:20px 14px calc(110px + env(safe-area-inset-bottom))}
+.header{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}h1{font-size:26px;line-height:1.05;margin:0;font-weight:850;letter-spacing:-.04em}.sub{font-size:11px;color:var(--muted);margin-top:7px;line-height:1.45}
+.badgeTop{border:1px solid var(--line);border-radius:999px;padding:7px 10px;font-size:10px;color:#cbd4df;background:#111722;white-space:nowrap}
+.grid{display:grid;gap:10px}.metrics{grid-template-columns:1fr 1fr;margin-top:17px}.metric:last-child{grid-column:1/-1}.card{background:linear-gradient(180deg,rgba(20,27,38,.98),rgba(15,21,30,.98));border:1px solid var(--line);border-radius:18px;box-shadow:0 12px 34px rgba(0,0,0,.2)}.metric{padding:14px;min-height:82px}.lab{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:800}.val{font-size:20px;font-weight:850;margin-top:7px;letter-spacing:-.03em}
+.sec{margin-top:18px}.sech{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 2px 9px}.secht{font-size:15px;font-weight:820}.hint{font-size:9px;color:var(--muted);margin-top:3px}
+.btn{min-height:42px;border:1px solid var(--line);background:linear-gradient(#1b2431,#151d28);color:var(--text);padding:10px 12px;border-radius:12px;font-size:11px;font-weight:780}.btn.primary{background:#f2f5fa;color:#080b10;border-color:#f2f5fa}.btn.danger{color:#ffb2b8}.btn.small{min-height:34px;padding:7px 9px;font-size:10px}
+.notice{padding:13px 14px;font-size:11px;color:#c5ced9;line-height:1.55}.notice b{color:#fff}
+.tabs{position:fixed;z-index:30;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(6,1fr);gap:2px;background:rgba(8,12,18,.95);border-top:1px solid var(--line);padding:6px 5px calc(7px + env(safe-area-inset-bottom));backdrop-filter:blur(20px)}.tab{border:0;background:transparent;color:var(--muted);min-height:49px;border-radius:11px;font-size:9px;font-weight:780;padding:6px 2px}.tab.on{background:#192331;color:#fff;box-shadow:inset 0 0 0 1px #263449}.page{display:none}.page.on{display:block}
+.groupList{display:grid;gap:10px}.groupCard{overflow:hidden}.groupHead{padding:14px;display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.groupName{font-size:15px;font-weight:850;letter-spacing:-.02em}.groupMeta{font-size:9px;color:var(--muted);margin-top:4px}.weight{font-size:18px;font-weight:850;text-align:right}.target{font-size:9px;color:var(--muted);text-align:right;margin-top:3px}
+.alloc{height:8px;background:#0b1118;border:1px solid #202a38;border-radius:999px;position:relative;overflow:hidden;margin:0 14px 10px}.allocFill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#4c83d6,#77aaff);border-radius:999px}.allocTarget{position:absolute;top:-2px;bottom:-2px;background:rgba(57,212,157,.22);border-left:1px solid rgba(57,212,157,.8);border-right:1px solid rgba(57,212,157,.8)}.groupFoot{padding:0 14px 13px;display:flex;justify-content:space-between;gap:10px;align-items:center}.decision{display:inline-flex;padding:7px 9px;border-radius:999px;font-size:9px;font-weight:850;letter-spacing:.04em}.add{background:rgba(57,212,157,.13);color:#88ebc9}.hold{background:#1b2431;color:#cbd5e1}.reduce{background:rgba(240,194,104,.12);color:#f3d79d}.special{background:rgba(184,156,255,.12);color:#d4c2ff}.gap{font-size:9px;color:var(--muted);text-align:right}
+.groupPositions{border-top:1px solid var(--line);display:none;padding:8px}.groupCard.open .groupPositions{display:block}.posRow{padding:11px 8px;border-bottom:1px solid #202938;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}.posRow:last-child{border-bottom:0}.ticker{font-size:14px;font-weight:850}.posName{font-size:9px;color:var(--muted);margin-top:3px}.posRight{text-align:right}.posVal{font-size:12px;font-weight:800}.posWt{font-size:9px;color:var(--muted);margin-top:3px}
+.list{display:grid;gap:9px}.tacticalGroups{display:grid;gap:12px}.item{background:linear-gradient(#131a24,#0f151e);border:1px solid var(--line);border-radius:16px;padding:13px}.itemTop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.pill{display:inline-flex;padding:7px 9px;border-radius:999px;font-size:9px;font-weight:850;white-space:nowrap}.wait{background:#1b2431;color:#cbd5e1}.buy{background:rgba(57,212,157,.13);color:#8becce}.trim{background:rgba(240,194,104,.12);color:#f3d79d}.no{background:rgba(255,123,132,.12);color:#ffb3b9}.detailGrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:11px}.detail{background:#0b1118;border:1px solid #202a38;border-radius:11px;padding:9px 10px}.detail .k{font-size:8px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2);font-weight:800}.detail .v{font-size:12px;font-weight:800;margin-top:4px}.reason{font-size:10px;line-height:1.45;color:#bcc6d2;margin-top:10px;padding-top:9px;border-top:1px solid #202938}.source{font-size:8px;color:var(--blue);font-weight:800;margin-top:4px;text-transform:uppercase;letter-spacing:.05em}
+.field{margin:11px 0}.field label{display:block;font-size:9px;color:var(--muted);font-weight:750;margin-bottom:6px}.field input,.field textarea,.field select{width:100%;min-height:45px;padding:10px 11px;border-radius:11px;background:#0b1017;color:#fff;border:1px solid var(--line);font-size:16px;outline:none}.field textarea{min-height:185px;resize:vertical;line-height:1.45}.two{display:grid;grid-template-columns:1fr;gap:0}.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.chartPanel{padding:13px}.chartHeader{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.chartTitle{font-size:16px;font-weight:850}.chartSub{font-size:9px;color:var(--muted);margin-top:4px}.chartWrap{margin-top:12px;background:#090f16;border:1px solid #202a38;border-radius:14px;padding:8px;overflow:hidden}canvas{width:100%;height:330px;display:block}.chartStats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:9px}.chartStat{background:#0b1118;border:1px solid #202a38;border-radius:10px;padding:9px}.chartStat .k{font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}.chartStat .v{font-size:12px;font-weight:800;margin-top:4px}.chartNote{font-size:9px;color:var(--muted);line-height:1.4;margin-top:8px}
+.aiHero{padding:14px}.aiReg{font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:var(--amber);font-weight:850}.aiSum{font-size:12px;line-height:1.55;margin-top:7px}.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.chip{padding:6px 8px;border-radius:999px;border:1px solid #263347;background:#0c121a;font-size:8px;color:#c3cbd7}
+.modal{position:fixed;z-index:50;inset:0;background:rgba(0,0,0,.72);display:none;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px)}.modal.on{display:flex}.sheet{width:100%;max-width:720px;max-height:92dvh;overflow:auto;background:linear-gradient(#121923,#0d141c);border:1px solid var(--line);border-bottom:0;border-radius:24px 24px 0 0;padding:17px 14px calc(18px + env(safe-area-inset-bottom))}.sheet h3{margin:0 0 10px;font-size:19px}.sheetActions{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:8px;margin-top:13px}
+.green{color:var(--green)}.red{color:var(--red)}.amber{color:var(--amber)}.muted{color:var(--muted)}.hidden{display:none!important}
+@media(min-width:720px){.app{padding:28px 20px 105px}.metrics{grid-template-columns:repeat(3,1fr)}.metric:last-child{grid-column:auto}.two{grid-template-columns:1fr 1fr;gap:10px}.groupList,.list{grid-template-columns:1fr 1fr}.tabs{left:50%;right:auto;transform:translateX(-50%);width:700px;bottom:12px;border:1px solid var(--line);border-radius:18px;padding:6px}.sheet{border-radius:24px;margin-bottom:20px;border-bottom:1px solid var(--line)}}
 
-<style id="v14-allocation-css">
-.alloccard{padding:15px}
-.allochead{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:12px}
-.alloctitle{font-size:15px;font-weight:780}
-.alloctotal{font-size:10px;color:var(--muted);font-weight:750;letter-spacing:.45px;text-transform:uppercase}
-.allocrow{display:grid;grid-template-columns:116px 1fr 42px;gap:9px;align-items:center;margin:10px 0}
-.allocname{font-size:11px;color:#cbd1d6;font-weight:700}
-.allocbar{height:7px;border-radius:999px;background:#0b1014;border:1px solid #1d252c;overflow:hidden}
-.allocfill{height:100%;border-radius:999px;background:linear-gradient(90deg,#5c927d,#9bd5bd)}
-.allocpct{text-align:right;font-size:11px;font-weight:780;color:var(--ivory)}
-.allocnote{margin-top:11px;padding-top:10px;border-top:1px solid var(--line-soft);font-size:10.5px;color:var(--muted);line-height:1.5}
-.zonegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:13px}
-.zonebox{min-width:0;background:rgba(8,11,14,.42);border:1px solid var(--line-soft);border-radius:13px;padding:9px 8px}
-.zonebox .zk{font-size:9px;color:var(--muted2);font-weight:800;letter-spacing:.48px;text-transform:uppercase}
-.zonebox .zp{font-size:13px;font-weight:760;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.zonebox .za{font-size:11px;color:var(--green);font-weight:760;margin-top:4px;white-space:nowrap}
-.nowamt{margin-top:5px;font-size:10px;color:var(--green);font-weight:760}
-.bucketbadge{display:inline-flex;margin-top:5px;padding:4px 6px;border-radius:999px;background:#10161c;border:1px solid #202932;color:#91a1ad;font-size:8.5px;font-weight:800;letter-spacing:.45px;text-transform:uppercase}
-.targetgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.targetbox{padding:11px;border-radius:14px;background:#0e1318;border:1px solid var(--line-soft)}
-.targetbox label{display:block;color:var(--muted);font-size:9px;font-weight:750;letter-spacing:.4px;text-transform:uppercase;margin-bottom:6px}
-.targetbox input{width:100%;background:transparent;color:var(--text);border:0;outline:0;font-size:18px;font-weight:760;padding:0}
-.targetsum{margin-top:10px;font-size:11px;color:var(--muted)}
-@media(max-width:380px){.allocrow{grid-template-columns:102px 1fr 38px}.zonebox{padding:8px 6px}.zonebox .zp{font-size:12px}.zonebox .za{font-size:10px}}
-</style>
+.syncHero{padding:15px}.syncStatus{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.syncTime{font-size:18px;font-weight:850;letter-spacing:-.02em;margin-top:5px}
+.accountGrid{display:grid;grid-template-columns:1fr;gap:8px}.acct{padding:12px}
+.acctName{font-size:11px;font-weight:820}.acctVal{font-size:17px;font-weight:850;margin-top:5px}
+.changeRow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid #202938}
+.changeRow:last-child{border-bottom:0}.changeTitle{font-size:11px;font-weight:800}.changeSub{font-size:9px;color:var(--muted);margin-top:3px}
+.changeDelta{font-size:10px;font-weight:820;text-align:right}.fileBtn{position:relative;overflow:hidden}.fileBtn input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.acctChips{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}.acctChip{font-size:8px;padding:4px 6px;border-radius:999px;background:#0b1118;border:1px solid #263244;color:#aeb9c8}
+.taxLock{font-size:8px;color:#f0c268;font-weight:850;margin-top:5px}
+@media(min-width:720px){.accountGrid{grid-template-columns:repeat(3,1fr)}}
 
+</style>
 </head>
 <body>
 <div class="app">
-<div class="header"><h1>Portfolio Command Centre</h1><div class="sub">V1.4 · premium mobile UI · strategic allocation · recommended buy amounts · AI tactical overlay</div></div>
-
-<section id="portfolio" class="page on">
-<div class="grid metrics">
-<div class="card metric"><div class="lab">CAD book cost</div><div id="cadBook" class="val">—</div></div>
-<div class="card metric"><div class="lab">USD book cost</div><div id="usdBook" class="val">—</div></div>
-<div class="card metric"><div class="lab">Dry powder</div><div id="dry" class="val green">—</div></div>
-</div>
-<div class="sec card notice"><b>Private by design:</b> your shares, book costs, API key and AI brief stay in this browser's local storage.</div>
-<div class="sec card alloccard">
-  <div class="allochead">
-    <div><div class="alloctitle">Strategic allocation</div><div class="mini" style="margin-top:3px">Your long-term target mix</div></div>
-    <div class="alloctotal">Core first</div>
+  <div class="header">
+    <div><h1>Portfolio Command Centre</h1><div class="sub">V1.6 · Wealthsimple CSV sync · grouped allocation · AI tactical engine · K-line</div></div>
+    <div class="badgeTop">PRIVATE · LOCAL</div>
   </div>
-  <div id="allocView"></div>
-  <div class="allocnote">Target: 40% S&amp;P 500 · 20% Nasdaq-100/QQC · 10% direct U.S./growth · 15% Canada · 10% XEF · 5% XEC. Direct stocks count inside the 10% bucket rather than on top of the U.S. core.</div>
-</div>
 
-<div class="sec"><div class="sech"><div class="secht">Holdings & watchlist</div><div style="display:flex;gap:8px"><button class="btn" onclick="openBulk()">Bulk prices</button><button class="btn" onclick="addHolding()">+ Add</button></div></div><div id="holdRows" class="list"></div></div>
-</section>
+  <section id="portfolio" class="page on">
+    <div class="grid metrics">
+      <div class="card metric"><div class="lab">Portfolio value</div><div id="totalVal" class="val">—</div></div>
+      <div class="card metric"><div class="lab">Cash & liquidity</div><div id="cashVal" class="val green">—</div></div>
+      <div class="card metric"><div class="lab">USD/CAD</div><div id="fxView" class="val">—</div></div>
+    </div>
+    <div class="sec card notice"><b>Allocation analytics exclude TELUS</b> per your standing rule. Watchlist positions are also excluded. Current weights update automatically whenever prices or FX are refreshed.</div>
+    <div class="sec"><div class="sech"><div><div class="secht">Allocation by group</div><div class="hint">Tap a group to expand its holdings</div></div><button class="btn small" onclick="openBulk()">Update prices</button></div><div id="groupRows" class="groupList"></div></div>
+    <div class="sec"><div class="sech"><div><div class="secht">Watchlist</div><div class="hint">Not counted in portfolio weights</div></div></div><div id="watchRows" class="list"></div></div>
+  </section>
 
-<section id="tactical" class="page">
-<div class="grid metrics">
-<div class="card metric"><div class="lab">Market regime</div><div id="regime" class="val">NEUTRAL</div></div>
-<div class="card metric"><div class="lab">10Y yield</div><div id="yieldView" class="val">—</div></div>
-<div class="card metric"><div class="lab">VIX</div><div id="vixView" class="val">—</div></div>
-</div>
-<div class="sec"><div class="sech"><div><div class="secht">Tactical plan</div><div class="mini">Price zone + suggested CAD amount. AI can temporarily override either.</div></div><button class="btn primary" onclick="refreshQuotes()">Refresh</button></div><div class="card notice" style="margin-bottom:10px"><b>Suggested $ is a per-trigger maximum.</b> If several holdings trigger together, keep the total deployment within your dry powder and favor the most underweight strategic bucket.</div><div id="tacRows" class="list"></div></div>
-</section>
+  <section id="tactical" class="page">
+    <div class="grid metrics">
+      <div class="card metric"><div class="lab">Market regime</div><div id="regimeView" class="val">—</div></div>
+      <div class="card metric"><div class="lab">AI brief</div><div id="aiFreshView" class="val">—</div></div>
+      <div class="card metric"><div class="lab">Tracked tickers</div><div id="trackedView" class="val">—</div></div>
+    </div>
+    <div class="sec"><div class="sech"><div><div class="secht">Tactical plan</div><div class="hint">Price from JSON updates this page immediately</div></div><button class="btn primary small" onclick="refreshQuotes()">Refresh</button></div><div id="tacRows" class="list"></div></div>
+  </section>
 
-<section id="ai" class="page">
-<div class="card notice"><b>Daily AI Research Brief</b><br>Paste the JSON from ChatGPT. Recommendations remain active for 36 hours.</div>
-<div class="field"><label>Paste AI brief JSON</label><textarea id="aiBox" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder='{"asOf":"2026-09-17","marketRegime":"CAUTIOUS",...}'></textarea></div>
-<div class="actions"><button class="btn primary" onclick="applyAI()">Apply brief</button><button class="btn danger" onclick="clearAI()">Clear brief</button></div>
-<div id="aiView" class="sec"></div>
-</section>
 
-<section id="settings" class="page">
-<div class="card" style="padding:15px"><div class="secht">Settings</div>
-<div class="field"><label>Twelve Data API key</label><input id="apiKey" type="password" placeholder="Stored only on this device"></div>
-<div class="two">
-<div class="field"><label>Dry powder (CAD)</label><input id="dryInput" inputmode="decimal" type="number" step="1"></div>
-<div class="field"><label>10Y Treasury yield %</label><input id="y10" inputmode="decimal" type="number" step="0.01"></div>
-<div class="field"><label>VIX</label><input id="vix" inputmode="decimal" type="number" step="0.1"></div>
-<div class="field"><label>Rates bias</label><select id="fed"><option value="neutral">Neutral</option><option value="hawkish">Hawkish</option><option value="dovish">Dovish</option></select></div>
-</div>
+  <section id="sync" class="page">
+    <div class="card syncHero">
+      <div class="syncStatus">
+        <div><div class="lab">Wealthsimple holdings sync</div><div id="syncTime" class="syncTime">Not synced</div><div id="syncMeta" class="sub">Import the Holdings Report CSV from Wealthsimple.</div></div>
+        <div id="syncBadge" class="badgeTop">LOCAL CSV</div>
+      </div>
+      <div class="actions" style="margin-top:13px">
+        <button class="btn primary fileBtn">Import Wealthsimple CSV<input id="wsFile" type="file" accept=".csv,text/csv"></button>
+        <button class="btn" onclick="exportPortfolioJSON()">Export Portfolio JSON</button>
+      </div>
+      <div class="notice" style="padding:12px 0 0"><b>Privacy:</b> the CSV is parsed inside your browser. It is not uploaded anywhere by this app. Account numbers are intentionally not stored.</div>
+    </div>
+    <div class="sec"><div class="sech"><div><div class="secht">Accounts</div><div class="hint">Converted to CAD using the app USD/CAD rate</div></div></div><div id="accountRows" class="accountGrid"></div></div>
+    <div class="sec card" style="padding:14px"><div class="secht">Last reconciliation</div><div class="hint">What changed versus the portfolio stored before the import</div><div id="syncChanges" style="margin-top:8px"><div class="muted" style="font-size:10px">No reconciliation yet.</div></div></div>
+    <div class="sec card notice"><b>Book cost safety:</b> Wealthsimple broker book cost is synced for normal positions. A separate tax ACB override can be locked per holding. TELUS is protected by default so future CSV imports cannot overwrite a manual tax ACB you enter.</div>
+  </section>
 
-<div class="sec" style="margin-top:16px">
-  <div class="secht" style="margin-bottom:9px">Strategic target weights</div>
-  <div class="targetgrid">
-    <div class="targetbox"><label>S&amp;P 500 %</label><input id="tSP500" inputmode="decimal" type="number" step="1"></div>
-    <div class="targetbox"><label>QQC / Nasdaq %</label><input id="tQQC" inputmode="decimal" type="number" step="1"></div>
-    <div class="targetbox"><label>Direct growth %</label><input id="tDIRECT" inputmode="decimal" type="number" step="1"></div>
-    <div class="targetbox"><label>Canada %</label><input id="tCANADA" inputmode="decimal" type="number" step="1"></div>
-    <div class="targetbox"><label>XEF %</label><input id="tXEF" inputmode="decimal" type="number" step="1"></div>
-    <div class="targetbox"><label>XEC %</label><input id="tXEC" inputmode="decimal" type="number" step="1"></div>
-  </div>
-  <div id="targetSum" class="targetsum">Total: 100%</div>
-</div>
-<div class="actions"><button class="btn primary" onclick="saveSettings()">Save</button><button class="btn danger" onclick="resetLocal()">Reset data</button></div>
-<div class="mini" style="margin-top:12px;line-height:1.45">Free Twelve Data plans may not return every TSX symbol. Manual prices always work.</div>
-</div>
-</section>
+  <section id="charts" class="page">
+    <div class="card chartPanel">
+      <div class="chartHeader">
+        <div><div class="chartTitle">K-line / Candlestick</div><div class="chartSub">Yahoo Finance daily OHLC · automatic support zones</div></div>
+        <button class="btn small" onclick="loadChart()">Load chart</button>
+      </div>
+      <div class="two">
+        <div class="field"><label>Ticker</label><select id="chartSelect"></select></div>
+        <div class="field"><label>Range</label><select id="chartRange"><option value="3mo">3 months</option><option value="6mo" selected>6 months</option><option value="1y">1 year</option><option value="2y">2 years</option></select></div>
+      </div>
+      <div class="chartWrap"><canvas id="kcanvas"></canvas></div>
+      <div id="chartStats" class="chartStats"></div>
+      <div id="chartMsg" class="chartNote">Choose a ticker and load the chart. V1.5 now uses Yahoo Finance for K-line data, so it does not consume Twelve Data credits. Canadian CDRs will use their Yahoo Canada/NEO symbol when available and clearly label any U.S.-underlying fallback.</div>
+    </div>
+  </section>
+
+  <section id="ai" class="page">
+    <div class="card notice"><b>V1.6 JSON import</b><br>Use position IDs for duplicate tickers, especially <b>NVDA_USD</b> and <b>NVDA_CAD</b>. Top-level <code>prices</code> values automatically overwrite current prices and instantly refresh Tactical + group weights.</div>
+    <div class="field"><label>Paste AI brief JSON</label><textarea id="aiBox" spellcheck="false" autocapitalize="off" placeholder='{"asOf":"...","marketRegime":"CAUTIOUS","fxUSDCAD":1.40,"prices":{"VFV_CAD":189.8,"NVDA_USD":220.4,"NVDA_CAD":48.9},"recommendations":[...]}'></textarea></div>
+    <div class="actions"><button class="btn primary" onclick="applyAI()">Apply brief + prices</button><button class="btn danger" onclick="clearAI()">Clear AI overlay</button></div>
+    <div id="aiView" class="sec"></div>
+  </section>
+
+  <section id="settings" class="page">
+    <div class="card" style="padding:14px">
+      <div class="secht">Settings</div>
+      <div class="field"><label>Twelve Data API key</label><input id="apiKey" type="password" placeholder="Stored only in this browser"></div>
+      <div class="two">
+        <div class="field"><label>USD/CAD</label><input id="fxInput" type="number" step="0.0001" inputmode="decimal"></div>
+        <div class="field"><label>Manual dry powder note (CAD)</label><input id="dryInput" type="number" step="1" inputmode="decimal"></div>
+      </div>
+      <div class="actions"><button class="btn primary" onclick="saveSettings()">Save settings</button><button class="btn" onclick="openBulk()">Mass price update</button></div>
+      <button class="btn danger" style="width:100%;margin-top:9px" onclick="resetLocal()">Reset V1.5 data</button>
+      <div class="notice" style="padding:12px 0 0">K-line charts use Yahoo Finance and do not consume Twelve Data credits. Wealthsimple CSV sync updates holdings and broker prices; the Twelve Data key remains optional for quote refreshes between CSV imports.</div>
+    </div>
+  </section>
 </div>
 
 <nav class="tabs">
-<button class="tab on" data-p="portfolio">Portfolio</button>
-<button class="tab" data-p="tactical">Tactical</button>
-<button class="tab" data-p="ai">AI Brief</button>
-<button class="tab" data-p="settings">Settings</button>
+  <button class="tab on" data-p="portfolio">Portfolio</button>
+  <button class="tab" data-p="tactical">Tactical</button>
+  <button class="tab" data-p="sync">WS Sync</button>
+  <button class="tab" data-p="charts">K-line</button>
+  <button class="tab" data-p="ai">AI Brief</button>
+  <button class="tab" data-p="settings">Settings</button>
 </nav>
 
-
 <div id="bulkModal" class="modal"><div class="sheet">
-<h3>Mass Price Update</h3>
-<div class="notice" style="padding:0 0 10px;color:#94a3b8">
-Paste one ticker and price per line. These formats all work:
-<br><b style="color:#f4f7fb">VFV 187.77</b> &nbsp; <b style="color:#f4f7fb">QQC,48.15</b> &nbsp; <b style="color:#f4f7fb">AVGO = 342.10</b>
-</div>
-<div class="field"><label>Prices</label><textarea id="bulkBox" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="VFV 187.77&#10;QQC 48.15&#10;ATD 80.05&#10;AVGO 342.10&#10;TSM 417.70"></textarea></div>
-<div id="bulkResult" class="mini" style="min-height:18px;margin:2px 0 10px"></div>
-<div class="actions"><button class="btn primary" onclick="applyBulk()">Update All Prices</button><button class="btn" onclick="closeBulk()">Cancel</button></div>
+  <h3>Mass Price Update</h3>
+  <div class="notice" style="padding:0 0 8px">Paste <b>ID + price</b> or an unambiguous ticker + price. Example: <b>VFV 190.10</b>, <b>NVDA_USD 221.25</b>, <b>NVDA_CAD 49.05</b>. Plain “NVDA” is intentionally rejected because you own both listings.</div>
+  <div class="field"><label>Prices</label><textarea id="bulkBox" spellcheck="false" placeholder="VFV 190.10&#10;MSFT 495.20&#10;NVDA_USD 221.25&#10;NVDA_CAD 49.05"></textarea></div>
+  <div id="bulkResult" class="hint" style="min-height:20px"></div>
+  <div class="actions"><button class="btn primary" onclick="applyBulk()">Update all</button><button class="btn" onclick="closeBulk()">Cancel</button></div>
 </div></div>
 
-<div id="modal" class="modal"><div class="sheet">
-<h3>Edit holding</h3><input id="eid" type="hidden">
-<div class="two">
-<div class="field"><label>Ticker</label><input id="et"></div><div class="field"><label>Name</label><input id="en"></div>
-<div class="field"><label>Currency</label><select id="ec"><option>CAD</option><option>USD</option></select></div>
-<div class="field"><label>Shares</label><input id="es" inputmode="decimal" type="number" step="0.000001"></div>
-<div class="field"><label>Average cost / share</label><input id="eavg" inputmode="decimal" type="number" step="0.0001"></div>
-<div class="field"><label>Manual price</label><input id="ep" inputmode="decimal" type="number" step="0.0001"></div>
-<div class="field"><label>Buy 1</label><input id="eb1" inputmode="decimal" type="number" step="0.01"></div>
-<div class="field"><label>Buy 2</label><input id="eb2" inputmode="decimal" type="number" step="0.01"></div>
-<div class="field"><label>Strong buy</label><input id="estr" inputmode="decimal" type="number" step="0.01"></div>
-<div class="field"><label>Trim 1</label><input id="etr1" inputmode="decimal" type="number" step="0.01"></div>
-<div class="field"><label>Trim 2</label><input id="etr2" inputmode="decimal" type="number" step="0.01"></div>
-<div class="field"><label>Feed symbol</label><input id="efs"></div><div class="field"><label>Exchange</label><input id="eex" placeholder="TSX / NASDAQ / NYSE"></div>
-</div>
-
-<div class="field"><label>Strategic bucket</label>
-<select id="ebucket">
-<option value="SP500">S&amp;P 500 core</option>
-<option value="QQC">QQC / Nasdaq core</option>
-<option value="DIRECT">Direct U.S. / growth</option>
-<option value="CANADA">Canada</option>
-<option value="XEF">XEF developed ex-North America</option>
-<option value="XEC">XEC emerging markets</option>
-<option value="OTHER">Satellite / other</option>
-</select></div>
-<div class="two">
-<div class="field"><label>Buy 1 amount % of dry powder</label><input id="ep1" inputmode="decimal" type="number" step="0.5"></div>
-<div class="field"><label>Buy 2 amount % of dry powder</label><input id="ep2" inputmode="decimal" type="number" step="0.5"></div>
-<div class="field"><label>Strong Buy amount % of dry powder</label><input id="ep3" inputmode="decimal" type="number" step="0.5"></div>
-</div>
-<div class="field"><label>Notes</label><textarea id="enotes" style="min-height:90px"></textarea></div>
-<div class="sheetactions"><button class="btn primary" onclick="saveHolding()">Save</button><button class="btn" onclick="closeModal()">Cancel</button><button class="btn danger" onclick="deleteHolding()">Delete</button></div>
+<div id="editModal" class="modal"><div class="sheet">
+  <h3>Edit holding</h3><input id="eid" type="hidden">
+  <div class="two">
+    <div class="field"><label>ID</label><input id="eapp" disabled></div>
+    <div class="field"><label>Ticker</label><input id="et"></div>
+    <div class="field"><label>Name</label><input id="en"></div>
+    <div class="field"><label>Currency</label><select id="ec"><option>CAD</option><option>USD</option></select></div>
+    <div class="field"><label>Shares</label><input id="es" type="number" step="0.000001"></div>
+    <div class="field"><label>Average cost / share</label><input id="eavg" type="number" step="0.0001"></div>
+    <div class="field"><label>Current price</label><input id="ep" type="number" step="0.0001"></div>
+    <div class="field"><label>Broker avg cost / share</label><input id="ebrokeravg" type="number" step="0.0001" disabled></div>
+    <div class="field"><label>Tax ACB override / share</label><input id="etaxavg" type="number" step="0.0001" placeholder="Optional"></div>
+    <div class="field"><label>Protect tax ACB on sync</label><select id="elock"><option value="false">No</option><option value="true">Yes</option></select></div>
+    <div class="field"><label>Group</label><select id="eg"></select></div>
+    <div class="field"><label>Buy 1</label><input id="eb1" type="number" step="0.01"></div>
+    <div class="field"><label>Buy 2</label><input id="eb2" type="number" step="0.01"></div>
+    <div class="field"><label>Strong buy</label><input id="estr" type="number" step="0.01"></div>
+    <div class="field"><label>Trim 1</label><input id="etr1" type="number" step="0.01"></div>
+    <div class="field"><label>Trim 2</label><input id="etr2" type="number" step="0.01"></div>
+  </div>
+  <div class="sheetActions"><button class="btn primary" onclick="saveHolding()">Save</button><button class="btn" onclick="closeEdit()">Cancel</button><button class="btn danger" onclick="deleteHolding()">Delete</button></div>
 </div></div>
 
 <script>
-const K='pcc_v13_private_1';
-const TARGET_DEFAULTS={SP500:40,QQC:20,DIRECT:10,CANADA:15,XEF:10,XEC:5};
-const BUCKET_LABELS={SP500:'S&P 500',QQC:'QQC / Nasdaq',DIRECT:'Direct growth',CANADA:'Canada',XEF:'XEF',XEC:'XEC',OTHER:'Satellite'};
-const META={
-  'VFV':{bucket:'SP500',p1:10,p2:15,p3:20},
-  'HXS':{bucket:'SP500',p1:6,p2:10,p3:15},
-  'QQC':{bucket:'QQC',p1:8,p2:12,p3:18},
-  'XEF':{bucket:'XEF',p1:5,p2:8,p3:12},
-  'XEC':{bucket:'XEC',p1:4,p2:6,p3:9},
-  'XEI':{bucket:'CANADA',p1:4,p2:6,p3:8},
-  'VDY':{bucket:'CANADA',p1:0,p2:0,p3:0},
-  'ATD':{bucket:'CANADA',p1:4,p2:6,p3:9},
-  'ENB':{bucket:'CANADA',p1:4,p2:6,p3:8},
-  'CNQ':{bucket:'CANADA',p1:4,p2:6,p3:8},
-  'T':{bucket:'CANADA',p1:0,p2:0,p3:0},
-  'BCE':{bucket:'CANADA',p1:0,p2:0,p3:0},
-  'TSM':{bucket:'DIRECT',p1:5,p2:8,p3:12},
-  'AVGO':{bucket:'DIRECT',p1:5,p2:8,p3:12},
-  'MSFT':{bucket:'DIRECT',p1:5,p2:8,p3:12},
-  'GOOGL':{bucket:'DIRECT',p1:5,p2:8,p3:12},
-  'AMZN':{bucket:'DIRECT',p1:5,p2:8,p3:12},
-  'NVDA':{bucket:'DIRECT',p1:5,p2:8,p3:12},
-  'ASML':{bucket:'DIRECT',p1:5,p2:8,p3:12},
-  'META':{bucket:'DIRECT',p1:0,p2:0,p3:0},
-  'MCD':{bucket:'DIRECT',p1:0,p2:0,p3:0},
-  'PEP':{bucket:'DIRECT',p1:0,p2:0,p3:0},
-  'BTCX.B':{bucket:'OTHER',p1:3,p2:5,p3:7},
-  'XEQT':{bucket:'OTHER',p1:0,p2:0,p3:0}
-};
-const seed={settings:{apiKey:'',dry:0,y10:5.0,vix:20,fed:'neutral',targets:{...TARGET_DEFAULTS}},ai:null,holdings:[
-['VFV','Vanguard S&P 500 ETF','CAD',184,178,170,null,null,'VFV','TSX'],['HXS','Global X S&P 500 Index ETF','CAD',107,103,98,null,null,'HXS','TSX'],['XEC','iShares Core MSCI Emerging Markets IMI','CAD',42.5,41,39.25,null,null,'XEC','TSX'],['XEF','iShares Core MSCI EAFE IMI','CAD',50.5,49,47,null,null,'XEF','TSX'],['XEI','iShares S&P/TSX Composite High Dividend','CAD',38.5,37,35.5,null,null,'XEI','TSX'],['QQC','Invesco NASDAQ 100 Index ETF','CAD',46,44,42,49.75,51,'QQC','TSX'],['ATD','Alimentation Couche-Tard','CAD',77.5,74.25,70,null,null,'ATD','TSX'],['ENB','Enbridge','CAD',65,62.5,59.5,null,null,'ENB','TSX'],['TSM','Taiwan Semiconductor ADR','USD',410,385,355,null,null,'TSM','NYSE'],['AVGO','Broadcom','USD',345,320,295,null,null,'AVGO','NASDAQ'],['MSFT','Microsoft','USD',475,450,420,null,null,'MSFT','NASDAQ'],['GOOGL','Alphabet','USD',320,300,280,null,null,'GOOGL','NASDAQ'],['AMZN','Amazon','USD',245,230,210,null,null,'AMZN','NASDAQ'],['NVDA','NVIDIA','USD',205,190,170,null,null,'NVDA','NASDAQ'],['META','Meta Platforms','USD',610,575,530,null,null,'META','NASDAQ'],['BTCX.B','CI Galaxy Bitcoin ETF','CAD',14.5,13.25,11.75,null,null,'BTCX.B','TSX'],['T','TELUS','CAD',null,null,null,null,null,'T','TSX']
-].map((x,i)=>({id:'h'+i,ticker:x[0],name:x[1],currency:x[2],shares:null,avg:null,price:null,b1:x[3],b2:x[4],strong:x[5],tr1:x[6],tr2:x[7],feed:x[8],exchange:x[9],notes:x[0]==='T'?'Tax/ACB placeholder; no tactical buy by default.':''}))};
-let d=migrate(load());
-function load(){try{return JSON.parse(localStorage.getItem(K))||structuredClone(seed)}catch(e){return structuredClone(seed)}}
-function migrate(x){
-  x=x||structuredClone(seed);
-  x.settings=x.settings||{};
-  x.settings.targets={...TARGET_DEFAULTS,...(x.settings.targets||{})};
-  x.holdings=(x.holdings||[]).map(h=>{
-    const m=META[String(h.ticker||'').toUpperCase()]||{bucket:'OTHER',p1:3,p2:5,p3:7};
-    if(!h.bucket)h.bucket=m.bucket;
-    if(h.p1==null)h.p1=m.p1;
-    if(h.p2==null)h.p2=m.p2;
-    if(h.p3==null)h.p3=m.p3;
-    return h;
-  });
+const K='pcc_v16_private_1', OLD='pcc_v15_private_1';
+const seed={"version":"1.6","settings":{"apiKey":"","dry":0,"fxUSDCAD":1.4,"chartDays":90},"ai":null,"positions":[{"id":"AMZN_CAD","ticker":"AMZN","name":"Amazon CDR","currency":"CAD","shares":151,"avg":25.400927,"price":28.67,"group":"mega","feed":"AMZN","exchange":"NEO","fallbackFeed":"AMZN","fallbackExchange":"NASDAQ","watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":null,"b2":null,"strong":null,"tr1":null,"tr2":null},{"id":"ASML_CAD","ticker":"ASML","name":"ASML CDR","currency":"CAD","shares":55.2621,"avg":20.173139,"price":45.749981,"group":"semi","feed":"ASML","exchange":"NEO","fallbackFeed":"ASML","fallbackExchange":"NASDAQ","watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":null,"b2":null,"strong":null,"tr1":null,"tr2":null},{"id":"ATD_CAD","ticker":"ATD","name":"Alimentation Couche-Tard","currency":"CAD","shares":6.2996,"avg":79.370119,"price":79.87015,"group":"consumer","feed":"ATD","exchange":"TSX","fallbackFeed":null,"fallbackExchange":null,"watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":77.5,"b2":74.25,"strong":70,"tr1":null,"tr2":null},{"id":"BTCXB_CAD","ticker":"BTCX.B","name":"CI Galaxy Bitcoin ETF","currency":"CAD","shares":194.3835,"avg":15.697269,"price":15.560014,"group":"crypto","feed":"BTCX.B","exchange":"TSX","fallbackFeed":null,"fallbackExchange":null,"watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":14.5,"b2":13.25,"strong":11.75,"tr1":null,"tr2":null},{"id":"CASH_CAD","ticker":"CASH","name":"Global X High Interest Savings ETF","currency":"CAD","shares":303.1421,"avg":50.018787,"price":50.059988,"group":"cash","feed":"CASH","exchange":"TSX","fallbackFeed":null,"fallbackExchange":null,"watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":null,"b2":null,"strong":null,"tr1":null,"tr2":null},{"id":"CNQ_CAD","ticker":"CNQ.TO","name":"Canadian Natural Resources","currency":"CAD","shares":71.2332,"avg":50.056575,"price":70.830034,"group":"energy","feed":"CNQ","exchange":"TSX","fallbackFeed":null,"fallbackExchange":null,"watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":null,"b2":null,"strong":null,"tr1":null,"tr2":null},{"id":"DRAM_USD","ticker":"DRAM","name":"Roundhill DRAM & Memory ETF","currency":"USD","shares":37.0142,"avg":59.429894,"price":57.989907,"group":"semi","feed":"DRAM","exchange":"","fallbackFeed":null,"fallbackExchange":null,"watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":null,"b2":null,"strong":null,"tr1":null,"tr2":null},{"id":"ENB_CAD","ticker":"ENB.TO","name":"Enbridge","currency":"CAD","shares":21.6637,"avg":69.551831,"price":68.179951,"group":"energy","feed":"ENB","exchange":"TSX","fallbackFeed":null,"fallbackExchange":null,"watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":65,"b2":62.5,"strong":59.5,"tr1":null,"tr2":null},{"id":"ETH_CAD","ticker":"ETH","name":"Ethereum","currency":"CAD","shares":0.011047,"avg":2608.853082,"price":3458.857608,"group":"crypto","feed":"ETH/CAD","exchange":"","fallbackFeed":null,"fallbackExchange":null,"watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":null,"b2":null,"strong":null,"tr1":null,"tr2":null},{"id":"GOOGL_USD","ticker":"GOOGL","name":"Alphabet","currency":"USD","shares":14.8944,"avg":312.132748,"price":348.220136,"group":"mega","feed":"GOOGL","exchange":"NASDAQ","fallbackFeed":null,"fallbackExchange":null,"watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":320,"b2":300,"strong":280,"tr1":null,"tr2":null},{"id":"HXS_CAD","ticker":"HXS","name":"Global X S&P 500 Index ETF","currency":"CAD","shares":67.3565,"avg":99.410599,"price":110.719975,"group":"uscore","feed":"HXS","exchange":"TSX","fallbackFeed":null,"fallbackExchange":null,"watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":107,"b2":103,"strong":98,"tr1":null,"tr2":null},{"id":"INTC_CAD","ticker":"INTC","name":"Intel CDR","currency":"CAD","shares":105.6959,"avg":11.729594,"price":60.950046,"group":"semi","feed":"INTC","exchange":"NEO","fallbackFeed":"INTC","fallbackExchange":"NASDAQ","watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":null,"b2":null,"strong":null,"tr1":null,"tr2":null},{"id":"MCD_CAD","ticker":"MCD","name":"McDonald's CDR","currency":"CAD","shares":84.2769,"avg":23.864665,"price":20.900033,"group":"consumer","feed":"MCD","exchange":"NEO","fallbackFeed":"MCD","fallbackExchange":"NYSE","watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":null,"b2":null,"strong":null,"tr1":null,"tr2":null},{"id":"META_CAD","ticker":"META","name":"Meta Platforms CDR","currency":"CAD","shares":123.1902,"avg":35.596825,"price":36.189973,"group":"mega","feed":"META","exchange":"NEO","fallbackFeed":"META","fallbackExchange":"NASDAQ","watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":null,"b2":null,"strong":null,"tr1":36.75,"tr2":39.5},{"id":"MSFT_USD","ticker":"MSFT","name":"Microsoft","currency":"USD","shares":20.6779,"avg":406.416512,"price":496.819793,"group":"mega","feed":"MSFT","exchange":"NASDAQ","fallbackFeed":null,"fallbackExchange":null,"watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":475,"b2":450,"strong":420,"tr1":null,"tr2":null},{"id":"NVDA_USD","ticker":"NVDA","name":"NVIDIA (USD)","currency":"USD","shares":5.0064,"avg":132.67218,"price":220.489773,"group":"semi","feed":"NVDA","exchange":"NASDAQ","fallbackFeed":null,"fallbackExchange":null,"watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":205,"b2":190,"strong":170,"tr1":null,"tr2":null},{"id":"NVDA_CAD","ticker":"NVDA","name":"NVIDIA CDR (CAD)","currency":"CAD","shares":64.0824,"avg":28.188395,"price":48.90001,"group":"semi","feed":"NVDA","exchange":"NEO","fallbackFeed":"NVDA","fallbackExchange":"NASDAQ","watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":null,"b2":null,"strong":null,"tr1":null,"tr2":null},{"id":"PEP_CAD","ticker":"PEP","name":"PepsiCo CDR","currency":"CAD","shares":67.7695,"avg":22.322726,"price":19.790024,"group":"consumer","feed":"PEP","exchange":"NEO","fallbackFeed":"PEP","fallbackExchange":"NASDAQ","watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":null,"b2":null,"strong":null,"tr1":null,"tr2":null},{"id":"PSU_USD","ticker":"PSU.U","name":"Purpose US Cash Fund","currency":"USD","shares":74.025,"avg":100.248024,"price":100.200068,"group":"cash","feed":"PSU.U","exchange":"TSX","fallbackFeed":null,"fallbackExchange":null,"watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":null,"b2":null,"strong":null,"tr1":null,"tr2":null},{"id":"QQC_CAD","ticker":"QQC","name":"Invesco NASDAQ 100 Index ETF","currency":"CAD","shares":831.1689,"avg":43.45935,"price":49.004998,"group":"nasdaq","feed":"QQC","exchange":"TSX","fallbackFeed":null,"fallbackExchange":null,"watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":46,"b2":44,"strong":42,"tr1":49.75,"tr2":51},{"id":"SCHD_USD","ticker":"SCHD","name":"Schwab US Dividend Equity ETF","currency":"USD","shares":104.9884,"avg":29.104644,"price":33.940035,"group":"usdiv","feed":"SCHD","exchange":"","fallbackFeed":null,"fallbackExchange":null,"watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":null,"b2":null,"strong":null,"tr1":null,"tr2":null},{"id":"T_CAD","ticker":"T","name":"TELUS","currency":"CAD","shares":1168,"avg":13.07,"price":12.47,"group":"excluded","feed":"T","exchange":"TSX","fallbackFeed":null,"fallbackExchange":null,"watch":false,"excludeWeight":true,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":null,"b2":null,"strong":null,"tr1":null,"tr2":null},{"id":"TCSH_CAD","ticker":"TCSH","name":"TD Cash Management ETF","currency":"CAD","shares":26.291,"avg":50.09509,"price":50.060097,"group":"cash","feed":"TCSH","exchange":"TSX","fallbackFeed":null,"fallbackExchange":null,"watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":null,"b2":null,"strong":null,"tr1":null,"tr2":null},{"id":"TD_CAD","ticker":"TD.TO","name":"Toronto-Dominion Bank","currency":"CAD","shares":10.55,"avg":80.467299,"price":170.369668,"group":"caddiv","feed":"TD","exchange":"TSX","fallbackFeed":null,"fallbackExchange":null,"watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":null,"b2":null,"strong":null,"tr1":null,"tr2":null},{"id":"TSM_USD","ticker":"TSM","name":"Taiwan Semiconductor ADR","currency":"USD","shares":1.8249,"avg":410.959505,"price":428.730341,"group":"semi","feed":"TSM","exchange":"NYSE","fallbackFeed":null,"fallbackExchange":null,"watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":410,"b2":385,"strong":355,"tr1":null,"tr2":null},{"id":"VDY_CAD","ticker":"VDY","name":"Vanguard Canadian High Dividend ETF","currency":"CAD","shares":44.0982,"avg":58.293763,"price":77.41994,"group":"caddiv","feed":"VDY","exchange":"TSX","fallbackFeed":null,"fallbackExchange":null,"watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":null,"b2":null,"strong":null,"tr1":null,"tr2":null},{"id":"VFV_CAD","ticker":"VFV","name":"Vanguard S&P 500 Index ETF","currency":"CAD","shares":215.7215,"avg":163.074844,"price":189.820023,"group":"uscore","feed":"VFV","exchange":"TSX","fallbackFeed":null,"fallbackExchange":null,"watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":184,"b2":178,"strong":170,"tr1":null,"tr2":null},{"id":"XEF_CAD","ticker":"XEF","name":"iShares Core MSCI EAFE IMI ETF","currency":"CAD","shares":234.8706,"avg":48.996724,"price":52.100007,"group":"intl","feed":"XEF","exchange":"TSX","fallbackFeed":null,"fallbackExchange":null,"watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":50.5,"b2":49,"strong":47,"tr1":null,"tr2":null},{"id":"XEI_CAD","ticker":"XEI","name":"iShares S&P/TSX Composite High Dividend ETF","currency":"CAD","shares":296.5123,"avg":33.58778,"price":39.890015,"group":"caddiv","feed":"XEI","exchange":"TSX","fallbackFeed":null,"fallbackExchange":null,"watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":38.5,"b2":37,"strong":35.5,"tr1":null,"tr2":null},{"id":"XEQT_CAD","ticker":"XEQT","name":"iShares Core Equity ETF Portfolio","currency":"CAD","shares":76.3899,"avg":38.7186,"price":45.509943,"group":"global","feed":"XEQT","exchange":"TSX","fallbackFeed":null,"fallbackExchange":null,"watch":false,"excludeWeight":false,"priceSource":"Snapshot","priceAsOf":"2026-09-18","b1":null,"b2":null,"strong":null,"tr1":null,"tr2":null},{"id":"XEC_CAD","ticker":"XEC","name":"iShares Core MSCI Emerging Markets IMI ETF","currency":"CAD","group":"watch","feed":"XEC","exchange":"TSX","b1":42.5,"b2":41,"strong":39.25,"shares":0,"avg":null,"price":null,"watch":true,"excludeWeight":true,"fallbackFeed":null,"fallbackExchange":null,"priceSource":"","priceAsOf":"","tr1":null,"tr2":null},{"id":"AVGO_USD","ticker":"AVGO","name":"Broadcom","currency":"USD","group":"watch","feed":"AVGO","exchange":"NASDAQ","b1":345,"b2":320,"strong":295,"shares":0,"avg":null,"price":null,"watch":true,"excludeWeight":true,"fallbackFeed":null,"fallbackExchange":null,"priceSource":"","priceAsOf":"","tr1":null,"tr2":null},{"id":"BRKB_USD","ticker":"BRK.B","name":"Berkshire Hathaway Class B","currency":"USD","group":"watch","feed":"BRK.B","exchange":"NYSE","b1":507.5,"b2":487.5,"strong":465,"shares":0,"avg":null,"price":null,"watch":true,"excludeWeight":true,"fallbackFeed":null,"fallbackExchange":null,"priceSource":"","priceAsOf":"","tr1":null,"tr2":null}],"groups":[{"id":"uscore","name":"U.S. Broad Market Core","target":[20,25],"note":"VFV + HXS","over":"PAUSE ADD"},{"id":"nasdaq","name":"NASDAQ Growth","target":[12,15],"note":"QQC","over":"PAUSE ADD / TRIM ON STRENGTH"},{"id":"intl","name":"International Developed","target":[6,8],"note":"XEF","over":"HOLD"},{"id":"caddiv","name":"Canadian Dividend & Financials","target":[7,9.5],"note":"XEI + VDY + TD","over":"HOLD"},{"id":"usdiv","name":"U.S. Dividend","target":[2,4],"note":"SCHD","over":"HOLD"},{"id":"global","name":"Global All-Equity","target":[0,2],"note":"XEQT","over":"HOLD"},{"id":"mega","name":"Mega-cap Tech","target":[10,12],"note":"AMZN + GOOGL + META + MSFT","over":"TRIM WINNERS GRADUALLY"},{"id":"semi","name":"Semiconductors / Memory","target":[6,8],"note":"ASML + DRAM + INTC + NVDA + TSM","over":"ROTATE / NO NET ADD"},{"id":"energy","name":"Canadian Energy","target":[3,4],"note":"CNQ + ENB","over":"TRIM ONLY IF THESIS/WEIGHT WARRANTS"},{"id":"consumer","name":"Consumer / Defensive","target":[2,4],"note":"ATD + MCD + PEP","over":"HOLD"},{"id":"crypto","name":"Crypto","target":[1,2],"note":"BTCX.B + ETH","over":"NO ADD"},{"id":"cash","name":"Cash & Liquidity","target":[8,12],"note":"CASH + TCSH + PSU.U","over":"DEPLOY SELECTIVELY"}]};
+const $=id=>document.getElementById(id);
+const num=x=>{let v=parseFloat(x);return Number.isFinite(v)?v:null};
+const clone=x=>JSON.parse(JSON.stringify(x));
+function load(){
+  try{let x=JSON.parse(localStorage.getItem(K));if(x)return x}catch(e){}
+  let x=clone(seed);
+  try{
+    let old=JSON.parse(localStorage.getItem(OLD));
+    if(old){
+      x.settings.apiKey=old.settings?.apiKey||'';
+      x.settings.dry=num(old.settings?.dry)||0;
+      x.settings.fxUSDCAD=num(old.settings?.fxUSDCAD)||x.settings.fxUSDCAD||1.4;
+      x.ai=old.ai||null;
+      for(let o of (old.positions||old.holdings||[])){
+        let p=x.positions.find(z=>z.id===o.id);
+        if(p){
+          if(num(o.b1)!=null)p.b1=num(o.b1);if(num(o.b2)!=null)p.b2=num(o.b2);if(num(o.strong)!=null)p.strong=num(o.strong);
+          if(num(o.tr1)!=null)p.tr1=num(o.tr1);if(num(o.tr2)!=null)p.tr2=num(o.tr2);
+          p.taxAvgOverride=num(o.taxAvgOverride);p.lockTaxACB=!!o.lockTaxACB;
+        }
+      }
+    }
+  }catch(e){}
+  // New V1.6 installations start from the uploaded 2026-09-19 Wealthsimple Holdings Report.
+  for(let [id,s] of Object.entries(WS_SNAPSHOT_SEED)){
+    let p=x.positions.find(z=>z.id===id);
+    if(!p && WS_POS_META[id]){
+      p={id:id,...WS_POS_META[id],shares:0,avg:null,brokerAvg:null,price:null,watch:false,excludeWeight:false,b1:null,b2:null,strong:null,tr1:null,tr2:null,priceSource:"",priceAsOf:"",accounts:[]};
+      x.positions.push(p);
+    }
+    if(!p)continue;
+    p.shares=s.qty;p.price=s.price;p.brokerAvg=s.qty?s.bookMarket/s.qty:null;p.avg=p.brokerAvg;
+    p.bookCAD=s.bookCAD;p.accounts=s.accounts||[];p.priceSource="Wealthsimple CSV";p.priceAsOf=WS_ASOF_SEED;
+    p.watch=false;
+    if(id==="T_CAD"){p.lockTaxACB=true;p.excludeWeight=true;}
+  }
+  x.sync={asOf:WS_ASOF_SEED,source:"Seeded from uploaded Holdings Report",changes:[],lastImport:new Date().toISOString()};
   return x;
 }
+let d=load();
+
 function save(){localStorage.setItem(K,JSON.stringify(d));render()}
-const num=x=>{let v=parseFloat(x);return Number.isFinite(v)?v:null};
-const money=(v,c='CAD')=>v==null?'—':new Intl.NumberFormat('en-CA',{style:'currency',currency:c,maximumFractionDigits:2}).format(v);
-const cad0=v=>v==null||v<=0?'—':new Intl.NumberFormat('en-CA',{style:'currency',currency:'CAD',maximumFractionDigits:0}).format(v);
-const round25=v=>Math.round(v/25)*25;
-function amountOverrides(a){
-  if(!a)return {};
-  return {
-    b1:num(a.amountBuy1??a.buy1Amount??a.recommendedBuy1),
-    b2:num(a.amountBuy2??a.buy2Amount??a.recommendedBuy2),
-    strong:num(a.amountStrong??a.strongAmount??a.recommendedStrong)
-  };
-}
-function recAmounts(h){
-  const dry=num(d.settings.dry)||0,a=aiRec(h.ticker),ov=amountOverrides(a);
-  const calc=p=>dry>0&&num(p)>0?round25(dry*num(p)/100):null;
-  return {
-    b1:ov.b1??calc(h.p1),
-    b2:ov.b2??calc(h.p2),
-    strong:ov.strong??calc(h.p3),
-    src:(ov.b1!=null||ov.b2!=null||ov.strong!=null)?'AI':'BASE'
-  };
-}
-function currentSuggested(h){
-  const [a]=action(h),r=recAmounts(h);
-  if(a==='BUY 1')return r.b1;
-  if(a==='BUY 2')return r.b2;
-  if(a==='STRONG BUY')return r.strong;
+function money(v,c='CAD'){return v==null?'—':new Intl.NumberFormat('en-CA',{style:'currency',currency:c,maximumFractionDigits:2}).format(v)}
+function groupDef(id){return d.groups.find(g=>g.id===id)}
+function mvLocal(p){let s=num(p.shares),pr=num(p.price);return s!=null&&pr!=null?s*pr:null}
+function mvCAD(p){let v=mvLocal(p);if(v==null)return null;return p.currency==='USD'?v*(num(d.settings.fxUSDCAD)||1.4):v}
+function bookLocal(p){let s=num(p.shares),a=num(p.avg);return s!=null&&a!=null?s*a:null}
+function portfolioTotal(){return d.positions.filter(p=>!p.watch&&!p.excludeWeight).reduce((a,p)=>a+(mvCAD(p)||0),0)}
+function groupValue(id){return d.positions.filter(p=>!p.watch&&!p.excludeWeight&&p.group===id).reduce((a,p)=>a+(mvCAD(p)||0),0)}
+function weightOf(p){let t=portfolioTotal();return t&&mvCAD(p)!=null?mvCAD(p)/t*100:null}
+function groupWeight(id){let t=portfolioTotal();return t?groupValue(id)/t*100:0}
+function freshAI(){if(!d.ai?.asOf)return false;let t=new Date(d.ai.asOf).getTime();return Number.isFinite(t)&&Date.now()-t<36*3600e3}
+function matchRec(p){
+  if(!freshAI())return null;
+  let arr=d.ai.recommendations||[];
+  let byId=arr.find(r=>r.id===p.id||r.positionId===p.id); if(byId)return byId;
+  let same=d.positions.filter(x=>x.ticker===p.ticker);
+  if(same.length===1)return arr.find(r=>r.ticker===p.ticker)||null;
   return null;
 }
-function renderAllocation(){
-  const t=d.settings.targets||TARGET_DEFAULTS;
-  const rows=[['SP500','S&P 500'],['QQC','QQC / Nasdaq'],['DIRECT','Direct growth'],['CANADA','Canada'],['XEF','XEF'],['XEC','XEC']];
-  allocView.innerHTML=rows.map(([k,label])=>`<div class="allocrow"><div class="allocname">${label}</div><div class="allocbar"><div class="allocfill" style="width:${Math.max(0,Math.min(100,num(t[k])||0))}%"></div></div><div class="allocpct">${num(t[k])||0}%</div></div>`).join('');
+function levels(p){let r=matchRec(p);return {b1:r?.buy1??p.b1,b2:r?.buy2??p.b2,strong:r?.strong??p.strong,tr1:r?.trim1??p.tr1,tr2:r?.trim2??p.tr2,s1:r?.support1??null,s2:r?.support2??null,src:r?'AI':'BASE'}}
+function actionClass(a){a=(a||'').toUpperCase();if(a.includes('BUY')&&!a.includes('NO BUY'))return'buy';if(a.includes('TRIM')||a.includes('REDUCE'))return'trim';if(a.includes('NO BUY'))return'no';return'wait'}
+function tacticalAction(p){
+  if(p.id==='T_CAD')return ['NO BUY','no'];
+  let r=matchRec(p); if(r?.action)return [String(r.action).toUpperCase(),actionClass(r.action)];
+  let pr=num(p.price),l=levels(p); if(pr==null)return ['WAIT','wait'];
+  if(l.tr2!=null&&pr>=l.tr2)return ['TRIM 2','trim'];
+  if(l.tr1!=null&&pr>=l.tr1)return ['TRIM 1','trim'];
+  if(l.strong!=null&&pr<=l.strong)return ['STRONG BUY','buy'];
+  if(l.b2!=null&&pr<=l.b2)return ['BUY 2','buy'];
+  if(l.b1!=null&&pr<=l.b1)return ['BUY 1','buy'];
+  return [p.watch?'WAIT':'HOLD','wait'];
 }
-
-function freshAI(){if(!d.ai||!d.ai.asOf)return false;return Date.now()-new Date(d.ai.asOf).getTime()<=36*3600e3}
-function aiRec(t){if(!freshAI())return null;return (d.ai.recommendations||[]).find(r=>String(r.ticker).toUpperCase()===String(t).toUpperCase())||null}
-function levels(h){let a=aiRec(h.ticker);return {b1:a?.buy1??h.b1,b2:a?.buy2??h.b2,strong:a?.strong??h.strong,tr1:a?.trim1??h.tr1,tr2:a?.trim2??h.tr2,src:a?'AI':'BASE'}}
-function actionClass(a){a=(a||'').toUpperCase();if(a.includes('BUY')&&!a.includes('NO BUY'))return'buy';if(a.includes('TRIM'))return'trim';if(a.includes('NO BUY'))return'no';return'wait'}
-function action(h){if(h.ticker==='T')return ['NO BUY','no'];let a=aiRec(h.ticker);if(a?.action)return [String(a.action).toUpperCase(),actionClass(a.action)];let p=num(h.price),l=levels(h);if(p==null)return['WAIT','wait'];if(l.tr2!=null&&p>=l.tr2)return['TRIM 2','trim'];if(l.tr1!=null&&p>=l.tr1)return['TRIM 1','trim'];if(l.strong!=null&&p<=l.strong)return['STRONG BUY','buy'];if(l.b2!=null&&p<=l.b2)return['BUY 2','buy'];if(l.b1!=null&&p<=l.b1)return['BUY 1','buy'];return['WAIT','wait']}
-function book(h){return num(h.shares)!=null&&num(h.avg)!=null?num(h.shares)*num(h.avg):null}
-function mv(h){return num(h.shares)!=null&&num(h.price)!=null?num(h.shares)*num(h.price):null}
+function groupDecision(g,w){
+  let [lo,hi]=g.target;
+  if(w<lo*0.93)return ['ADD GRADUALLY','add'];
+  if(w>hi*1.04)return [g.over||'REDUCE','reduce'];
+  return ['HOLD / IN RANGE','hold'];
+}
 function detail(k,v,cl=''){return `<div class="detail"><div class="k">${k}</div><div class="v ${cl}">${v}</div></div>`}
+function renderGroups(){
+  let total=portfolioTotal();
+  $('groupRows').innerHTML=d.groups.map(g=>{
+    let w=groupWeight(g.id), [act,cl]=groupDecision(g,w), mid=(g.target[0]+g.target[1])/2;
+    let diff=(mid-w)/100*total;
+    let scale=Math.max(g.target[1]*1.35,w*1.12,5);
+    let fill=Math.min(100,w/scale*100), left=g.target[0]/scale*100, zone=(g.target[1]-g.target[0])/scale*100;
+    let ps=d.positions.filter(p=>!p.watch&&!p.excludeWeight&&p.group===g.id);
+    let rows=ps.map(p=>{let pw=weightOf(p)||0,[a,ac]=tacticalAction(p);return `<div class="posRow" onclick="event.stopPropagation();editHolding('${p.id}')"><div><div class="ticker">${p.ticker} <span class="pill ${ac}" style="padding:4px 6px;margin-left:4px">${a}</span></div><div class="posName">${p.name} · ${p.currency} · ${money(num(p.price),p.currency)}</div>${accountChips(p)}${p.lockTaxACB?`<div class="taxLock">TAX ACB PROTECTED${p.taxAvgOverride!=null?" · "+money(p.taxAvgOverride,p.currency)+"/share":""}</div>`:""}</div><div class="posRight"><div class="posVal">${money(mvCAD(p),'CAD')}</div><div class="posWt">${pw.toFixed(2)}%</div></div></div>`}).join('');
+    return `<div class="card groupCard" onclick="this.classList.toggle('open')"><div class="groupHead"><div><div class="groupName">${g.name}</div><div class="groupMeta">${g.note}</div></div><div><div class="weight">${w.toFixed(1)}%</div><div class="target">target ${g.target[0]}–${g.target[1]}%</div></div></div><div class="alloc"><div class="allocTarget" style="left:${left}%;width:${zone}%"></div><div class="allocFill" style="width:${fill}%"></div></div><div class="groupFoot"><span class="decision ${cl}">${act}</span><div class="gap">${diff>=0?'~'+money(diff,'CAD')+' to midpoint':'~'+money(Math.abs(diff),'CAD')+' above midpoint'}</div></div><div class="groupPositions">${rows}</div></div>`;
+  }).join('');
+}
+function renderWatch(){
+  $('watchRows').innerHTML=d.positions.filter(p=>p.watch).map(p=>{
+    let [a,cl]=tacticalAction(p),l=levels(p);
+    return `<div class="item" onclick="editHolding('${p.id}')"><div class="itemTop"><div><div class="ticker">${p.ticker}</div><div class="posName">${p.name} · ${p.currency}</div></div><span class="pill ${cl}">${a}</span></div><div class="detailGrid">${detail('Price',money(num(p.price),p.currency))}${detail('Buy 1',money(l.b1,p.currency))}${detail('Buy 2',money(l.b2,p.currency))}${detail('Strong',money(l.strong,p.currency))}</div></div>`;
+  }).join('');
+}
+function tacticalCategoryDef(id){
+  if(TACTICAL_CATEGORY_META[id])return TACTICAL_CATEGORY_META[id];
+  return groupDef(id)||{id:id,name:id,target:[0,0],note:''};
+}
+function renderTactical(){
+  let cats=Object.keys(TACTICAL_CATEGORY_MAP).map(id=>{
+    let g=tacticalCategoryDef(id), ids=TACTICAL_CATEGORY_MAP[id];
+    let ps=ids.map(pid=>d.positions.find(p=>p.id===pid)).filter(Boolean);
+    let target=g.target||[0,0], midpoint=(target[0]+target[1])/2;
+    let heldWeight=ps.filter(p=>!p.watch&&!p.excludeWeight).reduce((s,p)=>s+(weightOf(p)||0),0);
+    return {id,g,ps,target,midpoint,heldWeight};
+  }).filter(x=>x.ps.length).sort((a,b)=>b.midpoint-a.midpoint);
+
+  $('tacRows').innerHTML=cats.map(c=>{
+    let targetText=c.target[0]===c.target[1] ? `${c.target[0]}%` : `${c.target[0]}–${c.target[1]}%`;
+    let rows=c.ps.map(p=>{
+      let l=levels(p),[a,cl]=tacticalAction(p),r=matchRec(p);
+      let wt=(!p.watch&&!p.excludeWeight)?(weightOf(p)||0):0;
+      let reason=r?.reason||(!p.watch?`${c.g.name} · current position weight ${wt.toFixed(2)}%`:'Watchlist / planned position');
+      return `<div class="item" style="box-shadow:none">
+        <div class="itemTop">
+          <div onclick="editHolding('${p.id}')">
+            <div class="ticker">${p.ticker} <span class="muted" style="font-size:9px">${p.id}</span></div>
+            <div class="source">${l.src} · ${p.priceSource||'MANUAL'}${p.priceAsOf?' · '+p.priceAsOf:''}${p.watch?' · WATCH':''}</div>${accountChips(p)}
+          </div>
+          <span class="pill ${cl}">${a}</span>
+        </div>
+        <div class="detailGrid">
+          ${detail('Current',money(num(p.price),p.currency))}
+          ${detail('Weight',p.watch?'WATCH':wt.toFixed(2)+'%')}
+          ${detail('Buy 1',money(l.b1,p.currency))}
+          ${detail('Buy 2',money(l.b2,p.currency))}
+          ${detail('Strong',money(l.strong,p.currency))}
+          ${detail('Support 1',money(l.s1,p.currency))}
+        </div>
+        <div class="reason">${reason}</div>
+      </div>`;
+    }).join('');
+    return `<div class="card" style="padding:11px">
+      <div class="groupHead" style="padding:2px 2px 10px">
+        <div><div class="groupName">${c.g.name}</div><div class="groupMeta">${c.g.note||''}</div></div>
+        <div><div class="weight">${c.heldWeight.toFixed(1)}%</div><div class="target">target ${targetText}</div></div>
+      </div>
+      <div class="list">${rows}</div>
+    </div>`;
+  }).join('');
+}
+
+function accountChips(p){
+  let aa=p.accounts||[]; if(!aa.length)return '';
+  let by={};for(let a of aa){let k=a.type||a.name||'Account';by[k]=(by[k]||0)+(num(a.qty)||0)}
+  return `<div class="acctChips">${Object.entries(by).map(([k,q])=>`<span class="acctChip">${k} ${q.toFixed(q<10?3:2)}</span>`).join('')}</div>`;
+}
+function parseCSV(text){
+  let rows=[],row=[],field='',q=false;
+  for(let i=0;i<text.length;i++){
+    let c=text[i];
+    if(q){
+      if(c==='"'&&text[i+1]==='"'){field+='"';i++}
+      else if(c==='"')q=false;
+      else field+=c;
+    }else{
+      if(c==='"')q=true;
+      else if(c===','){row.push(field);field=''}
+      else if(c==='\n'){row.push(field);rows.push(row);row=[];field=''}
+      else if(c!=='\r')field+=c;
+    }
+  }
+  if(field.length||row.length){row.push(field);rows.push(row)}
+  let headers=rows.shift()||[];
+  return rows.filter(r=>r.some(x=>String(x).trim()!=='')).map(r=>{
+    let o={};headers.forEach((h,i)=>o[h]=r[i]??'');return o;
+  });
+}
+function aggregateWS(rows){
+  let out={},asOf='',unmapped=[];
+  for(let r of rows){
+    if((r["Account Name"]||'').startsWith('As of ')){asOf=(r["Account Name"]||'').slice(6);continue}
+    let id=wsIdFor(r); if(!id){if((r["Symbol"]||'').trim())unmapped.push({symbol:r["Symbol"],exchange:r["Exchange"],account:r["Account Name"]});continue}
+    let a=out[id]||(out[id]={qty:0,bookMarket:0,bookCAD:0,marketLocal:0,price:null,currency:(r["Market Price Currency"]||'CAD').trim()||'CAD',accounts:[]});
+    let qty=num(r["Quantity"])||0,bm=num(r["Book Value (Market)"])||0,bc=num(r["Book Value (CAD)"])||0,mv=num(r["Market Value"])||0,pr=num(r["Market Price"]);
+    a.qty+=qty;a.bookMarket+=bm;a.bookCAD+=bc;a.marketLocal+=mv;if(pr!=null)a.price=pr;
+    a.accounts.push({name:r["Account Name"]||'',type:r["Account Type"]||'',qty:qty,bookMarket:bm,bookCAD:bc,marketValue:mv,currency:r["Market Value Currency"]||a.currency});
+  }
+  return {out,asOf,unmapped};
+}
+function ensurePosition(id){
+  let p=d.positions.find(z=>z.id===id);if(p)return p;
+  let m=WS_POS_META[id]||{ticker:id,name:id,currency:'CAD',group:'watch',feed:null,exchange:null};
+  p={id:id,...m,shares:0,avg:null,brokerAvg:null,price:null,watch:false,excludeWeight:false,b1:null,b2:null,strong:null,tr1:null,tr2:null,priceSource:'',priceAsOf:'',accounts:[]};
+  d.positions.push(p);return p;
+}
+function reconcileWS(agg,asOf){
+  let before={};for(let p of d.positions){if(!p.watch)before[p.id]={shares:num(p.shares)||0,price:num(p.price),value:mvCAD(p)||0}}
+  let changes=[];
+  // Any portfolio position absent from the new WS report becomes zero, except true watchlist names.
+  for(let p of d.positions){
+    if(p.watch||p.id==='T_CAD'&&false)continue;
+    if((p.accounts||[]).length && !agg[p.id]){
+      if((num(p.shares)||0)!==0)changes.push({id:p.id,type:'CLOSED',from:num(p.shares)||0,to:0});
+      p.shares=0;p.accounts=[];p.bookCAD=0;
+    }
+  }
+  for(let [id,s] of Object.entries(agg)){
+    let p=ensurePosition(id),old=num(p.shares)||0;
+    if(Math.abs(old-s.qty)>0.000001)changes.push({id:id,type:old===0?'NEW':'SHARES',from:old,to:s.qty});
+    p.shares=s.qty;p.price=s.price;p.brokerAvg=s.qty?s.bookMarket/s.qty:null;p.avg=p.brokerAvg;p.bookCAD=s.bookCAD;p.accounts=s.accounts||[];
+    p.priceSource='Wealthsimple CSV';p.priceAsOf=asOf||new Date().toISOString();p.watch=false;
+    if(id==='T_CAD'){p.lockTaxACB=true;p.excludeWeight=true}
+  }
+  d.sync={asOf:asOf||new Date().toISOString(),source:'Wealthsimple Holdings Report',changes:changes,lastImport:new Date().toISOString()};
+  return changes;
+}
+async function importWSFile(file){
+  let text=await file.text(),rows=parseCSV(text);
+  if(!rows.length||!('Account Name' in rows[0])||!('Symbol' in rows[0])||!('Quantity' in rows[0])){alert('This does not look like a Wealthsimple Holdings Report CSV.');return}
+  let {out,asOf,unmapped}=aggregateWS(rows),changes=reconcileWS(out,asOf);
+  localStorage.setItem(K,JSON.stringify(d));render();
+  let msg=`Synced ${Object.keys(out).length} consolidated positions · ${changes.length} changes`;
+  if(unmapped.length)msg+=` · ${unmapped.length} unmapped rows`;
+  alert(msg);go('sync');
+}
+function renderSync(){
+  let s=d.sync||null;
+  $('syncTime').textContent=s?.asOf||'Not synced';
+  $('syncMeta').textContent=s?`${s.source||'Wealthsimple'} · ${d.positions.filter(p=>!p.watch&&(p.accounts||[]).length).length} consolidated positions`:'Import the Holdings Report CSV from Wealthsimple.';
+  $('syncBadge').textContent=s?'SYNCED':'LOCAL CSV';
+  let accounts={};
+  for(let p of d.positions){
+    for(let a of (p.accounts||[])){
+      let k=a.type||a.name||'Account',v=num(a.marketValue)||0,cur=a.currency||p.currency;
+      accounts[k]=(accounts[k]||0)+(cur==='USD'?v*(num(d.settings.fxUSDCAD)||1.4):v);
+    }
+  }
+  $('accountRows').innerHTML=Object.entries(accounts).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div class="card acct"><div class="acctName">${k}</div><div class="acctVal">${money(v,'CAD')}</div></div>`).join('')||'<div class="card notice">No account data yet.</div>';
+  let ch=s?.changes||[];
+  $('syncChanges').innerHTML=ch.length?ch.map(c=>{
+    let p=d.positions.find(x=>x.id===c.id),delta=c.to-c.from,cl=delta>0?'green':delta<0?'red':'';
+    return `<div class="changeRow"><div><div class="changeTitle">${p?.ticker||c.id} · ${c.type}</div><div class="changeSub">${c.id}</div></div><div class="changeDelta ${cl}">${c.from.toFixed(4)} → ${c.to.toFixed(4)}${c.type==='SHARES'?`<br>${delta>0?'+':''}${delta.toFixed(4)} sh`:''}</div></div>`;
+  }).join(''):'<div class="muted" style="font-size:10px">No position changes recorded for the seeded snapshot.</div>';
+}
+function exportPortfolioJSON(){
+  let out={
+    asOf:d.sync?.asOf||new Date().toISOString(),
+    fxUSDCAD:num(d.settings.fxUSDCAD)||1.4,
+    totalCAD:portfolioTotal(),
+    positions:d.positions.filter(p=>!p.watch).map(p=>({
+      id:p.id,ticker:p.ticker,name:p.name,currency:p.currency,shares:num(p.shares)||0,currentPrice:num(p.price),
+      marketValueCAD:mvCAD(p),brokerAvgCost:num(p.brokerAvg??p.avg),taxACBOverride:num(p.taxAvgOverride),
+      taxACBProtected:!!p.lockTaxACB,group:p.group,excludeWeight:!!p.excludeWeight,
+      accounts:(p.accounts||[]).map(a=>({type:a.type,name:a.name,qty:a.qty,marketValue:a.marketValue,currency:a.currency}))
+    }))
+  };
+  let blob=new Blob([JSON.stringify(out,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download='portfolio-command-centre-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
 function render(){
- let cb=0,ub=0,hasC=0,hasU=0;
- d.holdings.forEach(h=>{let b=book(h);if(b!=null){if(h.currency==='CAD'){cb+=b;hasC=1}else{ub+=b;hasU=1}}});
- cadBook.textContent=hasC?money(cb,'CAD'):'—';usdBook.textContent=hasU?money(ub,'USD'):'—';dry.textContent=money(num(d.settings.dry)||0,'CAD');
- regime.textContent=freshAI()?(d.ai.marketRegime||localRegime()):localRegime();
- yieldView.textContent=num(d.settings.y10)!=null?num(d.settings.y10).toFixed(2)+'%':'—';
- vixView.textContent=num(d.settings.vix)!=null?num(d.settings.vix).toFixed(1):'—';
- renderAllocation();
-
- holdRows.innerHTML=d.holdings.map(h=>{
-   let p=num(h.price),b=book(h),m=mv(h),pl=b!=null&&m!=null?m-b:null,[a,cl]=action(h);
-   return `<div class="item" onclick="editHolding('${h.id}')">
-     <div class="itemtop"><div><div class="ticker">${h.ticker}</div><div class="name">${h.name}</div><div class="bucketbadge">${BUCKET_LABELS[h.bucket]||'Satellite'}</div></div><span class="pill ${cl}">${a}</span></div>
-     <div class="detailgrid">${detail('Price',money(p,h.currency))}${detail('Avg cost',money(num(h.avg),h.currency))}${detail('Book cost',money(b,h.currency))}${detail('P/L',money(pl,h.currency),pl>0?'green':pl<0?'red':'')}</div>
-   </div>`}).join('')||'<div class="card empty">No holdings yet.</div>';
-
- tacRows.innerHTML=d.holdings.map(h=>{
-   let l=levels(h),[a,cl]=action(h),r=aiRec(h.ticker),am=recAmounts(h),now=currentSuggested(h);
-   return `<div class="item" onclick="editHolding('${h.id}')">
-     <div class="itemtop">
-       <div><div class="ticker">${h.ticker}</div><div class="source">${l.src}${r?.confidence?' · '+r.confidence:''} · ${BUCKET_LABELS[h.bucket]||'Satellite'}</div>${now!=null?`<div class="nowamt">Suggested now: ${cad0(now)} CAD</div>`:''}</div>
-       <span class="pill ${cl}">${a}</span>
-     </div>
-     <div class="detailgrid">${detail('Current price',money(num(h.price),h.currency))}${detail('Trim 1',money(l.tr1,h.currency))}</div>
-     <div class="zonegrid">
-       <div class="zonebox"><div class="zk">Buy 1</div><div class="zp">${money(l.b1,h.currency)}</div><div class="za">${cad0(am.b1)} CAD</div></div>
-       <div class="zonebox"><div class="zk">Buy 2</div><div class="zp">${money(l.b2,h.currency)}</div><div class="za">${cad0(am.b2)} CAD</div></div>
-       <div class="zonebox"><div class="zk">Strong</div><div class="zp">${money(l.strong,h.currency)}</div><div class="za">${cad0(am.strong)} CAD</div></div>
-     </div>
-     ${r?.reason?`<div class="reason">${r.reason}</div>`:''}
-   </div>`}).join('');
-
- apiKey.value=d.settings.apiKey||'';dryInput.value=d.settings.dry??'';y10.value=d.settings.y10??'';vix.value=d.settings.vix??'';fed.value=d.settings.fed||'neutral';
- const t=d.settings.targets||TARGET_DEFAULTS;
- tSP500.value=t.SP500??40;tQQC.value=t.QQC??20;tDIRECT.value=t.DIRECT??10;tCANADA.value=t.CANADA??15;tXEF.value=t.XEF??10;tXEC.value=t.XEC??5;
- const total=['SP500','QQC','DIRECT','CANADA','XEF','XEC'].reduce((s,k)=>s+(num(t[k])||0),0);
- targetSum.textContent=`Total: ${total}%${total===100?'':' · adjust to 100%'}`;
- targetSum.className='targetsum '+(total===100?'green':'amber');
- renderAI();
+  let total=portfolioTotal(),cash=groupValue('cash');
+  $('totalVal').textContent=money(total,'CAD');$('cashVal').textContent=money(cash,'CAD');$('fxView').textContent=(num(d.settings.fxUSDCAD)||1.4).toFixed(4);
+  $('regimeView').textContent=freshAI()?(d.ai.marketRegime||'AI'):'LOCAL';
+  $('aiFreshView').textContent=d.ai?(freshAI()?'FRESH':'EXPIRED'):'NONE';
+  $('trackedView').textContent=d.positions.filter(p=>p.id!=='T_CAD').length;
+  $('apiKey').value=d.settings.apiKey||'';$('fxInput').value=d.settings.fxUSDCAD??'';$('dryInput').value=d.settings.dry??'';
+  renderGroups();renderWatch();renderTactical();renderAI();renderChartSelect();populateGroupSelect();renderSync();
 }
-function localRegime(){let s=0,y=num(d.settings.y10),v=num(d.settings.vix);if(y>=5.1)s+=2;else if(y>=4.8)s++;if(v>=30)s+=2;else if(v>=22)s++;if(d.settings.fed==='hawkish')s++;if(d.settings.fed==='dovish')s--;return s>=4?'STRESSED':s>=2?'CAUTIOUS':s<=-1?'RISK-ON':'NEUTRAL'}
-function editHolding(id){
- let h=d.holdings.find(x=>x.id===id);if(!h)return;
- eid.value=h.id;et.value=h.ticker;en.value=h.name;ec.value=h.currency;es.value=h.shares??'';eavg.value=h.avg??'';ep.value=h.price??'';
- eb1.value=h.b1??'';eb2.value=h.b2??'';estr.value=h.strong??'';etr1.value=h.tr1??'';etr2.value=h.tr2??'';
- efs.value=h.feed??'';eex.value=h.exchange??'';ebucket.value=h.bucket||'OTHER';ep1.value=h.p1??'';ep2.value=h.p2??'';ep3.value=h.p3??'';enotes.value=h.notes||'';
- modal.classList.add('on')
+function renderAI(){
+  if(!d.ai){$('aiView').innerHTML='<div class="card notice">No AI brief loaded.</div>';return}
+  let chips=(d.ai.catalysts||[]).map(x=>`<span class="chip">${x}</span>`).join('');
+  let priceCount=Object.keys(d.ai.prices||{}).length;
+  $('aiView').innerHTML=`<div class="card aiHero"><div class="aiReg">${d.ai.marketRegime||'AI'} · ${freshAI()?'Fresh':'Expired'}</div><div class="aiSum">${d.ai.summary||''}</div><div class="chips"><span class="chip">${priceCount} JSON prices</span>${chips}</div></div>`;
 }
-function addHolding(){
- let h={id:'h'+Date.now(),ticker:'NEW',name:'New holding',currency:'CAD',shares:null,avg:null,price:null,b1:null,b2:null,strong:null,tr1:null,tr2:null,feed:'',exchange:'',bucket:'OTHER',p1:3,p2:5,p3:7,notes:''};
- d.holdings.push(h);editHolding(h.id)
+function resolveKey(k){
+  let p=d.positions.find(x=>x.id.toUpperCase()===k.toUpperCase()); if(p)return [p];
+  let m=d.positions.filter(x=>x.ticker.toUpperCase()===k.toUpperCase());
+  return m;
 }
-function closeModal(){modal.classList.remove('on')}
-function saveHolding(){
- let h=d.holdings.find(x=>x.id===eid.value);if(!h)return;
- Object.assign(h,{ticker:et.value.trim().toUpperCase(),name:en.value.trim(),currency:ec.value,shares:num(es.value),avg:num(eavg.value),price:num(ep.value),b1:num(eb1.value),b2:num(eb2.value),strong:num(estr.value),tr1:num(etr1.value),tr2:num(etr2.value),feed:efs.value.trim(),exchange:eex.value.trim(),bucket:ebucket.value,p1:num(ep1.value)||0,p2:num(ep2.value)||0,p3:num(ep3.value)||0,notes:enotes.value.trim()});
- closeModal();save()
+function applyPrices(prices,asOf,source='AI JSON'){
+  let updated=[],amb=[],missing=[];
+  for(let [k,v] of Object.entries(prices||{})){
+    let price=(typeof v==='object'&&v)?num(v.price):num(v); if(price==null)continue;
+    let m=resolveKey(k);
+    if(m.length===1){m[0].price=price;m[0].priceSource=source;m[0].priceAsOf=(typeof v==='object'&&v.asOf)||asOf||'';updated.push(m[0].id)}
+    else if(m.length>1)amb.push(k); else missing.push(k);
+  }
+  return {updated,amb,missing};
 }
-function deleteHolding(){let id=eid.value;d.holdings=d.holdings.filter(x=>x.id!==id);closeModal();save()}
-function saveSettings(){
- d.settings.apiKey=apiKey.value.trim();d.settings.dry=num(dryInput.value)||0;d.settings.y10=num(y10.value);d.settings.vix=num(vix.value);d.settings.fed=fed.value;
- d.settings.targets={SP500:num(tSP500.value)||0,QQC:num(tQQC.value)||0,DIRECT:num(tDIRECT.value)||0,CANADA:num(tCANADA.value)||0,XEF:num(tXEF.value)||0,XEC:num(tXEC.value)||0};
- const total=Object.values(d.settings.targets).reduce((a,b)=>a+(num(b)||0),0);
- if(total!==100&&!confirm(`Target weights total ${total}%, not 100%. Save anyway?`))return;
- save()
+function applyAI(){
+  try{
+    let x=JSON.parse($('aiBox').value.trim()); if(!x.asOf||!Array.isArray(x.recommendations))throw new Error();
+    if(num(x.fxUSDCAD)!=null)d.settings.fxUSDCAD=num(x.fxUSDCAD);
+    let res=applyPrices(x.prices||{},x.asOf,'AI JSON');
+    // Also accept currentPrice inside each recommendation.
+    for(let r of x.recommendations){
+      if(num(r.currentPrice)==null)continue;
+      let key=r.id||r.positionId||r.ticker; if(!key)continue;
+      applyPrices({[key]:r.currentPrice},x.asOf,'AI JSON');
+    }
+    d.ai=x;localStorage.setItem(K,JSON.stringify(d));$('aiBox').value='';render();
+    alert(`AI brief applied. ${res.updated.length} top-level prices updated.${res.amb.length?' Ambiguous keys skipped: '+res.amb.join(', '):''}`);
+    go('tactical');
+  }catch(e){alert('Invalid V1.5 JSON. Paste the complete JSON block.')}
 }
-async function refreshQuotes(){let key=d.settings.apiKey;if(!key){alert('Add your Twelve Data API key in Settings first.');return}let ok=0;for(let h of d.holdings){if(!h.feed)continue;let sym=h.feed+(h.exchange?':'+h.exchange:'');try{let r=await fetch(`https://api.twelvedata.com/price?symbol=${encodeURIComponent(sym)}&apikey=${encodeURIComponent(key)}`);let j=await r.json();let p=num(j.price);if(p!=null){h.price=p;ok++}}catch(e){}}save();alert(`Updated ${ok} quotes. Symbols unavailable on your plan can still be entered manually.`)}
-function openBulk(){bulkBox.value='';bulkResult.textContent='';bulkModal.classList.add('on');setTimeout(()=>bulkBox.focus(),100)}
-function closeBulk(){bulkModal.classList.remove('on')}
-function applyBulk(){
- let lines=bulkBox.value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
- let updated=[],skipped=[],invalid=[];
- for(let line of lines){
-   if(/^ticker[\s,=:]+price$/i.test(line))continue;
-   let m=line.match(/^([A-Za-z0-9.\-]+)\s*(?:[,=:]|\s+)\s*\$?([0-9]+(?:\.[0-9]+)?)\s*$/);
-   if(!m){invalid.push(line);continue}
-   let ticker=m[1].toUpperCase(),price=parseFloat(m[2]);
-   let h=d.holdings.find(x=>String(x.ticker).toUpperCase()===ticker);
-   if(!h){skipped.push(ticker);continue}
-   h.price=price;updated.push(ticker);
- }
- if(updated.length){localStorage.setItem(K,JSON.stringify(d));render()}
- let msg=`Updated ${updated.length} price${updated.length===1?'':'s'}`;
- if(skipped.length)msg+=` · Not in watchlist: ${[...new Set(skipped)].join(', ')}`;
- if(invalid.length)msg+=` · Could not read ${invalid.length} line${invalid.length===1?'':'s'}`;
- bulkResult.textContent=msg;
- if(updated.length && !skipped.length && !invalid.length){setTimeout(()=>{closeBulk();go('tactical')},550)}
-}
-function applyAI(){try{let x=JSON.parse(aiBox.value.trim());if(!x.asOf||!Array.isArray(x.recommendations))throw 0;d.ai=x;save();aiBox.value='';go('tactical')}catch(e){alert('Invalid AI brief JSON. Paste the complete JSON block from ChatGPT.')}}
 function clearAI(){d.ai=null;save()}
-function renderAI(){if(!d.ai){aiView.innerHTML='<div class="card empty">No AI brief loaded.</div>';return}let age=(Date.now()-new Date(d.ai.asOf).getTime())/3600e3,active=age<36;let chips=(d.ai.catalysts||[]).map(x=>`<span class="chip">${x}</span>`).join('');let recs=(d.ai.recommendations||[]).map(r=>`<div class="card aiitem"><div class="itemtop"><div><div class="ticker">${r.ticker}</div><div class="mini">${r.confidence||''}</div></div><span class="pill ${actionClass(r.action)}">${r.action||''}</span></div>${r.reason?`<div class="reason">${r.reason}</div>`:''}</div>`).join('');aiView.innerHTML=`<div class="card aihero"><div class="reg">${d.ai.marketRegime||'AI Brief'} · ${active?'Fresh':'Expired'}</div><div class="sum">${d.ai.summary||''}</div>${chips?`<div class="chips">${chips}</div>`:''}</div><div class="list" style="margin-top:10px">${recs}</div>`}
-function resetLocal(){if(confirm('Delete all locally entered portfolio data and restore defaults?')){localStorage.removeItem(K);d=migrate(structuredClone(seed));render()}}
-function go(id){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x.dataset.p===id));document.querySelectorAll('.page').forEach(x=>x.classList.toggle('on',x.id===id));window.scrollTo({top:0,behavior:'smooth'})}
-document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>go(b.dataset.p));modal.onclick=e=>{if(e.target===modal)closeModal()};bulkModal.onclick=e=>{if(e.target===bulkModal)closeBulk()};render();
+function openBulk(){$('bulkBox').value='';$('bulkResult').textContent='';$('bulkModal').classList.add('on')}
+function closeBulk(){$('bulkModal').classList.remove('on')}
+function applyBulk(){
+  let lines=$('bulkBox').value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean),prices={},bad=[];
+  for(let line of lines){
+    let m=line.match(/^([A-Za-z0-9._-]+)\s*(?:[,=:]|\s+)\s*\$?([0-9]+(?:\.[0-9]+)?)\s*$/);
+    if(!m){bad.push(line);continue} prices[m[1]]=parseFloat(m[2]);
+  }
+  let r=applyPrices(prices,new Date().toISOString(),'Bulk');
+  localStorage.setItem(K,JSON.stringify(d));render();
+  $('bulkResult').textContent=`Updated ${r.updated.length} · ambiguous ${r.amb.length}${r.amb.length?' ('+r.amb.join(', ')+')':''} · unreadable ${bad.length} · unknown ${r.missing.length}`;
+  if(r.updated.length&&!r.amb.length&&!bad.length&&!r.missing.length)setTimeout(()=>{closeBulk();go('tactical')},500);
+}
+async function refreshQuotes(){
+  let key=d.settings.apiKey;if(!key){alert('Add your Twelve Data API key in Settings first.');return}
+  let ok=0,fail=0;
+  for(let p of d.positions){
+    if(!p.feed||p.id==='ETH_CAD')continue;
+    let sym=p.feed+(p.exchange?':'+p.exchange:'');
+    try{let r=await fetch(`https://api.twelvedata.com/price?symbol=${encodeURIComponent(sym)}&apikey=${encodeURIComponent(key)}`);let j=await r.json();let q=num(j.price);if(q!=null){p.price=q;p.priceSource='Twelve Data';p.priceAsOf=new Date().toISOString();ok++}else fail++}catch(e){fail++}
+  }
+  localStorage.setItem(K,JSON.stringify(d));render();alert(`Updated ${ok} quotes · ${fail} unavailable.`);
+}
+function editHolding(id){
+  let p=d.positions.find(x=>x.id===id);if(!p)return;
+  $('eid').value=id;$('eapp').value=p.id;$('et').value=p.ticker;$('en').value=p.name;$('ec').value=p.currency;$('es').value=p.shares??'';$('eavg').value=p.avg??'';$('ep').value=p.price??'';$('ebrokeravg').value=p.brokerAvg??p.avg??'';$('etaxavg').value=p.taxAvgOverride??'';$('elock').value=String(!!p.lockTaxACB);$('eg').value=p.group;$('eb1').value=p.b1??'';$('eb2').value=p.b2??'';$('estr').value=p.strong??'';$('etr1').value=p.tr1??'';$('etr2').value=p.tr2??'';$('editModal').classList.add('on');
+}
+function closeEdit(){$('editModal').classList.remove('on')}
+function saveHolding(){
+  let p=d.positions.find(x=>x.id===$('eid').value);if(!p)return;
+  Object.assign(p,{ticker:$('et').value.trim().toUpperCase(),name:$('en').value.trim(),currency:$('ec').value,shares:num($('es').value)||0,avg:num($('eavg').value),price:num($('ep').value),taxAvgOverride:num($('etaxavg').value),lockTaxACB:$('elock').value==='true',group:$('eg').value,b1:num($('eb1').value),b2:num($('eb2').value),strong:num($('estr').value),tr1:num($('etr1').value),tr2:num($('etr2').value),priceSource:'Manual',priceAsOf:new Date().toISOString()});
+  closeEdit();save();
+}
+function deleteHolding(){let id=$('eid').value;d.positions=d.positions.filter(x=>x.id!==id);closeEdit();save()}
+function populateGroupSelect(){if($('eg').options.length)return;let opts=d.groups.map(g=>`<option value="${g.id}">${g.name}</option>`).join('')+'<option value="watch">Watchlist</option><option value="excluded">Excluded</option>';$('eg').innerHTML=opts}
+function saveSettings(){d.settings.apiKey=$('apiKey').value.trim();d.settings.fxUSDCAD=num($('fxInput').value)||1.4;d.settings.dry=num($('dryInput').value)||0;save()}
+function resetLocal(){if(confirm('Reset V1.5 local data to the current portfolio snapshot?')){localStorage.removeItem(K);d=clone(seed);render()}}
+function renderChartSelect(){
+  let cur=$('chartSelect').value;
+  $('chartSelect').innerHTML=d.positions.filter(p=>p.id!=='T_CAD').map(p=>`<option value="${p.id}">${p.ticker} · ${p.currency}${p.watch?' · watch':''}</option>`).join('');
+  if(cur&&d.positions.some(p=>p.id===cur))$('chartSelect').value=cur;
+}
+function supports(vals){
+  if(vals.length<8)return [];
+  let last=num(vals[vals.length-1].close), piv=[];
+  for(let i=2;i<vals.length-2;i++){
+    let l=num(vals[i].low); if(l==null)continue;
+    let ns=[i-2,i-1,i+1,i+2].map(j=>num(vals[j].low)).filter(x=>x!=null);
+    if(ns.length===4&&l<=Math.min(...ns)&&l<last*0.999)piv.push({v:l,i});
+  }
+  piv.sort((a,b)=>b.v-a.v);
+  let out=[];
+  for(let p of piv){
+    if(!out.some(x=>Math.abs(x-p.v)/p.v<0.02))out.push(p.v);
+    if(out.length===2)break;
+  }
+  if(!out.length){let lows=vals.slice(-20).map(x=>num(x.low)).filter(x=>x!=null);if(lows.length)out.push(Math.min(...lows))}
+  return out;
+}
+function drawChart(vals,p,usedFallback){
+  let c=$('kcanvas'),ctx=c.getContext('2d'),dpr=window.devicePixelRatio||1,w=c.clientWidth,h=330;c.width=w*dpr;c.height=h*dpr;ctx.scale(dpr,dpr);ctx.clearRect(0,0,w,h);
+  let data=vals.slice(-90), highs=data.map(x=>num(x.high)),lows=data.map(x=>num(x.low));let sup=supports(data),l=levels(p);
+  let extra=[...sup]; if(!usedFallback)extra.push(l.b1,l.b2,l.strong,l.s1,l.s2);
+  let min=Math.min(...lows,...extra.filter(x=>x!=null))*0.985,max=Math.max(...highs,...extra.filter(x=>x!=null))*1.015;
+  let padL=42,padR=9,padT=10,padB=22,ph=h-padT-padB,pw=w-padL-padR;
+  let y=v=>padT+(max-v)/(max-min)*ph,x=i=>padL+i*pw/data.length+pw/data.length/2;
+  ctx.font='9px -apple-system';ctx.fillStyle='#7f8da0';ctx.strokeStyle='#1d2836';ctx.lineWidth=1;
+  for(let j=0;j<5;j++){let yy=padT+j*ph/4,price=max-j*(max-min)/4;ctx.beginPath();ctx.moveTo(padL,yy);ctx.lineTo(w-padR,yy);ctx.stroke();ctx.fillText(price.toFixed(price>100?1:2),2,yy+3)}
+  let cw=Math.max(2,Math.min(7,pw/data.length*.58));
+  data.forEach((q,i)=>{let o=num(q.open),cl=num(q.close),hi=num(q.high),lo=num(q.low);if([o,cl,hi,lo].some(v=>v==null))return;let xx=x(i),up=cl>=o;ctx.strokeStyle=up?'#39d49d':'#ff7b84';ctx.fillStyle=ctx.strokeStyle;ctx.beginPath();ctx.moveTo(xx,y(hi));ctx.lineTo(xx,y(lo));ctx.stroke();let top=Math.min(y(o),y(cl)),bh=Math.max(1,Math.abs(y(o)-y(cl)));ctx.fillRect(xx-cw/2,top,cw,bh)});
+  function line(v,color,label){if(v==null||v<min||v>max)return;ctx.save();ctx.setLineDash([5,4]);ctx.strokeStyle=color;ctx.beginPath();ctx.moveTo(padL,y(v));ctx.lineTo(w-padR,y(v));ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=color;ctx.fillText(label+' '+(v>100?v.toFixed(1):v.toFixed(2)),padL+4,y(v)-4);ctx.restore()}
+  sup.forEach((v,i)=>line(v,i===0?'#78adff':'#b89cff','S'+(i+1)));
+  if(!usedFallback){line(l.b1,'#f0c268','B1');line(l.b2,'#d59e4a','B2')}
+  let last=data[data.length-1];$('chartStats').innerHTML=detail('Last close',money(num(last.close),usedFallback?'USD':p.currency))+detail('Support 1',sup[0]!=null?money(sup[0],usedFallback?'USD':p.currency):'—')+detail('Support 2',sup[1]!=null?money(sup[1],usedFallback?'USD':p.currency):'—');
+}
+async function fetchYahooSeries(symbol,range){
+  let url=`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?range=${encodeURIComponent(range)}&interval=1d&includePrePost=false&events=div%2Csplits`;
+  let r=await fetch(url,{cache:'no-store'});
+  if(!r.ok)throw new Error('Yahoo HTTP '+r.status);
+  let j=await r.json(),res=j?.chart?.result?.[0];
+  if(!res?.timestamp?.length)throw new Error('No Yahoo series');
+  let q=res.indicators?.quote?.[0]; if(!q)throw new Error('No OHLC');
+  let vals=[];
+  for(let i=0;i<res.timestamp.length;i++){
+    let o=num(q.open?.[i]),h=num(q.high?.[i]),l=num(q.low?.[i]),c=num(q.close?.[i]);
+    if([o,h,l,c].some(v=>v==null))continue;
+    vals.push({
+      datetime:new Date(res.timestamp[i]*1000).toISOString().slice(0,10),
+      open:o,high:h,low:l,close:c,volume:num(q.volume?.[i])
+    });
+  }
+  if(vals.length<5)throw new Error('Not enough Yahoo candles');
+  return {vals,currency:res.meta?.currency||null,exchange:res.meta?.exchangeName||null};
+}
+async function loadChart(){
+  let p=d.positions.find(x=>x.id===$('chartSelect').value); if(!p)return;
+  let range=$('chartRange')?.value||'6mo';
+  let primary=YAHOO_SYMBOLS[p.id]||p.ticker, fallback=YAHOO_FALLBACK[p.id]||null;
+  $('chartMsg').textContent=`Loading ${primary} from Yahoo Finance…`;
+  let data=null,usedFallback=false,usedSymbol=primary;
+  try{data=await fetchYahooSeries(primary,range)}catch(e){}
+  if(!data&&fallback){
+    usedFallback=true;usedSymbol=fallback;
+    try{data=await fetchYahooSeries(fallback,range)}catch(e){}
+  }
+  if(!data){
+    $('chartMsg').textContent=`Yahoo Finance K-line unavailable for ${primary}. Tactical support from the AI brief, when available, will still appear in Tactical.`;
+    $('chartStats').innerHTML='';
+    let c=$('kcanvas'),ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);
+    return;
+  }
+  drawChart(data.vals,p,usedFallback);
+  let currency=data.currency||p.currency;
+  $('chartMsg').textContent=usedFallback
+    ? `Showing Yahoo Finance ${usedSymbol} (${currency}) because ${primary} was unavailable. Support levels shown on this chart belong to the underlying ${currency} security, not the Canadian CDR price.`
+    : `Yahoo Finance ${usedSymbol} · ${currency} · ${data.vals.length} daily candles. Blue/purple lines are auto-detected support; amber lines are your Buy 1/Buy 2 when they are in the same listing currency.`;
+}
+function go(id){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('on',x.id===id));document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x.dataset.p===id));window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>go(b.dataset.p));
+$('wsFile').addEventListener('change',e=>{let f=e.target.files?.[0];if(f)importWSFile(f);e.target.value='';});
+$('bulkModal').onclick=e=>{if(e.target===$('bulkModal'))closeBulk()};$('editModal').onclick=e=>{if(e.target===$('editModal'))closeEdit()};
+render();
 </script>
 </body>
 </html>
